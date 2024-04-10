@@ -8,6 +8,7 @@ public class player_Movement
     float _movementSpeed;
     float _dashForce;
     float _dashUpwardForce;
+    float _dashTime;
     float _jumpHeight;
     int _maxJumpsCount;
     int _jumpsRemaining;
@@ -15,9 +16,9 @@ public class player_Movement
     float _mouseX;
     FirstPersonCamera _cam;
     Rigidbody _rb;
-    BoxCollider _boxCol;
+    
 
-    public player_Movement(FirstPersonPlayer pj, float movementSpeed, float mouseSensitivity, float mouseX, FirstPersonCamera cam, Rigidbody rb, float dashForce, float dashUpwardForce, float jumpHeight, int maxJumpsCount, BoxCollider boxCol)
+    public player_Movement(FirstPersonPlayer pj, float movementSpeed, float mouseSensitivity, float mouseX, FirstPersonCamera cam, Rigidbody rb, float dashForce, float dashUpwardForce, float jumpHeight, int maxJumpsCount)
     {
         _pj = pj;
         _movementSpeed = movementSpeed;
@@ -29,7 +30,7 @@ public class player_Movement
         _dashUpwardForce = dashUpwardForce;
         _maxJumpsCount = maxJumpsCount;
         _jumpHeight = jumpHeight;
-        _boxCol = boxCol;
+        
     }
 
     public void Movement(float xAxis, float zAxis)
@@ -57,18 +58,26 @@ public class player_Movement
     public void Dash(float xAxis, float zAxis)
     {
         Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
-        
-        Vector3 forceToApply = dir * _dashForce + _pj.transform.up * _dashUpwardForce;
 
-        if(_pj.dashing!)
+        Vector3 forceToApply = Vector3.zero;
+
+        if(xAxis != 0 || zAxis != 0)
         {
-            _rb.AddForce(forceToApply, ForceMode.Impulse);
-            _rb.useGravity = false;
-            
+            forceToApply = dir * _dashForce +_pj.transform.up * _dashUpwardForce;
         }
+        else
+        {
+            forceToApply = _pj.transform.forward * _dashForce;
+        }
+
+        Debug.Log("Dash");
+        Debug.Log("fuerzaAplicada: " + forceToApply);
+
+        _pj.dashing = true;
+        _rb.AddForce(forceToApply, ForceMode.Impulse);
         
-            
-        
+
+
     }
 
 
@@ -76,13 +85,14 @@ public class player_Movement
     public void Jump()
     {
         
-        if (_maxJumpsCount <= _jumpsRemaining)
+        if (0 <= _jumpsRemaining)
         {
             _rb.AddForce(_pj.transform.up * _jumpHeight, ForceMode.Impulse);
             _jumpsRemaining -= 1;
-            Debug.Log("Salto");   
+            
+               
         }
-        
+        Debug.Log(_jumpsRemaining);
     }
     
     public void GroundedState()
@@ -93,6 +103,8 @@ public class player_Movement
         {
             _pj.grounded = true;
             _jumpsRemaining = _maxJumpsCount;
+
+            
         }
         else
             _pj.grounded = false;

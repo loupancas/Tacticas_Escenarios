@@ -64,7 +64,7 @@ public class FirstPersonPlayer : Entity
         Cursor.visible = false;
 
         _rb = GetComponent<Rigidbody>();
-        _boxCol = GetComponent<BoxCollider>();
+        
 
         _cam = Camera.main.GetComponent<FirstPersonCamera>();
         _cam.SetHead(_head);
@@ -74,7 +74,7 @@ public class FirstPersonPlayer : Entity
         _equippedWeapon.gameObject.SetActive(true);
         _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
 
-        _movement = new player_Movement(this, movementSpeed, _mouseSensitivity, _mouseX, _cam, _rb, _dashForce, _dashUpwardForce, _jumpHeight, _maxJumpsCount, _boxCol);
+        _movement = new player_Movement(this, movementSpeed, _mouseSensitivity, _mouseX, _cam, _rb, _dashForce, _dashUpwardForce, _jumpHeight, _maxJumpsCount);
         _inputs = new player_Inputs(_fireKey, _xAxis, _zAxis, _inputMouseX, _inputMouseY, _movement, _equippedWeapon, _attackMelee, _meleeKey, _stopTime, _cooldownFreeze, _dashKey, _jumpKey, this, _maxDashsCount);
         
     }

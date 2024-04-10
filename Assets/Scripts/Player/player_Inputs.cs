@@ -99,18 +99,21 @@ public class player_Inputs
     
     public void Dash()
     {
+
         _xAxis = Input.GetAxisRaw("Horizontal");
         _zAxis = Input.GetAxisRaw("Vertical");
-        if (Input.GetKeyDown(_dashKey) && 0 <= _dashsRemaining)
+        if (Input.GetKeyDown(_dashKey) && (0 < _dashsRemaining))
         {
-            _movement.Dash(_zAxis, _xAxis);
+            _movement.Dash(_xAxis, _zAxis);
             _dashsRemaining -= 1;
         }
         
-        if(_pj.dashing! && _pj.grounded && _dashsRemaining == 0)
+        if(_pj.grounded && _dashsRemaining <= 0)
         {
             _dashsRemaining = _maxDashCount;
+            Debug.Log("Carga del dash");
         }
+        Debug.Log("Dashes restantes: " + _dashsRemaining);
     }
 
     public void Jump()
@@ -118,7 +121,6 @@ public class player_Inputs
         
         if (Input.GetKeyDown(_jumpKey))
         {
-            Debug.Log("Espacio apretado");
             _movement.Jump();
         }
         
