@@ -37,5 +37,9 @@ public class FirstPersonCamera : MonoBehaviour
         transform.rotation = Quaternion.Euler(-_mouseY, xAxis, 0f);
     }
 
+    public void SetFov(float FOV)
+    {
+        GetComponent<Camera>().fieldOfView = FOV;
+    }
     
 }

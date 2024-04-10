@@ -13,84 +13,39 @@ public abstract class WeaponBase : MonoBehaviour
 
     [Header("Base Weapon Stats")]
     [SerializeField] private float _shotCooldown = .1f;
-    [SerializeField] private float _reloadCooldown = 3f;
     [SerializeField] protected int _dmg = 5;
-    [SerializeField] public int _totalAmmoStash = 120;
-    [SerializeField] private int _ammoPerMag = 30;
-    [SerializeField] private int _actualMag = 30;
-    
+    [SerializeField] protected ShootType _gunType;
+    public ShootType gunType { get { return _gunType; } }
+
     public bool CanShoot { get { return _canShoot; } }
     protected bool _canShoot;
-    public bool IsReloading { get { return _isReloading; } }
-    protected bool _isReloading;
 
     protected Ray _ray;
     protected RaycastHit _rayHit;
-    protected LayerMask _shootableLayers;
+    [SerializeField]protected LayerMask _shootableLayers;
     
+
     [SerializeField]protected AudioSource _audioSource;
 
-    [SerializeField]protected AudioClip _shotSound, _reloadSound;
+    [SerializeField] protected AudioClip _shotSound;
     
     
     public void SetInitialParams(Transform shotTransform, LayerMask shootableLayers)
     {
         _shotTransform = shotTransform;
         _shootableLayers = shootableLayers;
-
+        
         _canShoot = true;
     }
-
     abstract protected void FireBehaviour();
-
     virtual public void Fire()
     {
-        
-        
-        if (_actualMag <= 0)
-        {
-            Reload();
-        }
-        else
-        {
-            _actualMag--;
-            FireBehaviour();
-            StartCoroutine(crFireCooldown());
-            
-            _audioSource.clip = _shotSound;
-            _audioSource.Play();
-        }
-        _particula.Play();
+        FireBehaviour();
+        StartCoroutine(crFireCooldown());   
+        _audioSource.clip = _shotSound;
+        _audioSource.Play();
+        //_particula.Play();
     }
-
-    virtual public void Reload()
-    {
-        if(_totalAmmoStash > 0 && _actualMag < _ammoPerMag)
-        {
-            int neededAmmo = _ammoPerMag - _actualMag;
-
-            if(neededAmmo <= _totalAmmoStash)
-            {
-                _totalAmmoStash -= neededAmmo;
-                _actualMag = _ammoPerMag;
-            }
-            else
-            {
-                _actualMag += _totalAmmoStash;
-                _totalAmmoStash = 0;
-            }
-
-            StartCoroutine(crReloadCooldown());
-        }
-        else
-        {
-            if(_totalAmmoStash <= 0)
-            {
-                
-            }
-        }
-    }
-
     private IEnumerator crFireCooldown()
     {
         _canShoot = !_canShoot;
@@ -98,23 +53,12 @@ public abstract class WeaponBase : MonoBehaviour
         _canShoot = !_canShoot;
     }
 
-    private IEnumerator crReloadCooldown()
+    public enum ShootType
     {
-        print($"RELOADING!");
-        _isReloading = !_isReloading;
-        _canShoot = !_canShoot;
-        _weaponAnimator.SetBool("IsReloading", _isReloading);
-        yield return new WaitForSeconds(_reloadCooldown);
-        _isReloading = !_isReloading;
-        _canShoot = !_canShoot;
-        _weaponAnimator.SetBool("IsReloading", _isReloading);
-        print($"Fresh mag loaded.");
-        _weaponRenderer.material.SetFloat("currBullet", _actualMag);
+        Automatic,
+        Burst,
+        SemiAutomatic,
     }
-    public void TakeAmmo(int Ammo)
-    {
-       _totalAmmoStash += Ammo;
-    }
-
+    
     
 }

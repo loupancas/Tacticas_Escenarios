@@ -7,22 +7,34 @@ using UnityEngine.SceneManagement;
 public class FirstPersonPlayer : Entity
 {
     public static FirstPersonPlayer instance;
-    
+
+    public delegate void SaWardo();
+    public SaWardo theWorld;
 
     [Header("Values")]
     public float movementSpeed = 5f;
     [Range(1f, 500f)][SerializeField] private float _mouseSensitivity = 100f;
-    public bool lightIsActive;
-    public bool bocinaIsActive;
-    
+    [SerializeField] private float _cooldownMeleeAttack;
+    [SerializeField] private float _cooldownFreeze;
+    [SerializeField] private float _dashCd;
+    [SerializeField] private float _dashForce;
+    [SerializeField] private float _dashUpwardForce;
+    [SerializeField] private float _dashTime;
+    [SerializeField] private float _jumpHeight;
+    [SerializeField] private int _maxJumpsCount;
+    [SerializeField] private int _maxDashsCount;
+    [Header("States")]
+    public bool dashing;
+    public bool grounded = true;
     [Header("Components")]
     [SerializeField] private Transform _head;
-    [SerializeField] private Light _light;
-    [SerializeField] private Renderer _Hplow;
+    [SerializeField] private AttackMelee _attackMelee;
     [Header("Controls")]
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
-    [SerializeField] private KeyCode _reloadKey = KeyCode.R;
-    
+    [SerializeField] private KeyCode _meleeKey = KeyCode.F;
+    [SerializeField] private KeyCode _stopTime = KeyCode.E;
+    [SerializeField] private KeyCode _dashKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
     [Header("Weapons")]
     [SerializeField] private List<WeaponBase> _weaponStash = new List<WeaponBase>();
     [SerializeField] private LayerMask _shootableLayers;
@@ -30,11 +42,13 @@ public class FirstPersonPlayer : Entity
 
 
     private Rigidbody _rb;
+    private BoxCollider _boxCol;
     private FirstPersonCamera _cam;
     private float _xAxis, _zAxis, _inputMouseX, _inputMouseY, _mouseX;
     private WeaponBase _equippedWeapon;
-    public AudioSource audioSource;
 
+    player_Movement _movement;
+    player_Inputs _inputs;
     private void Awake()
     {
         if (instance == null)
@@ -50,86 +64,50 @@ public class FirstPersonPlayer : Entity
         Cursor.visible = false;
 
         _rb = GetComponent<Rigidbody>();
+        _boxCol = GetComponent<BoxCollider>();
 
         _cam = Camera.main.GetComponent<FirstPersonCamera>();
         _cam.SetHead(_head);
 
-        _equippedWeapon = _weaponStash[0];
+        int numeroRandom = Random.Range(0, _weaponStash.Capacity);
+        _equippedWeapon = _weaponStash[numeroRandom];
+        _equippedWeapon.gameObject.SetActive(true);
         _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
+
+        _movement = new player_Movement(this, movementSpeed, _mouseSensitivity, _mouseX, _cam, _rb, _dashForce, _dashUpwardForce, _jumpHeight, _maxJumpsCount, _boxCol);
+        _inputs = new player_Inputs(_fireKey, _xAxis, _zAxis, _inputMouseX, _inputMouseY, _movement, _equippedWeapon, _attackMelee, _meleeKey, _stopTime, _cooldownFreeze, _dashKey, _jumpKey, this, _maxDashsCount);
         
     }
 
-    private void Update()
+    public void Update()
     {
-        
-        _xAxis = Input.GetAxisRaw("Horizontal");
-        _zAxis = Input.GetAxisRaw("Vertical");
-
-
-        _inputMouseX = Input.GetAxisRaw("Mouse X");
-        _inputMouseY = Input.GetAxisRaw("Mouse Y");
-
-       
-
-        if(_inputMouseX != 0 || _inputMouseY != 0)
-        {
-            Rotation(_inputMouseX, _inputMouseY);
-        }
-        
-        if (Input.GetKey(_fireKey) && _equippedWeapon.CanShoot)
-        {
-            _equippedWeapon.Fire();
-        }
-        else if(Input.GetKeyDown(_reloadKey) && !_equippedWeapon.IsReloading)
-        {
-            _equippedWeapon.Reload();
-        }
+        _inputs.Rotation();
+        _inputs.MeleeAttack();
+        _inputs.TimeStop();
+        _inputs.Jump();
+        _inputs.Dash();
+        _movement.GroundedState();
     }
 
-    public void TakeDamage(int damage)
+    public void CambioDeArma()
     {
-        _vida -= damage;
-        _hudVida.ContadorVida(_vida);
-
-        if(_vida < 0)
+        if (_equippedWeapon != null)
         {
-            Morir();
+            _equippedWeapon.gameObject.SetActive(false);
+            _equippedWeapon = null;
         }
+        int numeroRandom = Random.Range(0, _weaponStash.Capacity);
+        _equippedWeapon = _weaponStash[numeroRandom];
+        _inputs.UpdateWeapon(_equippedWeapon);
+        _equippedWeapon.gameObject.SetActive(true);
+        _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
+
     }
 
     private void FixedUpdate()
     {
-        if(_xAxis != 0 || _zAxis != 0)
-        {
-            Movement(_xAxis, _zAxis);
-        }
-    }
-
-    private void Movement(float xAxis, float zAxis)
-    {
-        Vector3 dir = (transform.right * xAxis + transform.forward * zAxis).normalized;
-
-        _rb.MovePosition(transform.position += dir * movementSpeed * Time.fixedDeltaTime);
-    }
-
-    private void Rotation(float xAxis, float yAxis)
-    {
-        _mouseX += xAxis * _mouseSensitivity * Time.deltaTime;
-
-        if(_mouseX >= 360 || _mouseX <= -360)
-        {
-            _mouseX -= 360 * Mathf.Sign(_mouseX);
-        }
-
-        yAxis *= _mouseSensitivity * Time.deltaTime;
-
-        transform.rotation = Quaternion.Euler(0, _mouseX, 0);
-        _cam?.Rotate(_mouseX, yAxis);
-    }
-
-    public void TakeAmmo(int Ammo)
-    {
-        _equippedWeapon.TakeAmmo(Ammo);
+        _inputs.Control();
+        
     }
     public override void Morir()
     {
