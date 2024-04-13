@@ -74,7 +74,7 @@ public class FirstPersonPlayer : Entity
         _equippedWeapon.gameObject.SetActive(true);
         _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
 
-        _movement = new player_Movement(this, movementSpeed, _mouseSensitivity, _mouseX, _cam, _rb, _dashForce, _dashUpwardForce, _jumpHeight, _maxJumpsCount);
+        _movement = new player_Movement(this, movementSpeed, _mouseSensitivity, _mouseX, _cam, _rb, _dashForce, _dashUpwardForce, _jumpHeight, _maxJumpsCount, _dashTime);
         _inputs = new player_Inputs(_fireKey, _xAxis, _zAxis, _inputMouseX, _inputMouseY, _movement, _equippedWeapon, _attackMelee, _meleeKey, _stopTime, _cooldownFreeze, _dashKey, _jumpKey, this, _maxDashsCount);
         
     }
@@ -87,6 +87,7 @@ public class FirstPersonPlayer : Entity
         _inputs.Jump();
         _inputs.Dash();
         _movement.GroundedState();
+        _movement.DashState();
     }
 
     public void CambioDeArma()

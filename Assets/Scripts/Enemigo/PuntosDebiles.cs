@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PuntosDebiles : MonoBehaviour
 {
-    [SerializeField] Enemigo _me;
+    [SerializeField] EnemigoVolador _me;
     [SerializeField] MeshRenderer _mesh;
     public bool IsActive;
     public void Start()

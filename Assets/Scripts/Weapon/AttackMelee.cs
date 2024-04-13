@@ -17,7 +17,7 @@ public class AttackMelee : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Enemigo>()?.TakeDamage(_dmg);
+        other.gameObject.GetComponent<EnemigoVolador>()?.TakeDamage(_dmg);
 
         
         

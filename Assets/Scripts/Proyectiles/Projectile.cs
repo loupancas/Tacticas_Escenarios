@@ -68,6 +68,7 @@ public class Projectile : ProyectilesBase, IFreezed
     {
         var p = ProjectileFactory.Instance.pool.GetObject();
         p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
+        Debug.Log("Disparo proyectil");
     }
 
     public void NormalUpdate()
