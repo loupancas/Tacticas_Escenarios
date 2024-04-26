@@ -19,7 +19,8 @@ public class EnemigoVolador : Entity, IFreezed
     [SerializeField] PuntosDebiles[] _puntosDebiles;
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
-    [SerializeField] LayerMask _playerLayer;
+    [SerializeField] LayerMask _wallLayer;
+    
     public void Awake()
     {
         
@@ -37,9 +38,11 @@ public class EnemigoVolador : Entity, IFreezed
 
         _fsm = new FSM();
 
-        _fsm.CreateState("Attack", new EnemigoVoladorAttack(_fsm, _proyectil, transform, _spawnBullet, _playerLayer, _viewRadius, _viewAngle, _cdShot));
+        _fsm.CreateState("Attack", new EnemigoVoladorAttack(_fsm, _proyectil, transform, _spawnBullet, _wallLayer, _viewRadius, _viewAngle, _cdShot));
+        _fsm.CreateState("Lost view", new EnemigoVoladorLostView(_fsm, transform, _wallLayer, _viewRadius, _viewAngle));
+        _fsm.CreateState("Movement", new EnemigoVoladorMovimiento(_fsm, transform, _maxVelocity, _maxForce, _viewRadius, _viewAngle, _wallLayer));
 
-        _fsm.ChangeState("Attack");
+        _fsm.ChangeState("Movement");
     }
     public override void Morir()
     {

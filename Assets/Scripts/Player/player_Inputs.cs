@@ -1,41 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class player_Inputs 
 {
-    KeyCode _fireKey, _meleeKey, _stopTimeKey, _dashKey, _jumpKey;
-    float _xAxis, _zAxis, _inputMouseX, _inputMouseY, _cooldownMeleeAttack, _currTimeMeleeAttack, _cooldownTimeStop, _currTimeTimeStop;
-    int _maxDashCount;
+    
+    float _xAxis, _zAxis, _inputMouseX, _inputMouseY, _currTimeMeleeAttack, _currTimeTimeStop;
     int _dashsRemaining;
     player_Movement _movement;
     WeaponBase _equippedWeapon;
     AttackMelee _attackMelee;
     FirstPersonPlayer _pj;
-    
-    public player_Inputs (KeyCode fireKey, float xAxis, float zAxis, float inputMouseX, float inputMouseY, player_Movement movement, WeaponBase equippedWeapon, AttackMelee attackMelee, KeyCode meleeKey, KeyCode stopTimeKey, float cooldownTimeStop, KeyCode dashKey, KeyCode jumpKey, FirstPersonPlayer pj, int maxDashCount)
+    TextoActualizable _textDashCounts;
+    BaseStatsPlayer _baseStatsPlayer;
+    Controles _controles;
+    public player_Inputs ( player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, BaseStatsPlayer baseStatsPlayer, Controles controles)
     {
-        _fireKey = fireKey;
-        _xAxis = xAxis;
-        _zAxis = zAxis;
-        _inputMouseX = inputMouseX;
-        _inputMouseY = inputMouseY;
         _movement = movement;
         _equippedWeapon = equippedWeapon;
-        _attackMelee = attackMelee;
-        _meleeKey = meleeKey;
-        _stopTimeKey = stopTimeKey;
-        _cooldownTimeStop = cooldownTimeStop;
-        _dashKey = dashKey;
-        _jumpKey = jumpKey;
         _pj = pj;
-        _maxDashCount = maxDashCount;
+        _textDashCounts = text;
+        _baseStatsPlayer = baseStatsPlayer;
+        _controles = controles;
     }
 
     public void TimeStop()
     {
         _currTimeTimeStop += Time.deltaTime;
-        if(Input.GetKey(_stopTimeKey) && _cooldownTimeStop < _currTimeTimeStop)
+        if(Input.GetKey(_controles.stopTime) && _baseStatsPlayer.baseStats.cooldownFreeze < _currTimeTimeStop)
         {
             FirstPersonPlayer.instance.theWorld.Invoke();
            
@@ -54,13 +48,13 @@ public class player_Inputs
         switch (_equippedWeapon.gunType)
         {
             case WeaponBase.ShootType.Automatic:
-                if (Input.GetKey(_fireKey) && _equippedWeapon.CanShoot)
+                if (Input.GetKey(_controles.fireKey) && _equippedWeapon.CanShoot)
                 {
                     _equippedWeapon.Fire();
                 }
                 break;
             case WeaponBase.ShootType.SemiAutomatic:
-                if (Input.GetKeyDown(_fireKey) && _equippedWeapon.CanShoot)
+                if (Input.GetKeyDown(_controles.fireKey) && _equippedWeapon.CanShoot)
                 {
                     _equippedWeapon.Fire();
                 }
@@ -72,7 +66,7 @@ public class player_Inputs
     public void MeleeAttack()
     {
         _currTimeMeleeAttack += Time.deltaTime;
-        if(Input.GetKeyDown(_meleeKey) && _currTimeMeleeAttack > _cooldownMeleeAttack)
+        if(Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.baseStats.cooldownMeleeAttack)
         {
             _attackMelee.gameObject.SetActive(true);
             _attackMelee.StartCoroutine(_attackMelee.SpawnTime());
@@ -102,24 +96,26 @@ public class player_Inputs
 
         _xAxis = Input.GetAxisRaw("Horizontal");
         _zAxis = Input.GetAxisRaw("Vertical");
-        if (Input.GetKeyDown(_dashKey) && (0 < _dashsRemaining))
+        if (Input.GetKeyDown(_controles.dashKey) && (0 < _dashsRemaining))
         {
             _movement.Dash(_xAxis, _zAxis);
             _dashsRemaining -= 1;
         }
         
-        if(_pj.grounded && _dashsRemaining <= 0)
+        if(_pj.grounded && _dashsRemaining <= (_baseStatsPlayer.baseStats.maxDashsCount - 1) && !_pj.dashing)
         {
-            _dashsRemaining = _maxDashCount;
+            _dashsRemaining = _baseStatsPlayer.baseStats.maxDashsCount;
             Debug.Log("Carga del dash");
+            _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.baseStats.maxDashsCount, "Dash");
         }
         Debug.Log("Dashes restantes: " + _dashsRemaining);
+        _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.baseStats.maxDashsCount, "Dash");
     }
 
     public void Jump()
     {
         
-        if (Input.GetKeyDown(_jumpKey))
+        if (Input.GetKeyDown(_controles.jumpKey))
         {
             _movement.Jump();
         }

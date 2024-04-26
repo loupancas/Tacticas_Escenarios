@@ -41,20 +41,28 @@ public class EnemigoVoladorAttack : IState
     {
         _currCdShot += Time.deltaTime;
 
-        Vector3 pos = new Vector3(GameManager.instance.pj.transform.position.x, GameManager.instance.pj.transform.position.y, GameManager.instance.pj.transform.position.z);
-        _transform.LookAt(pos, _transform.forward);
+        
 
-        if (_currCdShot > _cdShot)
+
+
+        if (InFOV(GameManager.instance.pj.transform))
         {
+            Vector3 pos = new Vector3(GameManager.instance.pj.transform.position.x, GameManager.instance.pj.transform.position.y, GameManager.instance.pj.transform.position.z);
+            _transform.LookAt(pos);
+            Debug.Log("Detectado");
+            if (_currCdShot > _cdShot)
+            {
             _proyectil.SpawnProyectile(_bulletSpawn);
             _currCdShot = 0;
+            }        
         }
+        else
+        {
+            _fsm.ChangeState("Lost view");
+        }
+        
+        
 
-        //if (InFOV(GameManager.instance.pj.transform))
-        //{
-           
-        //}
-                
         
     }
 

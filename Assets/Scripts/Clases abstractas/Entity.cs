@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour
     [Header("Values of entity")]
     [SerializeField] protected int _vidaMax;
     [SerializeField] protected int _vida;
-    public void TakeDamage(int Damage)
+    public virtual void TakeDamage(int Damage)
     {
         _vida -= Damage;
         

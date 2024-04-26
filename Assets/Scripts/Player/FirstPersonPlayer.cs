@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class FirstPersonPlayer : Entity
@@ -12,24 +14,20 @@ public class FirstPersonPlayer : Entity
     public SaWardo theWorld;
 
     [Header("Values")]
-    public float movementSpeed = 5f;
-    [Range(1f, 500f)][SerializeField] private float _mouseSensitivity = 100f;
-    [SerializeField] private float _cooldownMeleeAttack;
-    [SerializeField] private float _cooldownFreeze;
-    [SerializeField] private float _dashCd;
-    [SerializeField] private float _dashForce;
-    [SerializeField] private float _dashUpwardForce;
-    [SerializeField] private float _dashTime;
-    [SerializeField] private float _jumpHeight;
-    [SerializeField] private int _maxJumpsCount;
-    [SerializeField] private int _maxDashsCount;
+    [SerializeField] BaseStatsPlayer baseStats;
+    public Stats Stats { get; private set; }
+    
     [Header("States")]
     public bool dashing;
     public bool grounded = true;
     [Header("Components")]
     [SerializeField] private Transform _head;
     [SerializeField] private AttackMelee _attackMelee;
+    [SerializeField] private HealthBar _hpBar;
+    [SerializeField] private TextoActualizable _textDashCounts, _textJumpCounts;
     [Header("Controls")]
+    [SerializeField] Controles _control;
+    [Range(1f, 500f)] [SerializeField] private float _mouseSensitivity = 100f;
     [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
     [SerializeField] private KeyCode _meleeKey = KeyCode.F;
     [SerializeField] private KeyCode _stopTime = KeyCode.E;
@@ -42,9 +40,8 @@ public class FirstPersonPlayer : Entity
 
 
     private Rigidbody _rb;
-    private BoxCollider _boxCol;
     private FirstPersonCamera _cam;
-    private float _xAxis, _zAxis, _inputMouseX, _inputMouseY, _mouseX;
+    private float _mouseX;
     private WeaponBase _equippedWeapon;
 
     player_Movement _movement;
@@ -55,11 +52,16 @@ public class FirstPersonPlayer : Entity
         {
             instance = this;
         }
+
+        
+        
     }
     private void Start()
     {
+        
+
         _vida = _vidaMax;
- 
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -74,13 +76,15 @@ public class FirstPersonPlayer : Entity
         _equippedWeapon.gameObject.SetActive(true);
         _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
 
-        _movement = new player_Movement(this, movementSpeed, _mouseSensitivity, _mouseX, _cam, _rb, _dashForce, _dashUpwardForce, _jumpHeight, _maxJumpsCount, _dashTime);
-        _inputs = new player_Inputs(_fireKey, _xAxis, _zAxis, _inputMouseX, _inputMouseY, _movement, _equippedWeapon, _attackMelee, _meleeKey, _stopTime, _cooldownFreeze, _dashKey, _jumpKey, this, _maxDashsCount);
+        _movement = new player_Movement(this,_cam, _rb, _textJumpCounts, baseStats, _control);
+        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, baseStats, _control);
+
         
     }
 
     public void Update()
     {
+        
         _inputs.Rotation();
         _inputs.MeleeAttack();
         _inputs.TimeStop();
@@ -118,5 +122,10 @@ public class FirstPersonPlayer : Entity
         SceneManager.LoadScene(2);
     }
 
-   
+    public override void TakeDamage(int Damage)
+    {
+        base.TakeDamage(Damage);
+        _hpBar.UpdateHPBar(_vida);
+    }
+
 }

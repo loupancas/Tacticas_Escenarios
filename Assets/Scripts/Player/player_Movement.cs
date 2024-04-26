@@ -1,56 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class player_Movement
 {
     FirstPersonPlayer _pj;
-    float _movementSpeed;
-    float _dashForce;
-    float _dashUpwardForce;
-    float _dashTime;
+    BaseStatsPlayer _baseStatsPlayer;
     float _currDashTime;
-    float _jumpHeight;
-    int _maxJumpsCount;
     int _jumpsRemaining;
-    float _mouseSensitivity;
     float _mouseX;
     FirstPersonCamera _cam;
     Rigidbody _rb;
-
-
-    public player_Movement(FirstPersonPlayer pj, float movementSpeed, float mouseSensitivity, float mouseX, FirstPersonCamera cam, Rigidbody rb, float dashForce, float dashUpwardForce, float jumpHeight, int maxJumpsCount, float dashTime)
+    TextoActualizable _textJumpCount;
+    Controles _controles;
+    public player_Movement(FirstPersonPlayer pj, FirstPersonCamera cam, Rigidbody rb, TextoActualizable text, BaseStatsPlayer baseStats, Controles controles)
     {
         _pj = pj;
-        _movementSpeed = movementSpeed;
-        _mouseSensitivity = mouseSensitivity;
-        _mouseX = mouseX;
         _cam = cam;
         _rb = rb;
-        _dashForce = dashForce;
-        _dashUpwardForce = dashUpwardForce;
-        _maxJumpsCount = maxJumpsCount;
-        _jumpHeight = jumpHeight;
-        _dashTime = dashTime;
+        _baseStatsPlayer = baseStats;
+        _textJumpCount = text;
+        _controles = controles;
     }
 
     public void Movement(float xAxis, float zAxis)
     {
         Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
 
-        _rb.MovePosition(_pj.transform.position += dir * _movementSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_pj.transform.position += dir * _baseStatsPlayer.baseStats.movementSpeed * Time.fixedDeltaTime);
     }
 
     public void Rotation(float xAxis, float yAxis)
     {
-        _mouseX += xAxis * _mouseSensitivity * Time.deltaTime;
+        _mouseX += xAxis * _controles.mouseSensitivity * Time.deltaTime;
 
         if (_mouseX >= 360 || _mouseX <= -360)
         {
             _mouseX -= 360 * Mathf.Sign(_mouseX);
         }
 
-        yAxis *= _mouseSensitivity * Time.deltaTime;
+        yAxis *= _controles.mouseSensitivity * Time.deltaTime;
 
         _pj.transform.rotation = Quaternion.Euler(0, _mouseX, 0);
         _cam?.Rotate(_mouseX, yAxis);
@@ -66,11 +56,11 @@ public class player_Movement
 
         if(xAxis != 0 || zAxis != 0)
         {
-            forceToApply = dir * _dashForce +_pj.transform.up * _dashUpwardForce;
+            forceToApply = dir * _baseStatsPlayer.baseStats.dashForce + _pj.transform.up * _baseStatsPlayer.baseStats.dashUpwardForce;
         }
         else
         {
-            forceToApply = _pj.transform.forward * _dashForce + _pj.transform.up * _dashUpwardForce;
+            forceToApply = _pj.transform.forward * _baseStatsPlayer.baseStats.dashForce + _pj.transform.up * _baseStatsPlayer.baseStats.dashUpwardForce;
         }
 
         Debug.Log("Dash");
@@ -89,18 +79,21 @@ public class player_Movement
         
         if (0 < (_jumpsRemaining - 1))
         {
-            _rb.AddForce(_pj.transform.up * _jumpHeight, ForceMode.Impulse);
+            _rb.AddForce(_pj.transform.up * _baseStatsPlayer.baseStats.jumpHeight, ForceMode.Impulse);
+            
             _jumpsRemaining -= 1;
             
-               
+
         }
-        Debug.Log(_jumpsRemaining);
+        
+
+        
     }
     
     public void DashState()
     {
         _currDashTime += Time.deltaTime;
-        if (_currDashTime > _dashTime && _pj.dashing && _pj.grounded)
+        if (_currDashTime > _baseStatsPlayer.baseStats.dashTime && _pj.dashing && _pj.grounded)
         {
             _pj.dashing = false;
             _rb.velocity = Vector3.zero;
@@ -114,11 +107,19 @@ public class player_Movement
         if (Physics.Raycast(_pj.transform.position, -_pj.transform.up, out hit, groundCheckDistance))
         {
             _pj.grounded = true;
-            _jumpsRemaining = _maxJumpsCount;
+            _jumpsRemaining = _baseStatsPlayer.baseStats.maxJumpsCount;
 
-            
+            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.baseStats.maxJumpsCount, "Saltos");
+
         }
         else
+        {
             _pj.grounded = false;
+            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.baseStats.maxJumpsCount, "Saltos");
+        }
+            
+
+        
+        Debug.Log("Remaining jumps: " + _jumpsRemaining);
     }
 }
