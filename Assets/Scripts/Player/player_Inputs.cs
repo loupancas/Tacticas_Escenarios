@@ -14,9 +14,9 @@ public class player_Inputs
     AttackMelee _attackMelee;
     FirstPersonPlayer _pj;
     TextoActualizable _textDashCounts;
-    BaseStatsPlayer _baseStatsPlayer;
+    ModifierStat _baseStatsPlayer;
     Controles _controles;
-    public player_Inputs ( player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, BaseStatsPlayer baseStatsPlayer, Controles controles)
+    public player_Inputs ( player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles)
     {
         _movement = movement;
         _equippedWeapon = equippedWeapon;
@@ -29,7 +29,7 @@ public class player_Inputs
     public void TimeStop()
     {
         _currTimeTimeStop += Time.deltaTime;
-        if(Input.GetKey(_controles.stopTime) && _baseStatsPlayer.baseStats.cooldownFreeze < _currTimeTimeStop)
+        if(Input.GetKey(_controles.stopTime) && _baseStatsPlayer.StatResultado.cooldownFreeze < _currTimeTimeStop)
         {
             FirstPersonPlayer.instance.theWorld.Invoke();
            
@@ -66,7 +66,7 @@ public class player_Inputs
     public void MeleeAttack()
     {
         _currTimeMeleeAttack += Time.deltaTime;
-        if(Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.baseStats.cooldownMeleeAttack)
+        if(Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.StatResultado.cooldownMeleeAttack)
         {
             _attackMelee.gameObject.SetActive(true);
             _attackMelee.StartCoroutine(_attackMelee.SpawnTime());
@@ -102,14 +102,14 @@ public class player_Inputs
             _dashsRemaining -= 1;
         }
         
-        if(_pj.grounded && _dashsRemaining <= (_baseStatsPlayer.baseStats.maxDashsCount - 1) && !_pj.dashing)
+        if(_pj.grounded && _dashsRemaining <= (_baseStatsPlayer.StatResultado.maxDashsCount - 1) && !_pj.dashing)
         {
-            _dashsRemaining = _baseStatsPlayer.baseStats.maxDashsCount;
+            _dashsRemaining = _baseStatsPlayer.StatResultado.maxDashsCount;
             Debug.Log("Carga del dash");
-            _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.baseStats.maxDashsCount, "Dash");
+            _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.StatResultado.maxDashsCount, "Dash");
         }
         Debug.Log("Dashes restantes: " + _dashsRemaining);
-        _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.baseStats.maxDashsCount, "Dash");
+        _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.StatResultado.maxDashsCount, "Dash");
     }
 
     public void Jump()

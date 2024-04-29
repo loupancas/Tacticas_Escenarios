@@ -12,8 +12,8 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] protected ParticleSystem _particula;
 
     [Header("Base Weapon Stats")]
-    [SerializeField] private float _shotCooldown = .1f;
-    [SerializeField] protected int _dmg = 5;
+    [SerializeField] public float shotCooldown = .1f;
+    [SerializeField] public int dmg = 5;
     [SerializeField] protected ShootType _gunType;
     public ShootType gunType { get { return _gunType; } }
 
@@ -49,7 +49,7 @@ public abstract class WeaponBase : MonoBehaviour
     private IEnumerator crFireCooldown()
     {
         _canShoot = !_canShoot;
-        yield return new WaitForSeconds(_shotCooldown);
+        yield return new WaitForSeconds(shotCooldown);
         _canShoot = !_canShoot;
     }
 

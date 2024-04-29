@@ -19,6 +19,8 @@ public class Buff
         this.calculate = calculate;
     }
 
+    
+
     public void Update(float deltaTime)
     {
         if (timer.IsFinished)

@@ -21,6 +21,7 @@ public class PuntosDebiles : MonoBehaviour
         if(IsActive)
         {
             _me.Morir();
+            GameManager.instance.pj.AgregarBuff();
         }
         else
         {

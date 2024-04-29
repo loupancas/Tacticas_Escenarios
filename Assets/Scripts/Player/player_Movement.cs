@@ -6,7 +6,7 @@ using TMPro;
 public class player_Movement
 {
     FirstPersonPlayer _pj;
-    BaseStatsPlayer _baseStatsPlayer;
+    ModifierStat _baseStatsPlayer;
     float _currDashTime;
     int _jumpsRemaining;
     float _mouseX;
@@ -14,7 +14,7 @@ public class player_Movement
     Rigidbody _rb;
     TextoActualizable _textJumpCount;
     Controles _controles;
-    public player_Movement(FirstPersonPlayer pj, FirstPersonCamera cam, Rigidbody rb, TextoActualizable text, BaseStatsPlayer baseStats, Controles controles)
+    public player_Movement(FirstPersonPlayer pj, FirstPersonCamera cam, Rigidbody rb, TextoActualizable text, ModifierStat baseStats, Controles controles)
     {
         _pj = pj;
         _cam = cam;
@@ -28,7 +28,7 @@ public class player_Movement
     {
         Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
 
-        _rb.MovePosition(_pj.transform.position += dir * _baseStatsPlayer.baseStats.movementSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_pj.transform.position += dir * _baseStatsPlayer.StatResultado.movementSpeed * Time.fixedDeltaTime);
     }
 
     public void Rotation(float xAxis, float yAxis)
@@ -56,11 +56,11 @@ public class player_Movement
 
         if(xAxis != 0 || zAxis != 0)
         {
-            forceToApply = dir * _baseStatsPlayer.baseStats.dashForce + _pj.transform.up * _baseStatsPlayer.baseStats.dashUpwardForce;
+            forceToApply = dir * _baseStatsPlayer.StatResultado.dashForce + _pj.transform.up * _baseStatsPlayer.StatResultado.dashUpwardForce;
         }
         else
         {
-            forceToApply = _pj.transform.forward * _baseStatsPlayer.baseStats.dashForce + _pj.transform.up * _baseStatsPlayer.baseStats.dashUpwardForce;
+            forceToApply = _pj.transform.forward * _baseStatsPlayer.StatResultado.dashForce + _pj.transform.up * _baseStatsPlayer.StatResultado.dashUpwardForce;
         }
 
         Debug.Log("Dash");
@@ -79,7 +79,7 @@ public class player_Movement
         
         if (0 < (_jumpsRemaining - 1))
         {
-            _rb.AddForce(_pj.transform.up * _baseStatsPlayer.baseStats.jumpHeight, ForceMode.Impulse);
+            _rb.AddForce(_pj.transform.up * _baseStatsPlayer.StatResultado.jumpHeight, ForceMode.Impulse);
             
             _jumpsRemaining -= 1;
             
@@ -93,7 +93,7 @@ public class player_Movement
     public void DashState()
     {
         _currDashTime += Time.deltaTime;
-        if (_currDashTime > _baseStatsPlayer.baseStats.dashTime && _pj.dashing && _pj.grounded)
+        if (_currDashTime > _baseStatsPlayer.StatResultado.dashTime && _pj.dashing && _pj.grounded)
         {
             _pj.dashing = false;
             _rb.velocity = Vector3.zero;
@@ -107,15 +107,15 @@ public class player_Movement
         if (Physics.Raycast(_pj.transform.position, -_pj.transform.up, out hit, groundCheckDistance))
         {
             _pj.grounded = true;
-            _jumpsRemaining = _baseStatsPlayer.baseStats.maxJumpsCount;
+            _jumpsRemaining = _baseStatsPlayer.StatResultado.maxJumpsCount;
 
-            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.baseStats.maxJumpsCount, "Saltos");
+            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.StatResultado.maxJumpsCount, "Saltos");
 
         }
         else
         {
             _pj.grounded = false;
-            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.baseStats.maxJumpsCount, "Saltos");
+            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.StatResultado.maxJumpsCount, "Saltos");
         }
             
 

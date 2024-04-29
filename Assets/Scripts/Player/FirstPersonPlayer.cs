@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -26,13 +27,7 @@ public class FirstPersonPlayer : Entity
     [SerializeField] private HealthBar _hpBar;
     [SerializeField] private TextoActualizable _textDashCounts, _textJumpCounts;
     [Header("Controls")]
-    [SerializeField] Controles _control;
-    [Range(1f, 500f)] [SerializeField] private float _mouseSensitivity = 100f;
-    [SerializeField] private KeyCode _fireKey = KeyCode.Mouse0;
-    [SerializeField] private KeyCode _meleeKey = KeyCode.F;
-    [SerializeField] private KeyCode _stopTime = KeyCode.E;
-    [SerializeField] private KeyCode _dashKey = KeyCode.LeftShift;
-    [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
+    [SerializeField] Controles _control; 
     [Header("Weapons")]
     [SerializeField] private List<WeaponBase> _weaponStash = new List<WeaponBase>();
     [SerializeField] private LayerMask _shootableLayers;
@@ -46,6 +41,8 @@ public class FirstPersonPlayer : Entity
 
     player_Movement _movement;
     player_Inputs _inputs;
+    ModifierStat _buffs;
+    
     private void Awake()
     {
         if (instance == null)
@@ -58,8 +55,8 @@ public class FirstPersonPlayer : Entity
     }
     private void Start()
     {
-        
-
+        _buffs = new ModifierStat(baseStats.baseStats);
+        _buffs.UpdateBuffs();
         _vida = _vidaMax;
         
         Cursor.lockState = CursorLockMode.Locked;
@@ -71,20 +68,23 @@ public class FirstPersonPlayer : Entity
         _cam = Camera.main.GetComponent<FirstPersonCamera>();
         _cam.SetHead(_head);
 
-        int numeroRandom = Random.Range(0, _weaponStash.Capacity);
+        int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         _equippedWeapon = _weaponStash[numeroRandom];
         _equippedWeapon.gameObject.SetActive(true);
         _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
 
-        _movement = new player_Movement(this,_cam, _rb, _textJumpCounts, baseStats, _control);
-        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, baseStats, _control);
+        
 
+        _movement = new player_Movement(this,_cam, _rb, _textJumpCounts, _buffs, _control);
+        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, _buffs, _control);
+
+        
         
     }
 
     public void Update()
     {
-        
+        _buffs.Update();
         _inputs.Rotation();
         _inputs.MeleeAttack();
         _inputs.TimeStop();
@@ -101,7 +101,7 @@ public class FirstPersonPlayer : Entity
             _equippedWeapon.gameObject.SetActive(false);
             _equippedWeapon = null;
         }
-        int numeroRandom = Random.Range(0, _weaponStash.Capacity);
+        int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         _equippedWeapon = _weaponStash[numeroRandom];
         _inputs.UpdateWeapon(_equippedWeapon);
         _equippedWeapon.gameObject.SetActive(true);
@@ -128,4 +128,32 @@ public class FirstPersonPlayer : Entity
         _hpBar.UpdateHPBar(_vida);
     }
 
+    public void AgregarBuff()
+    {
+        int Numero = UnityEngine.Random.Range(0, 5);
+
+        switch(Numero)
+        {
+            case 0:
+                _buffs.Add("Aumento de velocidad", (Stats original) => { original.movementSpeed += 2; return original; }, 5);
+                print("Aumento de velocidad");
+                break;
+            case 1:
+                _buffs.Add("Saltos Aumentados", (Stats original) => { original.maxJumpsCount += 1; return original; }, 5);
+                print("Saltos Aumentados");
+                break;
+            case 2:
+                _buffs.Add("Altura de salto aumentados", (Stats original) => { original.jumpHeight += 2; return original; }, 5);
+                print("Altura de salto aumentados");
+                break;
+            case 3:
+                _buffs.Add("Cooldown parar tiempo", (Stats original) => { original.cooldownFreeze -= 2; return original; }, 5);
+                print("Cooldown parar tiempo");
+                break;
+            case 4:
+                _buffs.Add("Dash mejorado", (Stats original) => { original.dashForce += 2; original.dashUpwardForce += 2; return original; }, 5);
+                print("Dash mejorado");
+                break;
+        }
+    }
 }

@@ -7,9 +7,15 @@ public class ModifierStat
 {
     Dictionary<string, Buff> buffs = new();
 
-    public Stats original;
+    public Stats StatOriginal, StatResultado;
 
-    public Stats resultado;
+    
+
+    public ModifierStat(Stats stats)
+    {
+        StatOriginal = stats;
+
+    }
 
     public void Remove(string a)
     {
@@ -19,10 +25,17 @@ public class ModifierStat
     }
 
     public void Add(string s, Func<Stats, Stats> func, float time)
-    {
-        buffs.Add(s, new Buff(time, () => Remove(s), func));
+    {   
+        if(!buffs.ContainsKey(s))
+        {
+           buffs.Add(s, new Buff(time, () => Remove(s), func));
+
+        }
+        
         UpdateBuffs();
     }
+
+    
 
     public void Update()
     {
@@ -32,13 +45,13 @@ public class ModifierStat
         }
     }
 
-    void UpdateBuffs()
+    public void UpdateBuffs()
     {
-        resultado = original;
+        StatResultado = StatOriginal;
 
         foreach (var (s, buff) in buffs)
         {
-            resultado = buff.calculate(resultado);
+            StatResultado = buff.calculate(StatResultado);
         }
     }
 

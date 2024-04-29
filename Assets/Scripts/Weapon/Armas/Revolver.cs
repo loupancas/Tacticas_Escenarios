@@ -11,8 +11,8 @@ public class Revolver : WeaponBase
         if (Physics.Raycast(_ray, out _rayHit, _shootableLayers))
         {
             print("Detecto algo");
-            _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_dmg);
-            _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_dmg);
+            _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(dmg);
+            _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(dmg);
         }
     }
 }
