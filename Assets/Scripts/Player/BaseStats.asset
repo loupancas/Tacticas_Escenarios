@@ -16,11 +16,11 @@ MonoBehaviour:
     cooldownMeleeAttack: 1
     cooldownFreeze: 6
     dashCd: 0
-    dashForce: 7
+    dashForce: 6
     dashUpwardForce: 2
     dashTime: 2
     jumpHeight: 8
     maxJumpsCount: 2
     maxDashsCount: 3
-    movementSpeed: 15
+    movementSpeed: 5
     cooldownHook: 0

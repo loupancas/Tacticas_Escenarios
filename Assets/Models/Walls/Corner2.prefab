@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4455958704262725395}
   - component: {fileID: 5994477541125840156}
   - component: {fileID: 8697055850470306256}
+  - component: {fileID: -4989598714174403317}
   m_Layer: 0
   m_Name: Corner2
   m_TagString: Untagged
@@ -103,3 +104,24 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5994477541125840156}
   m_Enabled: 1
+--- !u!65 &-4989598714174403317
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478727154193183775}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0118255615, y: 0.08, z: 0.0118255615}
+  m_Center: {x: 0.004087219, y: 0.04, z: 0.0059127808}

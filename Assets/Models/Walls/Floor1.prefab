@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 253053507071152356}
   - component: {fileID: 1793130486031293023}
   - component: {fileID: 2840640111716538097}
+  - component: {fileID: 5938970230956041720}
   m_Layer: 0
   m_Name: Floor1
   m_TagString: Untagged
@@ -103,3 +104,24 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1793130486031293023}
   m_Enabled: 1
+--- !u!65 &5938970230956041720
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923175756905757563}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04000001, y: 0, z: 0.16000004}
+  m_Center: {x: 0.019999998, y: 0, z: 0.08000002}

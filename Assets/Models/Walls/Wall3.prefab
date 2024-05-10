@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1440326192223843324}
   - component: {fileID: 6334853033704367980}
   - component: {fileID: 3432708691059231941}
+  - component: {fileID: -7426708994234648851}
   m_Layer: 0
   m_Name: Wall3
   m_TagString: Untagged
@@ -103,3 +104,24 @@ LODGroup:
     renderers:
     - renderer: {fileID: 6334853033704367980}
   m_Enabled: 1
+--- !u!65 &-7426708994234648851
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305313677217828090}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0024603277, y: 0.03, z: 0.16000006}
+  m_Center: {x: -0.0005953981, y: 0.015, z: 0.08000003}
