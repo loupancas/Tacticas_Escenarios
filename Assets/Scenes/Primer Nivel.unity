@@ -4546,7 +4546,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horda: 1
-  enemigo: {fileID: 8171125479128317140, guid: abe568f02ff164d47b5f3236063a6c85, type: 3}
+  enemigos:
+  - {fileID: 8171125479128317140, guid: abe568f02ff164d47b5f3236063a6c85, type: 3}
   spawnPoints:
   - {fileID: 5399063}
   - {fileID: 687649313}

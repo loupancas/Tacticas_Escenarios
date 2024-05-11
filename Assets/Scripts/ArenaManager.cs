@@ -6,11 +6,11 @@ public class ArenaManager : MonoBehaviour, IFreezed
 {
     public int horda;
 
-    public EnemigoVolador enemigo;
+    public EnemigoBase[] enemigos;
     
     public GameObject[] spawnPoints;
 
-    public List<EnemigoVolador> enemigosEnLaArena;
+    public List<EnemigoBase> enemigosEnLaArena;
 
     CountdownTimer _timer;
 
@@ -46,9 +46,10 @@ public class ArenaManager : MonoBehaviour, IFreezed
     
     public void SpawnEnemy()
     {
-        int NumeroRandom = Random.Range(0, spawnPoints.Length);
-        print(NumeroRandom);
-        enemigo.SpawnEnemy(spawnPoints[NumeroRandom].transform);
+        int NumeroRandom1 = Random.Range(0, spawnPoints.Length);
+        int NumeroRandom2 = Random.Range(0, enemigos.Length);
+        print(NumeroRandom1);
+        enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
     }
 
     public void StoppedTime()

@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemigoVolador : Entity, IFreezed
+public class EnemigoVolador : EnemigoBase, IFreezed
 {
-    FSM _fsm;
+    
 
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
-
+    [Header("Stats")]
     [SerializeField] float _cdShot;
-    [SerializeField] float _maxVelocity;
-    [SerializeField] float _maxForce;
-    [SerializeField] float _viewRadius;
-    [SerializeField] float _viewAngle;
+    
 
     [Header("Components")]
-    [SerializeField] PuntosDebiles[] _puntosDebiles;
+    
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
-    [SerializeField] LayerMask _wallLayer;
+    
     
     public void Awake()
     {
@@ -81,7 +78,7 @@ public class EnemigoVolador : Entity, IFreezed
         delegateUpdate = NormalUpdate;
     }
 
-    public void SpawnEnemy(Transform spawnPoint)
+    public override void SpawnEnemy(Transform spawnPoint)
     {
         var p = EnemigoVoladorFactory.Instance.pool.GetObject();
         p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
