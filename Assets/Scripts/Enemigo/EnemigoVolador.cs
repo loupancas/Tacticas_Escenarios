@@ -29,6 +29,7 @@ public class EnemigoVolador : Entity, IFreezed
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
+        GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
 
         _vida = _vidaMax;
         int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
@@ -47,8 +48,12 @@ public class EnemigoVolador : Entity, IFreezed
     public override void Morir()
     {
         print("Mori xd");
+        GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
+        EnemigoVoladorFactory.Instance.ReturnProjectile(this);
         FirstPersonPlayer.instance.CambioDeArma();
     }
+
+    
 
     private void Update()
     {
@@ -74,5 +79,26 @@ public class EnemigoVolador : Entity, IFreezed
         delegateUpdate = Freezed;
         yield return new WaitForSeconds(3);
         delegateUpdate = NormalUpdate;
+    }
+
+    public void SpawnEnemy(Transform spawnPoint)
+    {
+        var p = EnemigoVoladorFactory.Instance.pool.GetObject();
+        p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
+        Debug.Log("Disparo proyectil");
+    }
+
+    private void Reset()
+    {
+        
+    }
+
+    public static void TurnOnOff(EnemigoVolador p, bool active = true)
+    {
+        if (active)
+        {
+            p.Reset();
+        }
+        p.gameObject.SetActive(active);
     }
 }
