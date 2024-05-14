@@ -87,7 +87,17 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
     private void Reset()
     {
-        
+        _vida = _vidaMax;
+        foreach(PuntosDebiles i in _puntosDebiles)
+        {
+            i.IsActive = false;
+            i.Desactivate();
+        }
+        int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
+        print(NumeroRandom);
+        _puntosDebiles[NumeroRandom].IsActive = true;
+        _puntosDebiles[NumeroRandom].Activate();
+
     }
 
     public static void TurnOnOff(EnemigoVolador p, bool active = true)

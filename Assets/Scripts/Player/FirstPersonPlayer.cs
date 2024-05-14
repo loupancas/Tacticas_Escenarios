@@ -35,8 +35,7 @@ public class FirstPersonPlayer : Entity
 
 
     private Rigidbody _rb;
-    private FirstPersonCamera _cam;
-    private float _mouseX;
+    public FirstPersonCamera cam;
     private WeaponBase _equippedWeapon;
 
     player_Movement _movement;
@@ -56,6 +55,7 @@ public class FirstPersonPlayer : Entity
     private void Start()
     {
         _buffs = new ModifierStat(baseStats.baseStats);
+        _buffs.ArmaUpdate(_equippedWeapon);
         _buffs.UpdateBuffs();
         _vida = _vidaMax;
         
@@ -65,21 +65,18 @@ public class FirstPersonPlayer : Entity
         _rb = GetComponent<Rigidbody>();
         
 
-        _cam = Camera.main.GetComponent<FirstPersonCamera>();
-        _cam.SetHead(_head);
+        cam = Camera.main.GetComponent<FirstPersonCamera>();
+        cam.SetHead(_head);
 
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         _equippedWeapon = _weaponStash[numeroRandom];
         _equippedWeapon.gameObject.SetActive(true);
-        _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
+        _equippedWeapon.SetInitialParams(cam.transform, _shootableLayers);
 
-        
 
-        _movement = new player_Movement(this,_cam, _rb, _textJumpCounts, _buffs, _control);
-        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, _buffs, _control);
+        _movement = new player_Movement(this,cam, _rb, _textJumpCounts, _buffs, _control);
+        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee);
 
-        
-        
     }
 
     public void Update()
@@ -103,9 +100,11 @@ public class FirstPersonPlayer : Entity
         }
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         _equippedWeapon = _weaponStash[numeroRandom];
+        _buffs.ArmaUpdate(_equippedWeapon);
         _inputs.UpdateWeapon(_equippedWeapon);
+        
         _equippedWeapon.gameObject.SetActive(true);
-        _equippedWeapon.SetInitialParams(_cam.transform, _shootableLayers);
+        _equippedWeapon.SetInitialParams(cam.transform, _shootableLayers);
 
     }
 
@@ -139,8 +138,8 @@ public class FirstPersonPlayer : Entity
                 print("Aumento de velocidad");
                 break;
             case 1:
-                _buffs.Add("Saltos Aumentados", (Stats original) => { original.maxJumpsCount += 1; return original; }, 5);
-                print("Saltos Aumentados");
+                _buffs.Add("Daño Aumentado", (WeaponBase original) => { original.dmg += 20; return original; }, 5);
+                print("Daño Aumentado");
                 break;
             case 2:
                 _buffs.Add("Altura de salto aumentados", (Stats original) => { original.jumpHeight += 2; return original; }, 5);

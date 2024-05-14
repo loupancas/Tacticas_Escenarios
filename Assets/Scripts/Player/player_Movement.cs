@@ -51,7 +51,7 @@ public class player_Movement
         _currDashTime = 0;
 
         Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
-
+        
         Vector3 forceToApply = Vector3.zero;
 
         if(xAxis != 0 || zAxis != 0)

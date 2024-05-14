@@ -16,7 +16,7 @@ public class player_Inputs
     TextoActualizable _textDashCounts;
     ModifierStat _baseStatsPlayer;
     Controles _controles;
-    public player_Inputs ( player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles)
+    public player_Inputs(player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles, AttackMelee attackMelee)
     {
         _movement = movement;
         _equippedWeapon = equippedWeapon;
@@ -24,6 +24,7 @@ public class player_Inputs
         _textDashCounts = text;
         _baseStatsPlayer = baseStatsPlayer;
         _controles = controles;
+        _attackMelee = attackMelee;
     }
 
     public void TimeStop()
@@ -32,7 +33,6 @@ public class player_Inputs
         if(Input.GetKey(_controles.stopTime) && _baseStatsPlayer.StatResultado.cooldownFreeze < _currTimeTimeStop)
         {
             FirstPersonPlayer.instance.theWorld.Invoke();
-           
             _currTimeTimeStop = 0;
         }
     }

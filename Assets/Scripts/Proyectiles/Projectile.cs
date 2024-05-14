@@ -60,7 +60,8 @@ public class Projectile : ProyectilesBase, IFreezed
         if (other.gameObject.GetComponent<AttackMelee>() != null)
         {
             print("Toco el trigger");
-            ProjectileFactory.Instance.ReturnProjectile(this);
+            transform.forward = GameManager.instance.pj.cam.transform.forward;
+            transform.rotation = GameManager.instance.pj.cam.transform.rotation;
 
         }
     }

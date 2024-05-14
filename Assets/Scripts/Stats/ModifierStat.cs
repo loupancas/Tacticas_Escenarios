@@ -9,12 +9,18 @@ public class ModifierStat
 
     public Stats StatOriginal, StatResultado;
 
-    
+    public WeaponBase ArmaOriginal, ArmaResultado;
 
     public ModifierStat(Stats stats)
     {
         StatOriginal = stats;
+        
+    }
 
+    public void ArmaUpdate(WeaponBase Weaponstats)
+    {
+        ArmaOriginal = Weaponstats;
+        Debug.Log("Arma Actualizada: " + ArmaOriginal);
     }
 
     public void Remove(string a)
@@ -29,13 +35,20 @@ public class ModifierStat
         if(!buffs.ContainsKey(s))
         {
            buffs.Add(s, new Buff(time, () => Remove(s), func));
-
         }
         
         UpdateBuffs();
     }
 
-    
+    public void Add(string s, Func<WeaponBase, WeaponBase> func, float time)
+    {
+        if (!buffs.ContainsKey(s))
+        {
+            buffs.Add(s, new Buff(time, () => Remove(s), func));
+        }
+
+        UpdateArmaBuffs();
+    }
 
     public void Update()
     {
@@ -48,10 +61,22 @@ public class ModifierStat
     public void UpdateBuffs()
     {
         StatResultado = StatOriginal;
+        
 
         foreach (var (s, buff) in buffs)
         {
             StatResultado = buff.calculate(StatResultado);
+            
+        }
+    }
+
+    public void UpdateArmaBuffs()
+    {
+        ArmaResultado = ArmaOriginal;
+
+        foreach(var (s,buff) in buffs)
+        {
+            ArmaResultado = buff.CalculateWeapon(ArmaOriginal);
         }
     }
 

@@ -22,13 +22,10 @@ public class ArenaManager : MonoBehaviour, IFreezed
 
     private void Start()
     {
-        _timer = new CountdownTimer(_timeSpawn);
-        
-        _timer.Start();
-
         delegateUpdate = NormalUpdate;
-
-
+        GameManager.instance.pj.theWorld += StoppedTime;
+        _timer = new CountdownTimer(_timeSpawn);
+        _timer.Start();
     }
     public void UpdateArena()
     {
@@ -48,26 +45,23 @@ public class ArenaManager : MonoBehaviour, IFreezed
     {
         int NumeroRandom1 = Random.Range(0, spawnPoints.Length);
         int NumeroRandom2 = Random.Range(0, enemigos.Length);
-        print(NumeroRandom1);
         enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
+        
+        
     }
 
     public void StoppedTime()
     {
-        
+        _timer.Stop();
     }
 
     public void NormalUpdate()
     {
-        _timer.Tick(Time.deltaTime);
-
-
-        if (_timer.IsFinished && enemigosEnLaArena.Count <= 10)
+        for (int i = 0; i <= enemigos.Length; i++)
         {
             SpawnEnemy();
-            _timer.Reset();
-            _timer.Start();
         }
+        
     }
 
     public void Freezed()
