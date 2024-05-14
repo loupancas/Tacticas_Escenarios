@@ -26,13 +26,13 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
-        GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+        //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
 
-        _vida = _vidaMax;
-        int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
-        print(NumeroRandom);
-        _puntosDebiles[NumeroRandom].IsActive = true;
-        _puntosDebiles[NumeroRandom].Activate();
+        //_vida = _vidaMax;
+        //int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
+        //print(NumeroRandom);
+        //_puntosDebiles[NumeroRandom].IsActive = true;
+        //_puntosDebiles[NumeroRandom].Activate();
 
         _fsm = new FSM();
 
@@ -94,10 +94,10 @@ public class EnemigoVolador : EnemigoBase, IFreezed
             i.Desactivate();
         }
         int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
-        print(NumeroRandom);
+        print(NumeroRandom + " Reinicio");
         _puntosDebiles[NumeroRandom].IsActive = true;
         _puntosDebiles[NumeroRandom].Activate();
-
+        GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
     public static void TurnOnOff(EnemigoVolador p, bool active = true)

@@ -6,6 +6,8 @@ public class ArenaManager : MonoBehaviour, IFreezed
 {
     public int horda;
 
+    bool _arenaEmpezada;
+
     public EnemigoBase[] enemigos;
     
     public GameObject[] spawnPoints;
@@ -22,10 +24,11 @@ public class ArenaManager : MonoBehaviour, IFreezed
 
     private void Start()
     {
+        
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
-        _timer = new CountdownTimer(_timeSpawn);
-        _timer.Start();
+        _timer = new CountdownTimer(10);
+        _timer.OnTimerStop = IniciarHorda;
     }
     public void UpdateArena()
     {
@@ -41,27 +44,45 @@ public class ArenaManager : MonoBehaviour, IFreezed
         delegateUpdate.Invoke();
     }
     
+    public void IniciarHorda()
+    {
+        _arenaEmpezada = true;
+        for(int i = 0; i < 5; i++)
+        {
+            SpawnEnemy();
+        }
+
+    }
+
     public void SpawnEnemy()
     {
         int NumeroRandom1 = Random.Range(0, spawnPoints.Length);
         int NumeroRandom2 = Random.Range(0, enemigos.Length);
         enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
-        
-        
     }
 
     public void StoppedTime()
     {
-        _timer.Stop();
+        _timer.Pause();
     }
 
     public void NormalUpdate()
     {
-        for (int i = 0; i <= enemigos.Length; i++)
-        {
-            SpawnEnemy();
-        }
         
+        if (enemigosEnLaArena.Count == 0 && _arenaEmpezada)
+        {
+            _arenaEmpezada = false;
+            horda++;
+            _timer.Start();
+        }
+
+
+        
+            //IniciarHorda();
+            print("Tiempo terminado");
+       
+
+        _timer.Tick(Time.deltaTime);
     }
 
     public void Freezed()
