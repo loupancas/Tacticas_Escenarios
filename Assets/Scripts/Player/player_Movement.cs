@@ -14,14 +14,16 @@ public class player_Movement
     Rigidbody _rb;
     TextoActualizable _textJumpCount;
     Controles _controles;
-    public player_Movement(FirstPersonPlayer pj, FirstPersonCamera cam, Rigidbody rb, TextoActualizable text, ModifierStat baseStats, Controles controles)
+    
+    public player_Movement(FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStats, Controles controles)
     {
         _pj = pj;
-        _cam = cam;
-        _rb = rb;
+        _cam = pj.cam;
+        _rb = pj.GetComponent<Rigidbody>();
         _baseStatsPlayer = baseStats;
         _textJumpCount = text;
         _controles = controles;
+        
     }
 
     public void Movement(float xAxis, float zAxis)
@@ -76,7 +78,6 @@ public class player_Movement
 
     public void Jump()
     {
-        
         if (0 < (_jumpsRemaining - 1))
         {
             _rb.AddForce(_pj.transform.up * _baseStatsPlayer.StatResultado.jumpHeight, ForceMode.Impulse);
@@ -85,9 +86,6 @@ public class player_Movement
             
 
         }
-        
-
-        
     }
     
     public void DashState()

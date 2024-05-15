@@ -74,19 +74,20 @@ public class FirstPersonPlayer : Entity
         _equippedWeapon.SetInitialParams(cam.transform, _shootableLayers);
 
 
-        _movement = new player_Movement(this,cam, _rb, _textJumpCounts, _buffs, _control);
-        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee);
+        _movement = new player_Movement(this, _textJumpCounts, _buffs, _control);
+        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee, _textJumpCounts);
 
     }
 
     public void Update()
     {
+        _inputs.ControlUpdateNormal();
         _buffs.Update();
         _inputs.Rotation();
         _inputs.MeleeAttack();
         _inputs.TimeStop();
-        _inputs.Jump();
-        _inputs.Dash();
+        //_inputs.Jump();
+        //_inputs.Dash();
         _movement.GroundedState();
         _movement.DashState();
     }
@@ -138,7 +139,7 @@ public class FirstPersonPlayer : Entity
                 print("Aumento de velocidad");
                 break;
             case 1:
-                _buffs.Add("Daño Aumentado", (WeaponBase original) => { original.dmg += 20; return original; }, 5);
+                _buffs.Add("Daño Aumentado", (Stats original) => { original.cooldownFreeze -= 1; return original; }, 5);
                 print("Daño Aumentado");
                 break;
             case 2:

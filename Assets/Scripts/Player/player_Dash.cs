@@ -6,23 +6,21 @@ public class player_Dash
 {
     CountdownTimer _timer, _delayedTimer;
     ModifierStat _buffs;
-
-
     FirstPersonPlayer _pj;
     Rigidbody _rb;
-
-    float _dashForce;
-    float _dashUpwardForce;
     float _dashDuration;
-    float _dashFov;
     float _dashSpeed;
     Vector3 _delayedForceToApply;
-    public player_Dash(float timeDash, FirstPersonPlayer pj, ModifierStat buffs)
+    public player_Dash(FirstPersonPlayer pj, ModifierStat buffs)
     {
-        _dashDuration = timeDash;
+        _dashDuration = buffs.StatResultado.dashTime;
+        _dashSpeed = buffs.StatResultado.dashSpeed;
         _timer = new CountdownTimer(_dashDuration);
+        _delayedTimer = new CountdownTimer(0.025f);
+        _timer.OnTimerStop = ResetDash;
+        _delayedTimer.OnTimerStop = DelayedDashForce;
         _pj = pj;
-        _rb = pj.GetComponent<Rigidbody>();
+        _rb = pj.gameObject.GetComponent<Rigidbody>();
         _buffs = buffs;
     }
 
@@ -30,38 +28,43 @@ public class player_Dash
     {
         _timer.Tick(TimeDelta);
         _delayedTimer.Tick(TimeDelta);
-
-        if (_delayedTimer.IsFinished)
-        {
-            _rb.velocity = Vector3.zero;
-            _rb.AddForce(_delayedForceToApply, ForceMode.Impulse);
-        }
-
-        if (_timer.IsFinished)
-        {
-            _pj.dashing = false;
-        }
     }
 
     public void Dash(float xAxis, float zAxis)
     {
-        _timer.Start();
+        Debug.Log("Dash");
         Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
         _buffs.Add("Dash", (Stats original) => { original.movementSpeed = _dashSpeed; return original; }, _dashDuration);
         Vector3 forceToApply;
 
+        _pj.cam.SetFov(50f);
+
         if(xAxis != 0 || zAxis != 0)
-        {
-            forceToApply = _pj.transform.forward * _buffs.StatResultado.dashForce + _pj.transform.up * _buffs.StatResultado.dashUpwardForce;
-        }
-        else
         {
             forceToApply = dir * _buffs.StatResultado.dashForce + _pj.transform.up * _buffs.StatResultado.dashUpwardForce;
         }
+        else
+        {
+            forceToApply = _pj.transform.forward * _buffs.StatResultado.dashForce + _pj.transform.up * _buffs.StatResultado.dashUpwardForce;
+        }
         _delayedForceToApply = forceToApply;
-        _delayedTimer = new CountdownTimer(0.025f);
+        _timer.Start();
         _delayedTimer.Start();
         _pj.dashing = true;
+        _rb.useGravity = false;
     }
 
+    void DelayedDashForce()
+    {
+        _rb.velocity = Vector3.zero;
+        _rb.AddForce(_delayedForceToApply, ForceMode.Impulse);
+    }
+
+    void ResetDash()
+    {
+        _pj.dashing = false;
+        _rb.velocity = Vector3.zero;
+        _pj.cam.SetFov(60f);
+        _rb.useGravity = true;
+    }
 }

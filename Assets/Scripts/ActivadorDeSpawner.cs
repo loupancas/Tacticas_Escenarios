@@ -9,5 +9,6 @@ public class ActivadorDeSpawner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _arena.IniciarHorda();
+        gameObject.SetActive(false);
     }
 }

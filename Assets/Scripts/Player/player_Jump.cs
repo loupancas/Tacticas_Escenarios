@@ -10,11 +10,11 @@ public class player_Jump
     Rigidbody _rb;
     TextoActualizable _textJumpCount;
 
-    public player_Jump(ModifierStat buffs, FirstPersonPlayer pj, Rigidbody rb, TextoActualizable texto)
+    public player_Jump(ModifierStat buffs, FirstPersonPlayer pj, TextoActualizable texto)
     {
         _buffs = buffs;
         _pj = pj;
-        _rb = rb;
+        _rb = pj.gameObject.GetComponent<Rigidbody>();
         _textJumpCount = texto;
     }
 

@@ -27,7 +27,7 @@ public class ArenaManager : MonoBehaviour, IFreezed
         
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
-        _timer = new CountdownTimer(10);
+        _timer = new CountdownTimer(_timeSpawn);
         _timer.OnTimerStop = IniciarHorda;
     }
     public void UpdateArena()
@@ -68,20 +68,12 @@ public class ArenaManager : MonoBehaviour, IFreezed
 
     public void NormalUpdate()
     {
-        
         if (enemigosEnLaArena.Count == 0 && _arenaEmpezada)
         {
             _arenaEmpezada = false;
             horda++;
             _timer.Start();
         }
-
-
-        
-            //IniciarHorda();
-            print("Tiempo terminado");
-       
-
         _timer.Tick(Time.deltaTime);
     }
 
