@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: BaseStats
   m_EditorClassIdentifier: 
   baseStats:
-    cooldownMeleeAttack: 1
+    cooldownMeleeAttack: 0
     cooldownFreeze: 6
     dashCd: 0
-    dashForce: 6
+    dashForce: 10
+    dashSpeed: 7
     dashUpwardForce: 2
-    dashTime: 2
+    dashTime: 0.5
     jumpHeight: 8
     maxJumpsCount: 2
     maxDashsCount: 3

@@ -40,14 +40,11 @@ public class EnemigoVoladorMovimiento : IState
         {
             AddForce(Seek(GameManager.instance.pj.transform.position));
         }
-        else
-        {
-            _fsm.ChangeState("Lost view");
-        }
+        
         _transform.position += _velocity * Time.deltaTime;
         _transform.forward = _velocity;
 
-        if(InFOV(GameManager.instance.pj.transform))
+        if(Vector3.Distance(_transform.position, GameManager.instance.pj.transform.position ) < 5)
         {
             _fsm.ChangeState("Attack");
         }

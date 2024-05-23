@@ -10,6 +10,7 @@ public struct Stats
     public float cooldownFreeze;
     public float dashCd;
     public float dashForce;
+    public float dashSpeed;
     public float dashUpwardForce;
     public float dashTime;
     public float jumpHeight;

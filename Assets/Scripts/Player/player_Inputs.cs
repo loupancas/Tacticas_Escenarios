@@ -16,7 +16,10 @@ public class player_Inputs
     TextoActualizable _textDashCounts;
     ModifierStat _baseStatsPlayer;
     Controles _controles;
-    public player_Inputs ( player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles)
+    player_Dash _dash;
+    player_Jump _jump;
+
+    public player_Inputs(player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles, AttackMelee attackMelee, TextoActualizable text2)
     {
         _movement = movement;
         _equippedWeapon = equippedWeapon;
@@ -24,6 +27,10 @@ public class player_Inputs
         _textDashCounts = text;
         _baseStatsPlayer = baseStatsPlayer;
         _controles = controles;
+        _attackMelee = attackMelee;
+        _dash = new player_Dash(pj, baseStatsPlayer);
+        _jump = new player_Jump(baseStatsPlayer, pj, text2);
+        
     }
 
     public void TimeStop()
@@ -32,7 +39,6 @@ public class player_Inputs
         if(Input.GetKey(_controles.stopTime) && _baseStatsPlayer.StatResultado.cooldownFreeze < _currTimeTimeStop)
         {
             FirstPersonPlayer.instance.theWorld.Invoke();
-           
             _currTimeTimeStop = 0;
         }
     }
@@ -91,11 +97,29 @@ public class player_Inputs
         }
     }
     
+    public void ControlUpdateNormal()
+    {
+        //_xAxis = Input.GetAxisRaw("Horizontal");
+        //_zAxis = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKeyDown(_controles.dashKey))// && (0 < _dashsRemaining))
+        {
+            _dash.Dash(_xAxis, _zAxis);
+        }
+        if (Input.GetKeyDown(_controles.jumpKey))
+        {
+            _jump.Jump();
+        }
+
+        _jump.GroundedState();
+        _dash.UpdateDashTimer(Time.deltaTime);
+        
+    }
+
     public void Dash()
     {
 
-        _xAxis = Input.GetAxisRaw("Horizontal");
-        _zAxis = Input.GetAxisRaw("Vertical");
+       
         if (Input.GetKeyDown(_controles.dashKey) && (0 < _dashsRemaining))
         {
             _movement.Dash(_xAxis, _zAxis);

@@ -29,4 +29,8 @@ public class PuntosDebiles : MonoBehaviour
         }
         
     }
+    public void Desactivate()
+    {
+        _mesh.material.color = Color.grey;
+    }
 }

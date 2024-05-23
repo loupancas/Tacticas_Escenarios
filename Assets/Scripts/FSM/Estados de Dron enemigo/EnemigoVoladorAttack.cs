@@ -58,7 +58,7 @@ public class EnemigoVoladorAttack : IState
         }
         else
         {
-            _fsm.ChangeState("Lost view");
+            _fsm.ChangeState("Movement");
         }
         
         

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FirstPersonCamera : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class FirstPersonCamera : MonoBehaviour
 
     public void SetFov(float FOV)
     {
-        GetComponent<Camera>().fieldOfView = FOV;
+        GetComponent<Camera>().DOFieldOfView(FOV, 0.25f);
     }
     
 }

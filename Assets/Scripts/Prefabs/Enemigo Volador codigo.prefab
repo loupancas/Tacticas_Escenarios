@@ -3082,8 +3082,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 34.5, y: 1.5, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7331265696163193560}
   m_Father: {fileID: 0}
@@ -3102,10 +3102,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vidaMax: 100
   _vida: 0
-  _cdShot: 4
+  _cdShot: 1
   _maxVelocity: 4
   _maxForce: 4
-  _viewRadius: 20
+  _viewRadius: 10
   _viewAngle: 180
   _puntosDebiles:
   - {fileID: 5626540854111498135}
@@ -3116,7 +3116,7 @@ MonoBehaviour:
   _spawnBullet: {fileID: 2502652083021165761}
   _wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!65 &5213907397914646294
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemigoVolador : Entity, IFreezed
+public class EnemigoVolador : EnemigoBase, IFreezed
 {
-    FSM _fsm;
+    
 
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
-
+    [Header("Stats")]
     [SerializeField] float _cdShot;
-    [SerializeField] float _maxVelocity;
-    [SerializeField] float _maxForce;
-    [SerializeField] float _viewRadius;
-    [SerializeField] float _viewAngle;
+    
 
     [Header("Components")]
-    [SerializeField] PuntosDebiles[] _puntosDebiles;
+    
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
-    [SerializeField] LayerMask _wallLayer;
+    
     
     public void Awake()
     {
@@ -29,12 +26,13 @@ public class EnemigoVolador : Entity, IFreezed
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
+        //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
 
-        _vida = _vidaMax;
-        int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
-        print(NumeroRandom);
-        _puntosDebiles[NumeroRandom].IsActive = true;
-        _puntosDebiles[NumeroRandom].Activate();
+        //_vida = _vidaMax;
+        //int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
+        //print(NumeroRandom);
+        //_puntosDebiles[NumeroRandom].IsActive = true;
+        //_puntosDebiles[NumeroRandom].Activate();
 
         _fsm = new FSM();
 
@@ -47,8 +45,12 @@ public class EnemigoVolador : Entity, IFreezed
     public override void Morir()
     {
         print("Mori xd");
+        GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
+        EnemigoVoladorFactory.Instance.ReturnProjectile(this);
         FirstPersonPlayer.instance.CambioDeArma();
     }
+
+    
 
     private void Update()
     {
@@ -74,5 +76,36 @@ public class EnemigoVolador : Entity, IFreezed
         delegateUpdate = Freezed;
         yield return new WaitForSeconds(3);
         delegateUpdate = NormalUpdate;
+    }
+
+    public override void SpawnEnemy(Transform spawnPoint)
+    {
+        var p = EnemigoVoladorFactory.Instance.pool.GetObject();
+        p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
+        Debug.Log("Disparo proyectil");
+    }
+
+    private void Reset()
+    {
+        _vida = _vidaMax;
+        foreach(PuntosDebiles i in _puntosDebiles)
+        {
+            i.IsActive = false;
+            i.Desactivate();
+        }
+        int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
+        print(NumeroRandom + " Reinicio");
+        _puntosDebiles[NumeroRandom].IsActive = true;
+        _puntosDebiles[NumeroRandom].Activate();
+        GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+    }
+
+    public static void TurnOnOff(EnemigoVolador p, bool active = true)
+    {
+        if (active)
+        {
+            p.Reset();
+        }
+        p.gameObject.SetActive(active);
     }
 }
