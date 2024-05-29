@@ -16,15 +16,18 @@ public class player_Jump
         _pj = pj;
         _rb = pj.gameObject.GetComponent<Rigidbody>();
         _textJumpCount = texto;
+        _textJumpCount.UpdateHUD(_jumpsRemaining, _buffs.StatResultado.maxJumpsCount, "Saltos");
     }
 
     public void Jump()
     {
+        
         if (0 < (_jumpsRemaining - 1))
         {
             _rb.AddForce(_pj.transform.up * _buffs.StatResultado.jumpHeight, ForceMode.Impulse);
             _jumpsRemaining -= 1;
         }
+        _textJumpCount.UpdateHUD(_jumpsRemaining, _buffs.StatResultado.maxJumpsCount, "Saltos");
     }
     public void GroundedState()
     {

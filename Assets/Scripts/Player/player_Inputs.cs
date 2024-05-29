@@ -28,7 +28,7 @@ public class player_Inputs
         _baseStatsPlayer = baseStatsPlayer;
         _controles = controles;
         _attackMelee = attackMelee;
-        _dash = new player_Dash(pj, baseStatsPlayer);
+        _dash = new player_Dash(pj, baseStatsPlayer, _textDashCounts);
         _jump = new player_Jump(baseStatsPlayer, pj, text2);
         
     }
@@ -99,10 +99,7 @@ public class player_Inputs
     
     public void ControlUpdateNormal()
     {
-        //_xAxis = Input.GetAxisRaw("Horizontal");
-        //_zAxis = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetKeyDown(_controles.dashKey))// && (0 < _dashsRemaining))
+        if (Input.GetKeyDown(_controles.dashKey))
         {
             _dash.Dash(_xAxis, _zAxis);
         }
@@ -110,39 +107,8 @@ public class player_Inputs
         {
             _jump.Jump();
         }
-
         _jump.GroundedState();
         _dash.UpdateDashTimer(Time.deltaTime);
-        
-    }
-
-    public void Dash()
-    {
-
-       
-        if (Input.GetKeyDown(_controles.dashKey) && (0 < _dashsRemaining))
-        {
-            _movement.Dash(_xAxis, _zAxis);
-            _dashsRemaining -= 1;
-        }
-        
-        if(_pj.grounded && _dashsRemaining <= (_baseStatsPlayer.StatResultado.maxDashsCount - 1) && !_pj.dashing)
-        {
-            _dashsRemaining = _baseStatsPlayer.StatResultado.maxDashsCount;
-            Debug.Log("Carga del dash");
-            _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.StatResultado.maxDashsCount, "Dash");
-        }
-        Debug.Log("Dashes restantes: " + _dashsRemaining);
-        _textDashCounts.UpdateHUD(_dashsRemaining, _baseStatsPlayer.StatResultado.maxDashsCount, "Dash");
-    }
-
-    public void Jump()
-    {
-        
-        if (Input.GetKeyDown(_controles.jumpKey))
-        {
-            _movement.Jump();
-        }
         
     }
 }

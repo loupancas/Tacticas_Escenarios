@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Projectile : ProyectilesBase, IFreezed
 {
+    public bool devuelto = false;
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
+
+    CountdownTimer _Freezetime;
     void Start()
     {
         delegateUpdate = NormalUpdate;
+        _Freezetime = new CountdownTimer(3);
+        _Freezetime.OnTimerStop = BackToNormal;
         GameManager.instance.pj.theWorld += StoppedTime;
-        //_dmg = ProyectilesStats.ProyectilNormal.dmg;
-        //_speed = ProyectilesStats.ProyectilNormal.speed;
-        //_maxDistance = ProyectilesStats.ProyectilNormal.maxDistance;
+        _modifiedDmg = _dmg;
+        _modifiedSpeed = _speed;
     }
 
     
@@ -20,21 +24,16 @@ public class Projectile : ProyectilesBase, IFreezed
     {
         delegateUpdate.Invoke();
 
-        /*var distanceToTravel = _speed * Time.deltaTime;
-
-        transform.position += transform.forward * distanceToTravel;
-
-        _currentDistance += distanceToTravel;
-        if (_currentDistance > _maxDistance)
-        {
-            ProjectileFactory.Instance.ReturnProjectile(this);
-        }
-        */
+        
     }
 
     private void Reset()
     {
         _currentDistance = 0;
+        _modifiedDmg = _dmg;
+        _modifiedSpeed = _speed;
+        devuelto = false;
+        delegateUpdate = NormalUpdate;
     }
 
     public static void TurnOnOff(Projectile p, bool active = true)
@@ -48,21 +47,29 @@ public class Projectile : ProyectilesBase, IFreezed
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.GetComponent<Entity>() != null)
+        if (collision.collider.GetComponent<FirstPersonPlayer>() != null)
         {
-            collision.collider.GetComponent<Entity>().TakeDamage(_dmg);
+            collision.collider.GetComponent<FirstPersonPlayer>().TakeDamage(_modifiedDmg);
             ProjectileFactory.Instance.ReturnProjectile(this);
         }   
         
+        if (collision.collider.GetComponent<EnemigoBase>() != null && devuelto)
+        {
+            print("Toco al enemigo");
+            collision.collider.GetComponent<EnemigoBase>().Morir();
+            GameManager.instance.pj.AgregarBuff();
+            
+            ProjectileFactory.Instance.ReturnProjectile(this);
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<AttackMelee>() != null)
         {
             print("Toco el trigger");
-            transform.forward = GameManager.instance.pj.cam.transform.forward;
-            transform.rotation = GameManager.instance.pj.cam.transform.rotation;
 
+            DevolverBala();
         }
     }
     public override void SpawnProyectile(Transform spawnPoint)
@@ -74,7 +81,7 @@ public class Projectile : ProyectilesBase, IFreezed
 
     public void NormalUpdate()
     {
-        var distanceToTravel = _speed * Time.deltaTime;
+        var distanceToTravel = _modifiedSpeed * Time.deltaTime;
 
         transform.position += transform.forward * distanceToTravel;
 
@@ -87,17 +94,26 @@ public class Projectile : ProyectilesBase, IFreezed
 
     public void Freezed()
     {
-        
+        _Freezetime.Tick(Time.deltaTime);
     }
 
     public void StoppedTime()
     {
-        StartCoroutine(StopTime());
-    }
-    public IEnumerator StopTime()
-    {
         delegateUpdate = Freezed;
-        yield return new WaitForSeconds(3);
+        _Freezetime.Start();
+    }
+    public void BackToNormal()
+    {
         delegateUpdate = NormalUpdate;
     }
+    public void DevolverBala()
+    {
+        devuelto = true;
+        transform.forward = GameManager.instance.pj.cam.transform.forward;
+        transform.rotation = GameManager.instance.pj.cam.transform.rotation;
+        _modifiedDmg = _dmg * 2;
+        _modifiedSpeed = _speed * 6;
+    }
+
+    
 }

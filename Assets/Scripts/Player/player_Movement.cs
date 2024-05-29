@@ -7,8 +7,6 @@ public class player_Movement
 {
     FirstPersonPlayer _pj;
     ModifierStat _baseStatsPlayer;
-    float _currDashTime;
-    int _jumpsRemaining;
     float _mouseX;
     FirstPersonCamera _cam;
     Rigidbody _rb;
@@ -48,76 +46,5 @@ public class player_Movement
         _cam?.Rotate(_mouseX, yAxis);
     }
 
-    public void Dash(float xAxis, float zAxis)
-    {
-        _currDashTime = 0;
-
-        Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
-        
-        Vector3 forceToApply = Vector3.zero;
-
-        if(xAxis != 0 || zAxis != 0)
-        {
-            forceToApply = dir * _baseStatsPlayer.StatResultado.dashForce + _pj.transform.up * _baseStatsPlayer.StatResultado.dashUpwardForce;
-        }
-        else
-        {
-            forceToApply = _pj.transform.forward * _baseStatsPlayer.StatResultado.dashForce + _pj.transform.up * _baseStatsPlayer.StatResultado.dashUpwardForce;
-        }
-
-        Debug.Log("Dash");
-        Debug.Log("fuerzaAplicada: " + forceToApply);
-
-        _pj.dashing = true;
-        _rb.AddForce(forceToApply, ForceMode.Impulse);
-
-        
-    }
-
-
-
-    public void Jump()
-    {
-        if (0 < (_jumpsRemaining - 1))
-        {
-            _rb.AddForce(_pj.transform.up * _baseStatsPlayer.StatResultado.jumpHeight, ForceMode.Impulse);
-            
-            _jumpsRemaining -= 1;
-            
-
-        }
-    }
     
-    public void DashState()
-    {
-        _currDashTime += Time.deltaTime;
-        if (_currDashTime > _baseStatsPlayer.StatResultado.dashTime && _pj.dashing && _pj.grounded)
-        {
-            _pj.dashing = false;
-            _rb.velocity = Vector3.zero;
-        }
-    }
-
-    public void GroundedState()
-    {
-        float groundCheckDistance = 1.1f;
-        RaycastHit hit;
-        if (Physics.Raycast(_pj.transform.position, -_pj.transform.up, out hit, groundCheckDistance))
-        {
-            _pj.grounded = true;
-            _jumpsRemaining = _baseStatsPlayer.StatResultado.maxJumpsCount;
-
-            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.StatResultado.maxJumpsCount, "Saltos");
-
-        }
-        else
-        {
-            _pj.grounded = false;
-            _textJumpCount.UpdateHUD(_jumpsRemaining, _baseStatsPlayer.StatResultado.maxJumpsCount, "Saltos");
-        }
-            
-
-        
-        Debug.Log("Remaining jumps: " + _jumpsRemaining);
-    }
 }

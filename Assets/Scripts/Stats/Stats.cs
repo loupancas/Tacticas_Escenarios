@@ -8,6 +8,7 @@ public struct Stats
 {
     public float cooldownMeleeAttack;
     public float cooldownFreeze;
+    public float chargeDashTime;
     public float dashCd;
     public float dashForce;
     public float dashSpeed;

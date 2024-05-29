@@ -16,8 +16,8 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
-    
-    
+
+    CountdownTimer _Freezetime;
     public void Awake()
     {
         
@@ -26,9 +26,11 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
+        _Freezetime = new CountdownTimer(3);
+        _Freezetime.OnTimerStop = BackToNormal;
         //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
 
-        //_vida = _vidaMax;
+        _vida = _vidaMax;
         //int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
         //print(NumeroRandom);
         //_puntosDebiles[NumeroRandom].IsActive = true;
@@ -36,18 +38,18 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
         _fsm = new FSM();
 
-        _fsm.CreateState("Attack", new EnemigoVoladorAttack(_fsm, _proyectil, transform, _spawnBullet, _wallLayer, _viewRadius, _viewAngle, _cdShot));
+        _fsm.CreateState("Attack", new EnemigoVoladorAttack(_fsm, _proyectil, _spawnBullet, _wallLayer, _viewRadius, _viewAngle, _cdShot, this));
         _fsm.CreateState("Lost view", new EnemigoVoladorLostView(_fsm, transform, _wallLayer, _viewRadius, _viewAngle));
-        _fsm.CreateState("Movement", new EnemigoVoladorMovimiento(_fsm, transform, _maxVelocity, _maxForce, _viewRadius, _viewAngle, _wallLayer));
+        _fsm.CreateState("Movement", new EnemigoVoladorMovimiento(_fsm, _maxVelocity, _maxForce, _viewRadius, _viewAngle, _wallLayer, this));
 
         _fsm.ChangeState("Movement");
     }
     public override void Morir()
     {
-        print("Mori xd");
         GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
         EnemigoVoladorFactory.Instance.ReturnProjectile(this);
-        FirstPersonPlayer.instance.CambioDeArma();
+        GameManager.instance.pj.CambioDeArma();
+        _vida = _vidaMax;
     }
 
     
@@ -64,25 +66,23 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
     public void Freezed()
     {
-
+        _Freezetime.Tick(Time.deltaTime);
     }
-
     public void StoppedTime()
     {
-        StartCoroutine(StopTime());
-    }
-    public IEnumerator StopTime()
-    {
         delegateUpdate = Freezed;
-        yield return new WaitForSeconds(3);
+        _Freezetime.Start();
+    }
+    public void BackToNormal()
+    {
         delegateUpdate = NormalUpdate;
     }
-
     public override void SpawnEnemy(Transform spawnPoint)
     {
         var p = EnemigoVoladorFactory.Instance.pool.GetObject();
         p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
         Debug.Log("Disparo proyectil");
+        //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
     private void Reset()
@@ -97,7 +97,9 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         print(NumeroRandom + " Reinicio");
         _puntosDebiles[NumeroRandom].IsActive = true;
         _puntosDebiles[NumeroRandom].Activate();
-        GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+
+        if (!gameObject.activeInHierarchy) 
+            GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
     public static void TurnOnOff(EnemigoVolador p, bool active = true)
@@ -108,4 +110,6 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         }
         p.gameObject.SetActive(active);
     }
+
+    
 }

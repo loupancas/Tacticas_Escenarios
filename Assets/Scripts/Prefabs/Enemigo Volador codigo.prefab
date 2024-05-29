@@ -3065,6 +3065,7 @@ GameObject:
   - component: {fileID: 2688049747350996194}
   - component: {fileID: 8171125479128317140}
   - component: {fileID: 5213907397914646294}
+  - component: {fileID: -600112179354609036}
   m_Layer: 7
   m_Name: Enemigo Volador codigo
   m_TagString: Untagged
@@ -3102,21 +3103,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vidaMax: 100
   _vida: 0
-  _cdShot: 1
   _maxVelocity: 4
   _maxForce: 4
   _viewRadius: 10
   _viewAngle: 180
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _puntosDebiles:
   - {fileID: 5626540854111498135}
   - {fileID: 4478436201622781833}
   - {fileID: 5514389146469608995}
+  _cdShot: 1
   _proyectil: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
     type: 3}
   _spawnBullet: {fileID: 2502652083021165761}
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!65 &5213907397914646294
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3138,6 +3139,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.813405, y: 1.3917289, z: 1.7740417}
   m_Center: {x: 0.0014672279, y: 0.19586444, z: -0.1353755}
+--- !u!54 &-600112179354609036
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850294711148623708}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8360185113413339651
 GameObject:
   m_ObjectHideFlags: 0

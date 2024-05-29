@@ -10,8 +10,6 @@ public abstract class Entity : MonoBehaviour
     public virtual void TakeDamage(int Damage)
     {
         _vida -= Damage;
-        
-
         if (_vida < 0)
         {
             Morir();

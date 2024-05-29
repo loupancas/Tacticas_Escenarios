@@ -2,22 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArenaManager : MonoBehaviour, IFreezed
+public class Arena : ArenaBase, IFreezed
 {
     public int horda;
-
     bool _arenaEmpezada;
-
-    public EnemigoBase[] enemigos;
-    
-    public GameObject[] spawnPoints;
-
-    public List<EnemigoBase> enemigosEnLaArena;
-
-    CountdownTimer _timer;
-
+    CountdownTimer _timer, _Freezetime;
     [SerializeField] float _timeSpawn;
-
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
 
@@ -29,22 +19,16 @@ public class ArenaManager : MonoBehaviour, IFreezed
         GameManager.instance.pj.theWorld += StoppedTime;
         _timer = new CountdownTimer(_timeSpawn);
         _timer.OnTimerStop = IniciarHorda;
+        _Freezetime = new CountdownTimer(3);
+        _Freezetime.OnTimerStop = BackToNormal;
     }
-    public void UpdateArena()
-    {
-        if(enemigosEnLaArena.Count > 0)
-        {
-            horda++;
-            _timer.Reset();
-        }
-    }
-
+    
     private void Update()
     {
         delegateUpdate.Invoke();
     }
     
-    public void IniciarHorda()
+    public override void IniciarHorda()
     {
         _arenaEmpezada = true;
         for(int i = 0; i < 5; i++)
@@ -64,6 +48,9 @@ public class ArenaManager : MonoBehaviour, IFreezed
     public void StoppedTime()
     {
         _timer.Pause();
+        delegateUpdate = Freezed;
+        _Freezetime.Start();
+        
     }
 
     public void NormalUpdate()
@@ -79,15 +66,12 @@ public class ArenaManager : MonoBehaviour, IFreezed
 
     public void Freezed()
     {
-        StartCoroutine(StopTime());
-
+        _Freezetime.Tick(Time.deltaTime);
     }
 
-    public IEnumerator StopTime()
+    public void BackToNormal()
     {
-        delegateUpdate = Freezed;
-        yield return new WaitForSeconds(3);
         delegateUpdate = NormalUpdate;
-
+        _timer.Start();
     }
 }

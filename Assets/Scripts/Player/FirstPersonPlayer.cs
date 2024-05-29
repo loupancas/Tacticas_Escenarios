@@ -25,7 +25,7 @@ public class FirstPersonPlayer : Entity
     [SerializeField] private Transform _head;
     [SerializeField] private AttackMelee _attackMelee;
     [SerializeField] private HealthBar _hpBar;
-    [SerializeField] private TextoActualizable _textDashCounts, _textJumpCounts;
+    [SerializeField] private TextoActualizable _textDashCounts, _textJumpCounts, _textFases;
     [Header("Controls")]
     [SerializeField] Controles _control; 
     [Header("Weapons")]
@@ -36,26 +36,23 @@ public class FirstPersonPlayer : Entity
 
     private Rigidbody _rb;
     public FirstPersonCamera cam;
-    private WeaponBase _equippedWeapon;
+    public WeaponBase equippedWeapon;
 
     player_Movement _movement;
     player_Inputs _inputs;
     ModifierStat _buffs;
-    
+    Player_Fases _fases;
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
-
-        
-        
     }
     private void Start()
     {
         _buffs = new ModifierStat(baseStats.baseStats);
-        _buffs.ArmaUpdate(_equippedWeapon);
+        _buffs.ArmaUpdate(equippedWeapon);
         _buffs.UpdateBuffs();
         _vida = _vidaMax;
         
@@ -68,14 +65,16 @@ public class FirstPersonPlayer : Entity
         cam = Camera.main.GetComponent<FirstPersonCamera>();
         cam.SetHead(_head);
 
+        _fases = new Player_Fases(5, _textFases);
+
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
-        _equippedWeapon = _weaponStash[numeroRandom];
-        _equippedWeapon.gameObject.SetActive(true);
-        _equippedWeapon.SetInitialParams(cam.transform, _shootableLayers);
+        equippedWeapon = _weaponStash[numeroRandom];
+        equippedWeapon.gameObject.SetActive(true);
+        equippedWeapon.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
 
 
         _movement = new player_Movement(this, _textJumpCounts, _buffs, _control);
-        _inputs = new player_Inputs( _movement, _equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee, _textJumpCounts);
+        _inputs = new player_Inputs( _movement, equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee, _textJumpCounts);
 
     }
 
@@ -86,26 +85,23 @@ public class FirstPersonPlayer : Entity
         _inputs.Rotation();
         _inputs.MeleeAttack();
         _inputs.TimeStop();
-        //_inputs.Jump();
-        //_inputs.Dash();
-        _movement.GroundedState();
-        _movement.DashState();
+        _fases.UpdateTimer(Time.deltaTime);
     }
 
     public void CambioDeArma()
     {
-        if (_equippedWeapon != null)
+        if (equippedWeapon != null)
         {
-            _equippedWeapon.gameObject.SetActive(false);
-            _equippedWeapon = null;
+            equippedWeapon.gameObject.SetActive(false);
+            equippedWeapon = null;
         }
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
-        _equippedWeapon = _weaponStash[numeroRandom];
-        _buffs.ArmaUpdate(_equippedWeapon);
-        _inputs.UpdateWeapon(_equippedWeapon);
+        equippedWeapon = _weaponStash[numeroRandom];
+        _buffs.ArmaUpdate(equippedWeapon);
+        _inputs.UpdateWeapon(equippedWeapon);
         
-        _equippedWeapon.gameObject.SetActive(true);
-        _equippedWeapon.SetInitialParams(cam.transform, _shootableLayers);
+        equippedWeapon.gameObject.SetActive(true);
+        equippedWeapon.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
 
     }
 
@@ -130,6 +126,8 @@ public class FirstPersonPlayer : Entity
 
     public void AgregarBuff()
     {
+        print("Buffo dado");
+        _fases.SubirFase();
         int Numero = UnityEngine.Random.Range(0, 5);
 
         switch(Numero)

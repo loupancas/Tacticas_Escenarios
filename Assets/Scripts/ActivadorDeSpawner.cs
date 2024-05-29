@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActivadorDeSpawner : MonoBehaviour
 {
-    [SerializeField] ArenaManager _arena;
+    [SerializeField] ArenaBase _arena;
 
     private void OnTriggerEnter(Collider other)
     {

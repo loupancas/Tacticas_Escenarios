@@ -9,13 +9,15 @@ public class SpawnerDeBalas : MonoBehaviour, IFreezed
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
     float _currTime = 0;
+    CountdownTimer _Freezetime;
 
-   
 
     void Start()
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
+        _Freezetime = new CountdownTimer(3);
+        _Freezetime.OnTimerStop = BackToNormal;
     }
 
     
@@ -25,7 +27,7 @@ public class SpawnerDeBalas : MonoBehaviour, IFreezed
     }
     public void Freezed()
     {
-
+        _Freezetime.Tick(Time.deltaTime);
     }
 
     public void NormalUpdate()
@@ -40,14 +42,12 @@ public class SpawnerDeBalas : MonoBehaviour, IFreezed
 
     public void StoppedTime()
     {
-        StartCoroutine(StopTime());
+        delegateUpdate = Freezed;
+        _Freezetime.Start();
     }
 
-    public IEnumerator StopTime()
+    public void BackToNormal()
     {
-        delegateUpdate = Freezed;
-        yield return new WaitForSeconds(3);
         delegateUpdate = NormalUpdate;
     }
-
 }

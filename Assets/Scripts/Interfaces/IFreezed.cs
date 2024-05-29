@@ -8,6 +8,6 @@ public interface IFreezed
     public void StoppedTime();
     public void NormalUpdate();
     public void Freezed();
-    public IEnumerator StopTime();
+    public void BackToNormal();
 
 }

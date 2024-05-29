@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemigoVoladorMovimiento : IState
 {
     FSM _fsm;
+    EnemigoBase _me;
     Transform _transform;
+    List<EnemigoBase> _boids;
     float _maxVelocity;
     float _maxForce;
     float _viewRadius;
@@ -13,15 +15,18 @@ public class EnemigoVoladorMovimiento : IState
     Vector3 _velocity;
     LayerMask _wallLayer;
 
-    public EnemigoVoladorMovimiento(FSM fsm, Transform transform, float maxVelocity, float maxForce, float viewRadius, float viewAngle, LayerMask wallLayer)
+    public EnemigoVoladorMovimiento(FSM fsm, float maxVelocity, float maxForce, float viewRadius, float viewAngle, LayerMask wallLayer, EnemigoBase me)
     {
+        _me = me;
         _fsm = fsm;
-        _transform = transform;
+        _transform = me.transform;
         _maxVelocity = maxVelocity;
         _maxForce = maxForce;
         _viewRadius = viewRadius;
         _viewAngle = viewAngle;
         _wallLayer = wallLayer;
+        _boids = GameManager.instance.arenaManager.enemigosEnLaArena;
+        
     }
 
     public void OnEnter()
@@ -39,12 +44,16 @@ public class EnemigoVoladorMovimiento : IState
         if(InLineOfSight(_transform.position, GameManager.instance.pj.transform.position))
         {
             AddForce(Seek(GameManager.instance.pj.transform.position));
-        }
-        
-        _transform.position += _velocity * Time.deltaTime;
-        _transform.forward = _velocity;
+            AddForce(Separation(_boids, 1));
 
-        if(Vector3.Distance(_transform.position, GameManager.instance.pj.transform.position ) < 5)
+            _transform.position += _velocity * Time.deltaTime;
+            _transform.forward = _velocity;
+
+        }
+
+        
+
+        if (Vector3.Distance(_transform.position, GameManager.instance.pj.transform.position ) < 5)
         {
             _fsm.ChangeState("Attack");
         }
@@ -88,6 +97,36 @@ public class EnemigoVoladorMovimiento : IState
         }
 
         return false;
+    }
+
+    Vector3 Separation(List<EnemigoBase> boids, float radius)
+    {
+        Vector3 desired = Vector3.zero;
+
+        foreach (var item in boids)
+        {
+            var dir = item.transform.position - _transform.position;
+            if (dir.magnitude > radius || item == _me)
+                continue;
+
+            desired -= dir;
+        }
+
+        if (desired == Vector3.zero)
+            return desired;
+
+        desired.Normalize();
+        desired *= _maxVelocity;
+
+        return CalculateSteering(desired);
+    }
+
+    Vector3 CalculateSteering(Vector3 desired)
+    {
+        var steering = desired - _velocity;
+        steering = Vector3.ClampMagnitude(steering, _maxForce);
+
+        return steering;
     }
 }
 
