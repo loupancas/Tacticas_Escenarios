@@ -118,7 +118,7 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Blending_1: 1.49
+    - _Blending_1: 1.58
     - _Blending_2: 0.52
     - _Bottom_1: 0
     - _Bottom_2: 0.08
@@ -169,6 +169,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Luz_Red_channel: {r: 0, g: 0, b: 0, a: 0}
     - _Principal_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Sombras: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5010827772638107949
