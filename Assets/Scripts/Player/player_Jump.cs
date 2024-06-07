@@ -49,6 +49,6 @@ public class player_Jump
 
 
 
-        Debug.Log("Remaining jumps: " + _jumpsRemaining);
+        //Debug.Log("Remaining jumps: " + _jumpsRemaining);
     }
 }
