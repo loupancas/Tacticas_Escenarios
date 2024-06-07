@@ -51,12 +51,15 @@ public class PostVolume : MonoBehaviour
         {
             case 0:
                 volume.profile = profile1;
+                Debug.Log("No Postprocess");
                 break;
             case 1:
                 volume.profile = profile2;
+                Debug.Log("Scan");
                 break;
             case 2:
                 volume.profile = profile3;
+                Debug.Log("Time");
                 break;
             default:
                 throw new System.ArgumentOutOfRangeException();
