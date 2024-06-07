@@ -7,9 +7,11 @@ public class PuntosDebiles : MonoBehaviour
     [SerializeField] EnemigoVolador _me;
     [SerializeField] MeshRenderer _mesh;
     public bool IsActive;
-    public void Start()
+    public int resistance;
+    public void Awake()
     {
-        
+        int random = Random.Range(1, 10);
+        resistance = random;
 
     }
     public void Activate()
@@ -18,16 +20,16 @@ public class PuntosDebiles : MonoBehaviour
     }
     public void OnHit(int Dmg)
     {
-        if(IsActive)
-        {
-            _me.Morir();
-            GameManager.instance.pj.AgregarBuff();
+        //if(IsActive)
+        //{
+        //    _me.Morir();
+        //    GameManager.instance.pj.AgregarBuff();
             
-        }
-        else
-        {
-            _me.TakeDamage(Dmg);
-        }
+        //}
+        //else
+        //{
+            _me.TakeDamage(resistance + Dmg);
+        //}
         
     }
     public void Desactivate()

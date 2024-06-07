@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemigoVolador : EnemigoBase, IFreezed
@@ -17,6 +18,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
 
+
     CountdownTimer _Freezetime;
     public void Awake()
     {
@@ -28,13 +30,12 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         GameManager.instance.pj.theWorld += StoppedTime;
         _Freezetime = new CountdownTimer(3);
         _Freezetime.OnTimerStop = BackToNormal;
-        //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
 
         _vida = _vidaMax;
-        //int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
-        //print(NumeroRandom);
-        //_puntosDebiles[NumeroRandom].IsActive = true;
-        //_puntosDebiles[NumeroRandom].Activate();
+        
+        var weakestPoint = _puntosDebiles.Aggregate((currentWeakest,next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
+        weakestPoint.IsActive = true;
+        weakestPoint.Activate();
 
         _fsm = new FSM();
 
@@ -50,6 +51,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         EnemigoVoladorFactory.Instance.ReturnProjectile(this);
         GameManager.instance.pj.CambioDeArma();
         _vida = _vidaMax;
+
     }
 
     
@@ -85,7 +87,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
-    private void Reset()
+    void Reset()
     {
         _vida = _vidaMax;
         foreach(PuntosDebiles i in _puntosDebiles)
@@ -93,10 +95,9 @@ public class EnemigoVolador : EnemigoBase, IFreezed
             i.IsActive = false;
             i.Desactivate();
         }
-        int NumeroRandom = Random.Range(0, _puntosDebiles.Length);
-        print(NumeroRandom + " Reinicio");
-        _puntosDebiles[NumeroRandom].IsActive = true;
-        _puntosDebiles[NumeroRandom].Activate();
+        var weakestPoint = _puntosDebiles.Aggregate((currentWeakest, next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
+        weakestPoint.IsActive = true;
+        weakestPoint.Activate();
 
         if (!gameObject.activeInHierarchy) 
             GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);

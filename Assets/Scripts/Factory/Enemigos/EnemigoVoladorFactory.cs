@@ -7,7 +7,7 @@ public class EnemigoVoladorFactory : MonoBehaviour
     public static EnemigoVoladorFactory Instance { get { return _instance; } }
     static EnemigoVoladorFactory _instance;
 
-    public EnemigoVolador projectilePrefab;
+    public EnemigoVolador flyerEnemyPrefab;
     public int stock = 10;
 
     public Pool<EnemigoVolador> pool;
@@ -20,7 +20,7 @@ public class EnemigoVoladorFactory : MonoBehaviour
 
     public EnemigoVolador ProjectileCreator()
     {
-        return Instantiate(projectilePrefab, transform);
+        return Instantiate(flyerEnemyPrefab, transform);
     }
 
     public void ReturnProjectile(EnemigoVolador p)

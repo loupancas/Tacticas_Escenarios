@@ -338,6 +338,7 @@ MonoBehaviour:
   _me: {fileID: 8171125479128317140}
   _mesh: {fileID: 8578164526439050264}
   IsActive: 0
+  resistance: 0
 --- !u!33 &6652236738769034077
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -705,6 +706,7 @@ MonoBehaviour:
   _me: {fileID: 8171125479128317140}
   _mesh: {fileID: 1167049478928349246}
   IsActive: 0
+  resistance: 0
 --- !u!33 &3741786050030970740
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1072,6 +1074,7 @@ MonoBehaviour:
   _me: {fileID: 8171125479128317140}
   _mesh: {fileID: 5540421140165022185}
   IsActive: 0
+  resistance: 0
 --- !u!33 &5126088533582232466
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3114,7 +3117,7 @@ MonoBehaviour:
   - {fileID: 5626540854111498135}
   - {fileID: 4478436201622781833}
   - {fileID: 5514389146469608995}
-  _cdShot: 1
+  _cdShot: 3
   _proyectil: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
     type: 3}
   _spawnBullet: {fileID: 2502652083021165761}
