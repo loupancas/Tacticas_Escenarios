@@ -3798,7 +3798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &372222190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8097,7 +8097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941040427}
   - component: {fileID: 941040426}
-  - component: {fileID: 941040425}
+  - component: {fileID: 941040428}
   m_Layer: 0
   m_Name: Global Volume No PostProcess
   m_TagString: Untagged
@@ -8105,21 +8105,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &941040425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941040424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26731f0bd0e8acb41bb382e5f45d966e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile1: {fileID: 11400000, guid: 00cddbb8613ecca4aa0a6eab21b60469, type: 2}
-  profile2: {fileID: 11400000, guid: 6640345670909b34b82fb58d8b218272, type: 2}
-  profile3: {fileID: 11400000, guid: 5a117a1e51ce53c458cfbcda02ffd2b1, type: 2}
 --- !u!114 &941040426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8152,6 +8137,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941040428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941040424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751660a9ebe6bcc4eb88bad4e71bccdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderFeatures:
+  - feature: {fileID: -4056684041726677991, guid: c40be3174f62c4acf8c1216858c64956,
+      type: 2}
+    isEnabled: 0
+  - feature: {fileID: -598751141318024917, guid: c40be3174f62c4acf8c1216858c64956,
+      type: 2}
+    isEnabled: 0
+  - feature: {fileID: -1878332245247344467, guid: c40be3174f62c4acf8c1216858c64956,
+      type: 2}
+    isEnabled: 0
 --- !u!1001 &946794494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16200,7 +16207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1980851236
 MonoBehaviour:
   m_ObjectHideFlags: 0

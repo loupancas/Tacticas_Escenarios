@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    renderPassEvent: 450
+    renderPassEvent: 300
     material: {fileID: 2100000, guid: 4715c30dff85aaf44baea42be7d8bd7a, type: 2}
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62c9c65cf3354c93be831c8bc075510, type: 3}
   m_Name: SSAO
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   m_Settings:
     AOMethod: 1
     Downsample: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d018ead571c0dc44b9b2dac7e4e4b33d, type: 3}
   m_Name: DrawFullscreenFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 0
     blitMaterial: {fileID: 2100000, guid: 15bec761568819249b9668d08f2c5ce5, type: 2}

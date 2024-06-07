@@ -29,7 +29,7 @@ MonoBehaviour:
   active: 1
   dispersionStrength:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.197
   dispersionU:
     m_OverrideState: 1
     m_Value: 0.5
@@ -41,13 +41,13 @@ MonoBehaviour:
     m_Value: 0.5
   blackWhiteWidth:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.208
   blackWhiteWhiteColor:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.16587473, g: 0.13333331, b: 0.9254902, a: 1}
   blackWhiteBlackColor:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   enableBlackWhite:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
