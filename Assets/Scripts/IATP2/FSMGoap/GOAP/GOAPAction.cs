@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FSMach;
+using FSM;
 using UnityEngine;
 
 public class GOAPAction {
@@ -8,7 +8,7 @@ public class GOAPAction {
     public Dictionary<string, bool> effects       { get; private set; }
     public string                   name          { get; private set; }
     public float                    cost          { get; private set; }
-    public IState1                   linkedState   { get; private set; }
+    public IState                   linkedState   { get; private set; }
 
 
     public GOAPAction(string name) {
@@ -39,7 +39,7 @@ public class GOAPAction {
         return this;
     }
 
-    public GOAPAction LinkedState(IState1 state) {
+    public GOAPAction LinkedState(IState state) {
         linkedState = state;
         return this;
     }

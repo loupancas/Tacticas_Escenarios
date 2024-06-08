@@ -1,55 +1,53 @@
 ﻿using System.Collections.Generic;
-using FSMach;
+using FSM;
 using UnityEngine;
 
 public class GoapMiniTest : MonoBehaviour {
 
-    public PatrolState patrolState;
-    public ChaseState chaseState;
-    public MeleeAttackState meleeAttackState;
+   
 
-    private FiniteStateMachine1 _fsm;
+    private FiniteStateMachine _fsm;
 
 
     void Start() {
         //OnlyPlan();
-        PlanAndExecute();
+        //PlanAndExecute();
     }
 
     private void OnlyPlan() {
     }
 
-    private void PlanAndExecute() {
-        var actions = new List<GOAPAction>{
-                                              new GOAPAction("Patrol")
-                                                 .Effect("isPlayerInSight", true)
-                                                 .LinkedState(patrolState),
+    //private void PlanAndExecute() {
+    //    var actions = new List<GOAPAction>{
+    //                                          new GOAPAction("Patrol")
+    //                                             .Effect("isPlayerInSight", true)
+    //                                             //.LinkedState(patrolState),
 
-                                              new GOAPAction("Chase")
-                                                 .Pre("isPlayerInSight", true)
-                                                 .Effect("isPlayerNear",    true)
-                                                 .LinkedState(chaseState),
+    //                                          new GOAPAction("Chase")
+    //                                             .Pre("isPlayerInSight", true)
+    //                                             .Effect("isPlayerNear",    true)
+    //                                             //.LinkedState(chaseState),
 
-                                              new GOAPAction("Melee Attack")
-                                                 .Pre("isPlayerNear",   true)
-                                                 .Effect("isPlayerAlive", false)
-                                                 .LinkedState(meleeAttackState)
-                                          };
+    //                                          new GOAPAction("Melee Attack")
+    //                                             .Pre("isPlayerNear",   true)
+    //                                             .Effect("isPlayerAlive", false)
+    //                                             //.LinkedState(meleeAttackState)
+    //                                      };
         
-        var from = new GOAPState();
-        from.values["isPlayerInSight"] = false;
-        from.values["isPlayerNear"]    = false;
-        from.values["isPlayerAlive"]   = true;
+    //    var from = new GOAPState();
+    //    from.values["isPlayerInSight"] = false;
+    //    from.values["isPlayerNear"]    = false;
+    //    from.values["isPlayerAlive"]   = true;
 
-        var to = new GOAPState();
-        to.values["isPlayerAlive"] = false;
+    //    var to = new GOAPState();
+    //    to.values["isPlayerAlive"] = false;
 
-        var planner = new GoapPlanner();
-        planner.OnPlanCompleted += OnPlanCompleted;
-        planner.OnCantPlan      += OnCantPlan;
+    //    var planner = new GoapPlanner();
+    //    planner.OnPlanCompleted += OnPlanCompleted;
+    //    planner.OnCantPlan      += OnCantPlan;
 
-        planner.Run(from, to, actions, StartCoroutine);
-    }
+    //    planner.Run(from, to, actions, StartCoroutine);
+    //}
 
 
     private void OnPlanCompleted(IEnumerable<GOAPAction> plan) {

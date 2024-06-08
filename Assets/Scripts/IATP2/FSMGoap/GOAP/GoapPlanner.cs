@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using FSMach;
+using FSM;
 using UnityEngine;
 
 public class GoapPlanner {
@@ -30,10 +30,10 @@ public class GoapPlanner {
         startCoroutine(astarEnumerator);
     }
     
-    public static FiniteStateMachine1 ConfigureFSM(IEnumerable<GOAPAction> plan, Func<IEnumerator, Coroutine> startCoroutine){
+    public static FiniteStateMachine ConfigureFSM(IEnumerable<GOAPAction> plan, Func<IEnumerator, Coroutine> startCoroutine){
         var prevState1 = plan.First().linkedState;
             
-        var fsm = new FiniteStateMachine1(prevState1, startCoroutine);
+        var fsm = new FiniteStateMachine(prevState1, startCoroutine);
 
         foreach (var action in plan.Skip(1)){
             if (prevState1 == action.linkedState) continue;
