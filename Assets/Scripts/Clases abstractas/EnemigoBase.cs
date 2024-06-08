@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EnemigoBase : Entity
 {
-    protected FSM _fsm;
+    //protected FSM _fsm;
 
     [SerializeField] protected float _maxVelocity;
     [SerializeField] protected float _maxForce;

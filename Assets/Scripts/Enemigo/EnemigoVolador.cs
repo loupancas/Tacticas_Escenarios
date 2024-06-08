@@ -37,13 +37,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         weakestPoint.IsActive = true;
         weakestPoint.Activate();
 
-        _fsm = new FSM();
-
-        _fsm.CreateState("Attack", new EnemigoVoladorAttack(_fsm, _proyectil, _spawnBullet, _wallLayer, _viewRadius, _viewAngle, _cdShot, this));
-        _fsm.CreateState("Lost view", new EnemigoVoladorLostView(_fsm, transform, _wallLayer, _viewRadius, _viewAngle));
-        _fsm.CreateState("Movement", new EnemigoVoladorMovimiento(_fsm, _maxVelocity, _maxForce, _viewRadius, _viewAngle, _wallLayer, this));
-
-        _fsm.ChangeState("Movement");
+       
     }
     public override void Morir()
     {
@@ -63,7 +57,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
     public void NormalUpdate()
     {
-        _fsm.Execute();
+        
     }
 
     public void Freezed()
