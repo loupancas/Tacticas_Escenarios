@@ -152,7 +152,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _Test: 0
-    - _Tiling_1: 0.1
+    - _Tiling_1: 0.03
     - _Tiling_2: 0.07
     - _Top_1: 0.3
     - _Top_2: 1.43
