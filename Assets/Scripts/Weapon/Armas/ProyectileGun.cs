@@ -40,6 +40,7 @@ public class ProyectileGun : WeaponBase
 
     protected override void FireBehaviour()
     {
+        print("Disparo con proyectil gun");
         proyectil.SpawnProyectile(_spawnPoint);
     }
 }

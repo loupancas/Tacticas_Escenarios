@@ -40,10 +40,11 @@ public class Revolver : WeaponBase
 
         if (Physics.Raycast(_ray, out _rayHit, _shootableLayers))
         {
-            print("Detecto revolver");
-            //_rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
-            //_rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
-            //_rayHit.collider.GetComponent<Projectile>()?.DevolverBala();
+            print("Disparo con revolver");
+            _rayHit.collider.GetComponent<EnemigoVolador>()?.AddDamage(_modifiedDmg);
+            _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
+            _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
+            _rayHit.collider.GetComponent<Projectile>()?.DevolverBala();
 
         }
     }

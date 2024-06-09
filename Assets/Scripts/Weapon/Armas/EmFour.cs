@@ -35,9 +35,10 @@ public class EmFour : WeaponBase
         
         if(Physics.Raycast(_ray, out _rayHit, _shootableLayers))
         {
-            print("Detecto m4");
-            //_rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
-            //_rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
+            print("Disparo con m4");
+            _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
+            _rayHit.collider.GetComponent<EnemigoVolador>()?.AddDamage(_modifiedDmg);
+            _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
         }
     }
 }

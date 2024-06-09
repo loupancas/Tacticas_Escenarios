@@ -42,7 +42,7 @@ public class Arena : ArenaBase, IFreezed
     {
         int NumeroRandom1 = Random.Range(0, spawnPoints.Length);
         int NumeroRandom2 = Random.Range(0, enemigos.Length);
-        //enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
+        enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
     }
 
     public void StoppedTime()

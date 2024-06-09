@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c01143b643eb34cbce72a2ac8e0336, type: 3}
   m_Name: ColorDispersionRenderer
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 300
     material: {fileID: 2100000, guid: 4715c30dff85aaf44baea42be7d8bd7a, type: 2}

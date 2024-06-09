@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class EnemigoVolador : EnemigoBase, IFreezed
 {
-    
-
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
     [Header("Stats")]
     [SerializeField] float _cdShot;
-    
+
 
     [Header("Components")]
-    
+
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
 
-
     CountdownTimer _Freezetime;
+    [SerializeField] private TextMeshProUGUI _damageText;
+
     public void Awake()
     {
-        
+
     }
     public void Start()
     {
@@ -30,12 +30,11 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         GameManager.instance.pj.theWorld += StoppedTime;
         _Freezetime = new CountdownTimer(3);
         _Freezetime.OnTimerStop = BackToNormal;
+        _damageText.text = "Damage: 0";
 
         _vida = _vidaMax;
-        
-        var weakestPoint = _puntosDebiles.Aggregate((currentWeakest,next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
-        weakestPoint.IsActive = true;
-        weakestPoint.Activate();
+
+        ActivateWeakestPoint();
 
         _fsm = new FSM();
 
@@ -51,13 +50,11 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         EnemigoVoladorFactory.Instance.ReturnProjectile(this);
         GameManager.instance.pj.CambioDeArma();
         _vida = _vidaMax;
-
     }
-
-    
 
     private void Update()
     {
+        _activeTime += Time.deltaTime;
         delegateUpdate.Invoke();
     }
 
@@ -84,23 +81,32 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         var p = EnemigoVoladorFactory.Instance.pool.GetObject();
         p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
         Debug.Log("Disparo proyectil");
-        //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
-    void Reset()
+    public void Reset()
     {
         _vida = _vidaMax;
-        foreach(PuntosDebiles i in _puntosDebiles)
+        _activeTime = 0;
+        _damageText.text = "Damage: 0";
+        foreach (PuntosDebiles i in _puntosDebiles)
         {
             i.IsActive = false;
             i.Desactivate();
         }
-        var weakestPoint = _puntosDebiles.Aggregate((currentWeakest, next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
+
+        ActivateWeakestPoint();
+
+        if (!gameObject.activeInHierarchy)
+            GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+    }
+
+    private void ActivateWeakestPoint()
+    {
+        var weakestPoint = _puntosDebiles
+           .Aggregate((currentWeakest, next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
+
         weakestPoint.IsActive = true;
         weakestPoint.Activate();
-
-        if (!gameObject.activeInHierarchy) 
-            GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
     public static void TurnOnOff(EnemigoVolador p, bool active = true)
@@ -112,5 +118,43 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         p.gameObject.SetActive(active);
     }
 
-    
+    // #2
+
+    private List<int> _damageHistory = new List<int>();
+
+    public void AddDamage(int damage)
+    {
+        _damageHistory.Add(damage);
+        UpdateDamageUI();
+    }
+
+    private void UpdateDamageUI()
+    {
+        //string damageString = _damageHistory
+        //    .Aggregate("Damage: ", (result, damage) => result + damage.ToString() + ", ");
+        int totalDamage = _damageHistory.Aggregate(0, (sum, damage) => sum + damage);
+
+        // if (damageString.EndsWith(", "))
+        // {
+        //     damageString = damageString.Substring(0, damageString.Length - 2);
+        // }
+
+        _damageText.text = "Damage: " + totalDamage.ToString();
+    }
+
+    // #3
+
+    private float _activeTime;
+    public static void DeactivateOldEnemies(IEnumerable<EnemigoVolador> enemigos, float timeThreshold) // desde un manager o poder desactivar enemigos que llevan determinado tiempo activos
+    {
+        enemigos.Aggregate(new List<EnemigoVolador>(), (toDeactivate, enemigo) =>
+        {
+            if (enemigo._activeTime > timeThreshold)
+            {
+                toDeactivate.Add(enemigo);
+                enemigo.gameObject.SetActive(false);
+            }
+            return toDeactivate;
+        });
+    }
 }
