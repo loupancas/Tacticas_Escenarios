@@ -5,6 +5,7 @@ using FSM;
 
 public class TrackEnemigoVolador : MonoBaseState
 {
+    [SerializeField] EnemigoVolador me;
     Vector3 _velocity;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
@@ -15,19 +16,11 @@ public class TrackEnemigoVolador : MonoBaseState
     {
         var Distance = (Vector3.Distance(transform.position, GameManager.instance.pj.transform.position));
 
-        if (Distance < _distanceToAttack && Transitions.ContainsKey(StateTransitions.ToIdle))
+        if (me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToAttack))
             return Transitions[StateTransitions.ToAttack];
 
-        foreach(EnemigoBase a in GameManager.instance.arenaManager.enemigosEnLaArena)
-        {
-            if (a == this)
-                continue;
-
-            if(Distance < _distanceToSeparation)
-            {
-                return Transitions[StateTransitions.ToSeparation];
-            }
-        }
+        if (me.IsSeparationDistance() && Transitions.ContainsKey(StateTransitions.ToSeparation))
+            return Transitions[StateTransitions.ToSeparation];
 
         return this;
     }

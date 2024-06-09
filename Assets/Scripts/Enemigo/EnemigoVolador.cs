@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using FSM;
 
 public class EnemigoVolador : EnemigoBase, IFreezed
 {
@@ -10,11 +11,17 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
     [Header("Stats")]
-    [SerializeField] float _cdShot;
-    
+    public float cdShot;
+    [SerializeField] float _distanceToAttack;
+    [SerializeField] float _distanceToSeparation;
 
     [Header("Components")]
-    
+    [SerializeField] TrackEnemigoVolador trackState;
+    [SerializeField] SeparationEnemigoVolador separationState;
+    [SerializeField] AttackEnemigoVolador attackState;
+
+
+
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
 
@@ -37,7 +44,16 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         weakestPoint.IsActive = true;
         weakestPoint.Activate();
 
-       
+        _fsm = new FiniteStateMachine(trackState, StartCoroutine);
+
+        _fsm.AddTransition(StateTransitions.ToSeparation, trackState, separationState);
+        _fsm.AddTransition(StateTransitions.ToSeparation, attackState, separationState);
+        _fsm.AddTransition(StateTransitions.ToPersuit, separationState, trackState);
+        _fsm.AddTransition(StateTransitions.ToPersuit, attackState, trackState);
+        _fsm.AddTransition(StateTransitions.ToAttack, attackState, trackState);
+
+        _fsm.Active = true;
+
     }
     public override void Morir()
     {
@@ -106,5 +122,22 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         p.gameObject.SetActive(active);
     }
 
-    
+    public bool IsAttackDistance()
+    {
+        return Vector3.Distance(GameManager.instance.pj.transform.position, transform.position) >= _distanceToAttack;
+    }
+
+    public bool IsSeparationDistance()
+    {
+        foreach (EnemigoBase a in GameManager.instance.arenaManager.enemigosEnLaArena)
+        {
+            if (a == this)
+                continue;
+
+            return Vector3.Distance(a.transform.position, transform.position) >= _distanceToAttack;
+        }
+
+        return this;
+    }
+
 }

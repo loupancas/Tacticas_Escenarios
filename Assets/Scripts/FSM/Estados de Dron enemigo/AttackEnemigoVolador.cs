@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FSM;
 
-public class AttackEnemigoVolador : MonoBehaviour
+public class AttackEnemigoVolador : MonoBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] EnemigoVolador me;
+    [SerializeField] float _distanceToAttack;
+    [SerializeField] float _cdShot;
+    [SerializeField] CountdownTimer _timer;
+    [SerializeField] ProyectilesBase _proyectiles;
+    [SerializeField] Transform _spawnPoint;
+
+    public override void Enter(IState from, Dictionary<string, object> transitionParameters = null)
     {
-        
+        base.Enter(from, transitionParameters);
+
+        _timer = new CountdownTimer(me.cdShot);
+        _timer.OnTimerStop = Disparar;
+    }
+    public override IState ProcessInput()
+    {
+        if (!me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToPersuit))
+            return Transitions[StateTransitions.ToPersuit];
+
+        return this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UpdateLoop()
     {
-        
+        transform.LookAt(GameManager.instance.pj.transform);
+
+        _timer.Tick(Time.deltaTime);
+    }
+
+    public void Disparar()
+    {
+        _proyectiles.SpawnProyectile(_spawnPoint);
+        _timer.Reset();
     }
 }
