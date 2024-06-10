@@ -5,23 +5,28 @@ using FSM;
 
 public class AttackEnemigoVolador : MonoBaseState
 {
-    [SerializeField] EnemigoVolador me;
-    [SerializeField] float _distanceToAttack;
-    [SerializeField] float _cdShot;
+    [SerializeField] EnemigoVolador _me;
     [SerializeField] CountdownTimer _timer;
     [SerializeField] ProyectilesBase _proyectiles;
     [SerializeField] Transform _spawnPoint;
+
+    public AttackEnemigoVolador(EnemigoVolador me, ProyectilesBase proyectil, Transform spawnPoint)
+    {
+        _me = me;
+        _proyectiles = proyectil;
+        _spawnPoint = spawnPoint;
+    }
 
     public override void Enter(IState from, Dictionary<string, object> transitionParameters = null)
     {
         base.Enter(from, transitionParameters);
 
-        _timer = new CountdownTimer(me.cdShot);
+        _timer = new CountdownTimer(_me.cdShot);
         _timer.OnTimerStop = Disparar;
     }
     public override IState ProcessInput()
     {
-        if (!me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToPersuit))
+        if (!_me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToPersuit))
             return Transitions[StateTransitions.ToPersuit];
 
         return this;

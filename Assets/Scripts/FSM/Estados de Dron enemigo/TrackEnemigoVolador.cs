@@ -5,21 +5,26 @@ using FSM;
 
 public class TrackEnemigoVolador : MonoBaseState
 {
-    [SerializeField] EnemigoVolador me;
+    [SerializeField] EnemigoVolador _me;
     Vector3 _velocity;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
-    [SerializeField] float _distanceToAttack;
-    [SerializeField] float _distanceToSeparation;
+
+    public TrackEnemigoVolador(EnemigoVolador me, float maxVelocity, float maxForce)
+    {
+        _me = me;
+        _maxVelocity = maxVelocity;
+        _maxForce = maxForce;
+    }
 
     public override IState ProcessInput()
     {
         var Distance = (Vector3.Distance(transform.position, GameManager.instance.pj.transform.position));
 
-        if (me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToAttack))
+        if (_me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToAttack))
             return Transitions[StateTransitions.ToAttack];
 
-        if (me.IsSeparationDistance() && Transitions.ContainsKey(StateTransitions.ToSeparation))
+        if (_me.IsSeparationDistance() && Transitions.ContainsKey(StateTransitions.ToSeparation))
             return Transitions[StateTransitions.ToSeparation];
 
         return this;
@@ -29,12 +34,12 @@ public class TrackEnemigoVolador : MonoBaseState
     {
         AddForce(Seek(GameManager.instance.pj.transform.position));
 
-        transform.position += _velocity * Time.deltaTime;
-        transform.forward = _velocity;
+        _me.transform.position += _velocity * Time.deltaTime;
+        _me.transform.forward = _velocity;
     }
     Vector3 Seek(Vector3 dir)
     {
-        var desired = dir - transform.position;
+        var desired = dir - _me.transform.position;
         desired.Normalize();
         desired *= _maxVelocity;
 

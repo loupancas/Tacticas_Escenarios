@@ -5,23 +5,23 @@ using FSM;
 
 public class SeparationEnemigoVolador : MonoBaseState
 {
-    [SerializeField] float _distanceToSeparation;
+    [SerializeField] EnemigoVolador _me;
     Vector3 _velocity;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
+
+    public SeparationEnemigoVolador(EnemigoVolador me, float maxVelocity, float maxForce)
+    {
+        _me = me;
+        _maxVelocity = maxVelocity;
+        _maxForce = maxForce;
+    }
+
     public override IState ProcessInput()
     {
-        var Distance = (Vector3.Distance(transform.position, GameManager.instance.pj.transform.position));
-        foreach (EnemigoBase a in GameManager.instance.arenaManager.enemigosEnLaArena)
-        {
-            if (a == this)
-                continue;
-
-            if (Distance > _distanceToSeparation)
-            {
-                return Transitions[StateTransitions.ToPersuit];
-            }
-        }
+        
+        if (!_me.IsSeparationDistance() && Transitions.ContainsKey(StateTransitions.ToPersuit))
+            return Transitions[StateTransitions.ToPersuit];
 
         return this;
     }
@@ -30,13 +30,13 @@ public class SeparationEnemigoVolador : MonoBaseState
     {
         AddForce(Separation(GameManager.instance.arenaManager.enemigosEnLaArena, 1f));
 
-        transform.position += _velocity * Time.deltaTime;
-        transform.forward = _velocity;
+        _me.transform.position += _velocity * Time.deltaTime;
+        _me.transform.forward = _velocity;
     }
 
     Vector3 Seek(Vector3 dir)
     {
-        var desired = dir - transform.position;
+        var desired = dir - _me.transform.position;
         desired.Normalize();
         desired *= _maxVelocity;
 
@@ -58,7 +58,7 @@ public class SeparationEnemigoVolador : MonoBaseState
 
         foreach (var item in boids)
         {
-            var dir = item.transform.position - transform.position;
+            var dir = item.transform.position - _me.transform.position;
             if (dir.magnitude > radius || item == this)
                 continue;
 

@@ -39,7 +39,11 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         _Freezetime.OnTimerStop = BackToNormal;
 
         _vida = _vidaMax;
-        
+
+        attackState = new AttackEnemigoVolador(this, _proyectil, _spawnBullet);
+        trackState = new TrackEnemigoVolador(this, _maxVelocity, _maxForce);
+        separationState = new SeparationEnemigoVolador(this, _maxVelocity, _maxForce);
+
         var weakestPoint = _puntosDebiles.Aggregate((currentWeakest,next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
         weakestPoint.IsActive = true;
         weakestPoint.Activate();

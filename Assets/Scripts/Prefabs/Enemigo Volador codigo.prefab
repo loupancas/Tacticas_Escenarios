@@ -3117,7 +3117,12 @@ MonoBehaviour:
   - {fileID: 5626540854111498135}
   - {fileID: 4478436201622781833}
   - {fileID: 5514389146469608995}
-  _cdShot: 3
+  cdShot: 3
+  _distanceToAttack: 10
+  _distanceToSeparation: 2
+  trackState: {fileID: 0}
+  separationState: {fileID: 0}
+  attackState: {fileID: 0}
   _proyectil: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
     type: 3}
   _spawnBullet: {fileID: 2502652083021165761}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arena : ArenaBase, IFreezed
 {
     public int horda;
-    bool _arenaEmpezada;
+    [SerializeField] bool _arenaEmpezada;
     CountdownTimer _timer, _Freezetime;
     [SerializeField] float _timeSpawn;
     public delegate void DelegateUpdate();
@@ -42,7 +42,7 @@ public class Arena : ArenaBase, IFreezed
     {
         int NumeroRandom1 = Random.Range(0, spawnPoints.Length);
         int NumeroRandom2 = Random.Range(0, enemigos.Length);
-        //enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
+        enemigos[NumeroRandom2].SpawnEnemy(spawnPoints[NumeroRandom1].transform);
     }
 
     public void StoppedTime()
