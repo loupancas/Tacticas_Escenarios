@@ -19,7 +19,6 @@ public class TrackEnemigoVolador : MonoBaseState
 
     public override IState ProcessInput()
     {
-        var Distance = (Vector3.Distance(transform.position, GameManager.instance.pj.transform.position));
 
         if (_me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToAttack))
             return Transitions[StateTransitions.ToAttack];

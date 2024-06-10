@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arena : ArenaBase, IFreezed
 {
     public int horda;
-    [SerializeField] bool _arenaEmpezada;
+    
     CountdownTimer _timer, _Freezetime;
     [SerializeField] float _timeSpawn;
     public delegate void DelegateUpdate();

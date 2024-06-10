@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Components")]
     public FirstPersonPlayer pj;
-    public Arena arenaManager;
+    public ArenaBase arenaManager;
     public void Awake()
     {
         if (instance == null)

@@ -128,7 +128,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
     public bool IsAttackDistance()
     {
-        return Vector3.Distance(GameManager.instance.pj.transform.position, transform.position) >= _distanceToAttack;
+        return Vector3.Distance(GameManager.instance.pj.transform.position, transform.position) <= _distanceToAttack;
     }
 
     public bool IsSeparationDistance()
@@ -138,7 +138,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
             if (a == this)
                 continue;
 
-            return Vector3.Distance(a.transform.position, transform.position) >= _distanceToAttack;
+            return Vector3.Distance(a.transform.position, transform.position) >= _distanceToSeparation;
         }
 
         return this;
