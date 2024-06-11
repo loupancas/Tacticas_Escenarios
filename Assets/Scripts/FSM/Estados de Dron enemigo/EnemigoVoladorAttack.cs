@@ -53,7 +53,7 @@ public class EnemigoVoladorAttack : IState
 
             Vector3 pos = new Vector3(GameManager.instance.pj.transform.position.x, GameManager.instance.pj.transform.position.y, GameManager.instance.pj.transform.position.z);
             _transform.LookAt(pos);
-            Debug.Log("Detectado");
+            //Debug.Log("Detectado");
             if (_currCdShot > _cdShot)
             {
             _proyectil.SpawnProyectile(_bulletSpawn);

@@ -9695,7 +9695,7 @@ GameObject:
   - component: {fileID: 1362157470}
   - component: {fileID: 1362157469}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TriggerEnemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9714,6 +9714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arena: {fileID: 761043938}
+  gameManager: {fileID: 1488523895}
 --- !u!65 &1362157470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10951,6 +10952,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pj: {fileID: 962939238}
   arenaManager: {fileID: 761043938}
+  distanceThreshold: 20
+  checkInterval: 5
+  enemies: []
+  updateList: 0
 --- !u!4 &1488523896
 Transform:
   m_ObjectHideFlags: 0
