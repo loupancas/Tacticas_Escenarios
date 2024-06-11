@@ -7,8 +7,17 @@ public class TransitionController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(TransitionToBlackWhite());
+        //StartCoroutine(TransitionToBlackWhite());
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            StartCoroutine(TransitionToBlackWhite());
+        }
+    }
+
 
     IEnumerator TransitionToBlackWhite()
     {
