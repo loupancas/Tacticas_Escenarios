@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SquareQuery : MonoBehaviour, IQuery {
 
-    public SpatialGrid             targetGrid;
+    public SpatialGrid2             targetGrid;
     public float                   width    = 15f;
     public float                   height   = 30f;
     public IEnumerable<IGridEntity> selected = new List<IGridEntity>();

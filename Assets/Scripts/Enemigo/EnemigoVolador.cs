@@ -20,6 +20,18 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     CountdownTimer _Freezetime;
     [SerializeField] private TextMeshProUGUI _damageText;
 
+    private static SpatialGrid _spatialGrid;
+
+    public static void InitializeGrid(float cellSize)
+    {
+        _spatialGrid = new SpatialGrid(cellSize);
+    }
+
+    //public static void DrawGridDebug()
+    //{
+    //    _spatialGrid.DrawDebugGrid();
+    //}
+
     public void Awake()
     {
 
@@ -47,7 +59,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     public override void Morir()
     {
         GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
-        EnemigoVoladorFactory.Instance.ReturnProjectile(this);
+        EnemigoVoladorFactory.Instance.ReturnEnemy(this);
         GameManager.instance.pj.CambioDeArma();
         _vida = _vidaMax;
     }
@@ -98,6 +110,8 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
         if (!gameObject.activeInHierarchy)
             GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+
+        _spatialGrid.AddEnemy(this);
     }
 
     private void ActivateWeakestPoint()
@@ -114,6 +128,10 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         if (active)
         {
             p.Reset();
+        }
+        else 
+        {
+            //_spatialGrid.RemoveEnemy(p);
         }
         p.gameObject.SetActive(active);
     }
@@ -153,7 +171,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
            if (distanceToPlayer > distanceThreshold)
            {
                toUpdate.Add(enemy);
-               EnemigoVoladorFactory.Instance.ReturnProjectile(enemy);
+               EnemigoVoladorFactory.Instance.ReturnEnemy(enemy);
                enemy.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 
            }
@@ -167,5 +185,35 @@ public class EnemigoVolador : EnemigoBase, IFreezed
        });
     }
 
+    public static void FuseEnemiesInRange(Vector3 position, float range)
+    {
+        var enemiesInRange = _spatialGrid.GetEnemiesInRange(position, range);
+        if(enemiesInRange.Count > 1)
+        {
+            EnemigoVolador fusedEnemy = enemiesInRange.Aggregate((currentMax, next) => next._vida > currentMax._vida ? next : currentMax);
+
+            foreach (var enemy in enemiesInRange)
+            {
+                if(enemy != fusedEnemy)
+                {
+                    if(_spatialGrid.GetEnemiesInRange(enemy.transform.position, range).Contains(enemy))
+                    {
+                        fusedEnemy._vida += enemy._vida;
+                        _spatialGrid.RemoveEnemy(enemy);
+                        EnemigoVoladorFactory.Instance.ReturnEnemy(enemy);
+                        Debug.Log("Fusion de enemigos");
+
+                    }
+                    
+                }
+            }
+
+            _spatialGrid.RemoveEnemy(fusedEnemy);
+            _spatialGrid.AddEnemy(fusedEnemy);
+            Debug.Log("Fusion de enemigos 2");
+
+        }
+
+    }
 
 }

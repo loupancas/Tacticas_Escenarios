@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SpatialGrid : MonoBehaviour {
+public class SpatialGrid2 : MonoBehaviour {
 
     #region Variables
 
