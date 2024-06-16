@@ -19,7 +19,6 @@ public class SeparationEnemigoVolador : MonoBaseState
 
     public override IState ProcessInput()
     {
-        
         if (!_me.IsSeparationDistance() && Transitions.ContainsKey(StateTransitions.ToPersuit))
             return Transitions[StateTransitions.ToPersuit];
 

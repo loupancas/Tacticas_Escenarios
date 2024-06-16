@@ -23,6 +23,7 @@ public class AttackEnemigoVolador : MonoBaseState
 
         _timer = new CountdownTimer(_me.cdShot);
         _timer.OnTimerStop = Disparar;
+        _timer.Start();
     }
     public override IState ProcessInput()
     {
@@ -34,7 +35,7 @@ public class AttackEnemigoVolador : MonoBaseState
 
     public override void UpdateLoop()
     {
-        transform.LookAt(GameManager.instance.pj.transform);
+        _me.transform.LookAt(GameManager.instance.pj.transform);
 
         _timer.Tick(Time.deltaTime);
     }
@@ -43,5 +44,6 @@ public class AttackEnemigoVolador : MonoBaseState
     {
         _proyectiles.SpawnProyectile(_spawnPoint);
         _timer.Reset();
+        _timer.Start();
     }
 }

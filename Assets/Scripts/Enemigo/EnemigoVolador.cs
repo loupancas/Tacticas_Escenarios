@@ -54,7 +54,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         _fsm.AddTransition(StateTransitions.ToSeparation, attackState, separationState);
         _fsm.AddTransition(StateTransitions.ToPersuit, separationState, trackState);
         _fsm.AddTransition(StateTransitions.ToPersuit, attackState, trackState);
-        _fsm.AddTransition(StateTransitions.ToAttack, attackState, trackState);
+        _fsm.AddTransition(StateTransitions.ToAttack, trackState, attackState);
 
         _fsm.Active = true;
 
@@ -138,7 +138,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
             if (a == this)
                 continue;
 
-            return Vector3.Distance(a.transform.position, transform.position) >= _distanceToSeparation;
+            return Vector3.Distance(a.transform.position, transform.position) <= _distanceToSeparation;
         }
 
         return this;

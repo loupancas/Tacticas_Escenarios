@@ -3069,6 +3069,9 @@ GameObject:
   - component: {fileID: 8171125479128317140}
   - component: {fileID: 5213907397914646294}
   - component: {fileID: -600112179354609036}
+  - component: {fileID: 6068507237892911054}
+  - component: {fileID: 7182885420250603227}
+  - component: {fileID: 6474273171080817103}
   m_Layer: 7
   m_Name: Enemigo Volador codigo
   m_TagString: Untagged
@@ -3119,10 +3122,10 @@ MonoBehaviour:
   - {fileID: 5514389146469608995}
   cdShot: 3
   _distanceToAttack: 10
-  _distanceToSeparation: 2
-  trackState: {fileID: 0}
-  separationState: {fileID: 0}
-  attackState: {fileID: 0}
+  _distanceToSeparation: 1
+  trackState: {fileID: 6474273171080817103}
+  separationState: {fileID: 7182885420250603227}
+  attackState: {fileID: 6068507237892911054}
   _proyectil: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
     type: 3}
   _spawnBullet: {fileID: 2502652083021165761}
@@ -3174,6 +3177,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6068507237892911054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850294711148623708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4e174c5468f6447bbdcfde22dfd29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _me: {fileID: 8171125479128317140}
+  _proyectiles: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
+    type: 3}
+  _spawnPoint: {fileID: 2502652083021165761}
+--- !u!114 &7182885420250603227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850294711148623708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772c73c8a02e53246ae91e370e3552e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _me: {fileID: 8171125479128317140}
+  _maxVelocity: 0
+  _maxForce: 0
+--- !u!114 &6474273171080817103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850294711148623708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad0e85f595c76634cb82e6efd71fab42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _me: {fileID: 8171125479128317140}
+  _maxVelocity: 0
+  _maxForce: 0
 --- !u!1 &8360185113413339651
 GameObject:
   m_ObjectHideFlags: 0
