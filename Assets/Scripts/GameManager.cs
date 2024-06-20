@@ -14,14 +14,13 @@ public class GameManager : MonoBehaviour
     private float timeSinceLastCheck = 0f;
     public List<EnemigoVolador> enemies;
     public bool updateList = false;
-    private float fusionRange = 5f;
 
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            EnemigoVolador.InitializeGrid(10f);
+            EnemigoVolador.InitializeGrid();
         }
 
 
@@ -39,7 +38,6 @@ public class GameManager : MonoBehaviour
             FuseNearbyEnemies();
         }
 
-        //EnemigoVolador.DrawGridDebug();
     }
 
     private void UpdateDistanceEnemies()
@@ -62,7 +60,8 @@ public class GameManager : MonoBehaviour
         }
         foreach (var enemy in enemies)
         {
-            EnemigoVolador.FuseEnemiesInRange(enemy.transform.position, fusionRange);
+            var cellPosition = EnemigoVolador._spatialGrid.GetPositionInGrid(enemy.Position);
+            EnemigoVolador.FuseEnemiesInRange(enemy.Position, EnemigoVolador._spatialGrid.cellWidth);
         }
     }
 }

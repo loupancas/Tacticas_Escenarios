@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using System;
 
-public class EnemigoVolador : EnemigoBase, IFreezed
+public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 {
     public delegate void DelegateUpdate();
     public DelegateUpdate delegateUpdate;
@@ -20,22 +22,24 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     CountdownTimer _Freezetime;
     [SerializeField] private TextMeshProUGUI _damageText;
 
-    private static SpatialGrid _spatialGrid;
+    private Vector3 _position;
+    public static SpatialGrid _spatialGrid;
 
-    public static void InitializeGrid(float cellSize)
+    public static void InitializeGrid()
     {
-        _spatialGrid = new SpatialGrid(cellSize);
+        _spatialGrid = FindObjectOfType<SpatialGrid>();
     }
 
-    //public static void DrawGridDebug()
-    //{
-    //    _spatialGrid.DrawDebugGrid();
-    //}
-
-    public void Awake()
+   public Vector3 Position
     {
+        get { return transform.position; }
+        set { transform.position = value; OnMove?.Invoke(this); }
 
     }
+
+    public event Action<IGridEntity> OnMove;
+
+    
     public void Start()
     {
         delegateUpdate = NormalUpdate;
@@ -66,8 +70,12 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
     private void Update()
     {
-        //_activeTime += Time.deltaTime;
         delegateUpdate.Invoke();
+        if(_position != transform.position)
+        {
+            _position = transform.position;
+            OnMove?.Invoke(this);
+        }
     }
 
     public void NormalUpdate()
@@ -111,7 +119,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         if (!gameObject.activeInHierarchy)
             GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
 
-        _spatialGrid.AddEnemy(this);
+        _spatialGrid.Add(this);
     }
 
     private void ActivateWeakestPoint()
@@ -131,7 +139,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         }
         else 
         {
-            //_spatialGrid.RemoveEnemy(p);
+            _spatialGrid.Remove(p);
         }
         p.gameObject.SetActive(active);
     }
@@ -185,35 +193,37 @@ public class EnemigoVolador : EnemigoBase, IFreezed
        });
     }
 
-    public static void FuseEnemiesInRange(Vector3 position, float range)
+    public static void FuseEnemiesInRange(Vector3 position, float cellSize)
     {
-        var enemiesInRange = _spatialGrid.GetEnemiesInRange(position, range);
-        if(enemiesInRange.Count > 1)
+       
+        var cellPosition = _spatialGrid.GetPositionInGrid(position);
+        if(_spatialGrid.IsInsideGrid(cellPosition))
         {
-            EnemigoVolador fusedEnemy = enemiesInRange.Aggregate((currentMax, next) => next._vida > currentMax._vida ? next : currentMax);
-
-            foreach (var enemy in enemiesInRange)
+            var enemiesInCell = _spatialGrid.GetEntitiesInCell(cellPosition).OfType<EnemigoVolador>().ToList();
+            if(enemiesInCell.Count>1)
             {
-                if(enemy != fusedEnemy)
+                int fusionCount = 0;
+                while (enemiesInCell.Count > 1 && fusionCount<2)
                 {
-                    if(_spatialGrid.GetEnemiesInRange(enemy.transform.position, range).Contains(enemy))
-                    {
-                        fusedEnemy._vida += enemy._vida;
-                        _spatialGrid.RemoveEnemy(enemy);
-                        EnemigoVoladorFactory.Instance.ReturnEnemy(enemy);
-                        Debug.Log("Fusion de enemigos");
+                    var fusedEnemy = enemiesInCell.Aggregate((currentMax, next) => currentMax._vida < next._vida ? currentMax : next);
+                    var enemyToFuse= enemiesInCell.FirstOrDefault(enemy => enemy != fusedEnemy);
 
-                    }
-                    
+                    fusedEnemy._vida += enemyToFuse._vida;
+                    _spatialGrid.Remove(enemyToFuse);
+                    EnemigoVoladorFactory.Instance.ReturnEnemy(enemyToFuse);
+                    enemiesInCell.Remove(enemyToFuse);
+                    fusionCount++;
                 }
+
+                if(enemiesInCell.Count > 0)
+                {
+                    var remainingFusedEnemy = enemiesInCell[0];
+                    _spatialGrid.Remove(remainingFusedEnemy);
+                    _spatialGrid.Add(remainingFusedEnemy);
+                }
+             
             }
 
-            _spatialGrid.RemoveEnemy(fusedEnemy);
-            _spatialGrid.AddEnemy(fusedEnemy);
-            Debug.Log("Fusion de enemigos 2");
-
         }
-
     }
-
 }
