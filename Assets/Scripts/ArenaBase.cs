@@ -5,9 +5,10 @@ using UnityEngine;
 public abstract class ArenaBase : MonoBehaviour
 {
     public EnemigoBase[] enemigos;
-    public GameObject[] spawnPoints;
+    public SpawnPoints[] spawnPoints;
     public List<Nodo> nodos = new List<Nodo>();
     public List<EnemigoBase> enemigosEnLaArena;
+    [SerializeField]protected bool _arenaEmpezada;
 
 
     public abstract void IniciarHorda();

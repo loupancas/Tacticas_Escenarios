@@ -86,13 +86,12 @@ public class Misil : ProyectilesBase, IFreezed
         {
             print("Toco al enemigo");
             collision.collider.GetComponent<EnemigoBase>().TakeDamage(_dmg);
-            collision.collider.GetComponent<EnemigoVolador>()?.AddDamage(_dmg);
             GameManager.instance.pj.AgregarBuff();
 
             MisilFactory.Instance.ReturnProjectile(this);
         }
 
-        if(collision.collider.GetComponent<PuntosDebiles>() != null)
+        if (collision.collider.GetComponent<PuntosDebiles>() != null)
         {
             collision.collider.GetComponent<PuntosDebiles>().OnHit(_dmg);
             MisilFactory.Instance.ReturnProjectile(this);

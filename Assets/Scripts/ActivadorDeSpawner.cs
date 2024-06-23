@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class ActivadorDeSpawner : MonoBehaviour
 {
     [SerializeField] ArenaBase _arena;
-    [SerializeField] GameManager gameManager;
-    
+<<<<<<< Updated upstream
+    [SerializeField] GameManager _gameManager;
     private void OnTriggerEnter(Collider other)
     {
-        gameManager.updateList = true;
+        _gameManager.updateList = true;
+=======
+
+    private void OnTriggerEnter(Collider other)
+    {
+>>>>>>> Stashed changes
         _arena.IniciarHorda();
         gameObject.SetActive(false);
     }

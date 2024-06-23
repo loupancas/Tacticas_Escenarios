@@ -6529,7 +6529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemigos:
-  - {fileID: 8171125479128317140, guid: abe568f02ff164d47b5f3236063a6c85, type: 3}
+  - {fileID: 8171125479128317140, guid: be39c78d385cccb488270ad5c29b3aaf, type: 3}
   spawnPoints:
   - {fileID: 5399063}
   - {fileID: 687649313}
@@ -6539,6 +6539,7 @@ MonoBehaviour:
   - {fileID: 262364564}
   nodos: []
   enemigosEnLaArena: []
+  _arenaEmpezada: 0
   horda: 1
   _timeSpawn: 3.5
 --- !u!4 &761043939
@@ -9814,7 +9815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arena: {fileID: 761043938}
-  gameManager: {fileID: 1488523895}
+  _gameManager: {fileID: 1488523895}
 --- !u!65 &1362157470
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11053,7 +11054,7 @@ MonoBehaviour:
   pj: {fileID: 962939238}
   arenaManager: {fileID: 761043938}
   distanceThreshold: 20
-  checkInterval: 5
+  checkInterval: 3
   enemies: []
   updateList: 0
 --- !u!4 &1488523896

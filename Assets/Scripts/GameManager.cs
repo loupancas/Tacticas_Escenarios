@@ -8,21 +8,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Components")]
     public FirstPersonPlayer pj;
-    public Arena arenaManager;
-    [SerializeField] private float distanceThreshold = 20f;
-    [SerializeField] private float checkInterval = 3f;
-    private float timeSinceLastCheck = 0f;
-    public List<EnemigoVolador> enemies;
-    public bool updateList = false;
-
+    public ArenaBase arenaManager;
     public void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-            EnemigoVolador.InitializeGrid();
-        }
 
+<<<<<<< Updated upstream
 
     }
     private void Start()
@@ -37,18 +29,17 @@ public class GameManager : MonoBehaviour
             //UpdateDistanceEnemies();
             FuseNearbyEnemies();
         }
-
     }
 
     private void UpdateDistanceEnemies()
     {
-        if(updateList)
+        if (updateList)
         {
             enemies = new List<EnemigoVolador>(FindObjectsOfType<EnemigoVolador>());
             updateList = false;
         }
 
-        EnemigoVolador.DeactivateEnemiesByDistance(pj,enemies, distanceThreshold);
+        EnemigoVolador.DeactivateEnemiesByDistance(pj, enemies, distanceThreshold);
     }
 
     private void FuseNearbyEnemies()
@@ -58,10 +49,14 @@ public class GameManager : MonoBehaviour
             enemies = new List<EnemigoVolador>(FindObjectsOfType<EnemigoVolador>());
             updateList = false;
         }
-        foreach (var enemy in enemies)
+
+        // Iterar sobre cada enemigo y tratar de fusionarlo con enemigos en la misma celda
+        foreach (var enemigo in enemies)
         {
-            var cellPosition = EnemigoVolador._spatialGrid.GetPositionInGrid(enemy.Position);
-            EnemigoVolador.FuseEnemiesInRange(enemy.Position, EnemigoVolador._spatialGrid.cellWidth);
+            var cellPosition = EnemigoVolador._spatialGrid.GetPositionInGrid(enemigo.Position);
+            EnemigoVolador.FuseEnemiesInRange(enemigo.Position, EnemigoVolador._spatialGrid.cellWidth); // Usa el tamaño de la celda para el rango
         }
+=======
+>>>>>>> Stashed changes
     }
 }

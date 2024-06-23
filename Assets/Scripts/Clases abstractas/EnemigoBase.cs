@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using FSM;
 
 public abstract class EnemigoBase : Entity
 {
-    protected FSM _fsm;
+    protected FiniteStateMachine _fsm;
 
     [SerializeField] protected float _maxVelocity;
     [SerializeField] protected float _maxForce;
@@ -13,6 +13,7 @@ public abstract class EnemigoBase : Entity
     [SerializeField] protected LayerMask _wallLayer;
 
     [SerializeField] protected PuntosDebiles[] _puntosDebiles;
+
     //Aca instancias el factory por ejemplo:
     //var p = EnemigoVoladorFactory.Instance.pool.GetObject();
     //p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);

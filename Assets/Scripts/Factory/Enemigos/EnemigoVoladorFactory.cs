@@ -23,7 +23,7 @@ public class EnemigoVoladorFactory : MonoBehaviour
         return Instantiate(flyerEnemyPrefab, transform);
     }
 
-    public void ReturnEnemy(EnemigoVolador p)
+    public void ReturnProjectile(EnemigoVolador p)
     {
         pool.ReturnObject(p);
     }
