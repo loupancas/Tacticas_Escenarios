@@ -3,21 +3,12 @@ using UnityEngine;
 
 public class SquareQuery : MonoBehaviour, IQuery
 {
-    public SpatialGrid targetGrid;
-    public float width = 15f;
-    public float height = 30f;
-
-<<<<<<< Updated upstream
-    public IEnumerable<IGridEntity> Query()
-    {
-=======
     public SpatialGrid             targetGrid;
     public float                   width    = 15f;
     public float                   height   = 30f;
-    public IEnumerable<IGridEntity> selected = new List<IGridEntity>();
+   
 
     public IEnumerable<IGridEntity> Query() {
->>>>>>> Stashed changes
         var h = height * 0.5f;
         var w = width * 0.5f;
         return targetGrid.Query(

@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using FSM;
-<<<<<<< Updated upstream
 using System;
 using TMPro;
-=======
->>>>>>> Stashed changes
 
-public class EnemigoVolador : EnemigoBase, IFreezed
+public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 {
     
 
@@ -32,7 +29,6 @@ public class EnemigoVolador : EnemigoBase, IFreezed
 
 
     CountdownTimer _Freezetime;
-<<<<<<< Updated upstream
 
     [SerializeField] private TextMeshProUGUI _damageText;
 
@@ -55,39 +51,24 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     }
 
     public event Action<IGridEntity> OnMove;
+      
 
-=======
-    public void Awake()
-    {
-        
-    }
->>>>>>> Stashed changes
     public void Start()
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
         _Freezetime = new CountdownTimer(3);
         _Freezetime.OnTimerStop = BackToNormal;
-<<<<<<< Updated upstream
         _damageText.text = "Damage: 0";
-=======
-
->>>>>>> Stashed changes
         _vida = _vidaMax;
 
         attackState = new AttackEnemigoVolador(this, _proyectil, _spawnBullet);
         trackState = new TrackEnemigoVolador(this, _maxVelocity, _maxForce);
         separationState = new SeparationEnemigoVolador(this, _maxVelocity, _maxForce);
 
-<<<<<<< Updated upstream
-        attackState = new AttackEnemigoVolador(this, _proyectil, _spawnBullet);
-        trackState = new TrackEnemigoVolador(this, _maxVelocity, _maxForce);
-        separationState = new SeparationEnemigoVolador(this, _maxVelocity, _maxForce);       
-=======
         var weakestPoint = _puntosDebiles.Aggregate((currentWeakest,next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
         weakestPoint.IsActive = true;
         weakestPoint.Activate();
->>>>>>> Stashed changes
 
         _fsm = new FiniteStateMachine(trackState, StartCoroutine);
 
@@ -103,37 +84,28 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     public override void Morir()
     {
         GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
-        EnemigoVoladorFactory.Instance.ReturnProjectile(this);
+        EnemigoVoladorFactory.Instance.ReturnEnemy(this);
         GameManager.instance.pj.CambioDeArma();
         _vida = _vidaMax;
 
-<<<<<<< Updated upstream
     }    
-=======
-    }
->>>>>>> Stashed changes
 
     
 
     private void Update()
     {
         delegateUpdate.Invoke();
-<<<<<<< Updated upstream
-
         if (_position != transform.position)  // Añadido
         {
             _position = transform.position;
             OnMove?.Invoke(this);
         }
-    }    
-=======
     }
 
     public void NormalUpdate()
     {
         
     }
->>>>>>> Stashed changes
 
     public void Freezed()
     {
@@ -153,24 +125,18 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         var p = EnemigoVoladorFactory.Instance.pool.GetObject();
         p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
         Debug.Log("Disparo proyectil");
-        //GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
     void Reset()
     {
         _vida = _vidaMax;
-<<<<<<< Updated upstream
         _damageText.text = "Damage: 0";
 
         foreach (PuntosDebiles i in _puntosDebiles)
-=======
-        foreach(PuntosDebiles i in _puntosDebiles)
->>>>>>> Stashed changes
         {
             i.IsActive = false;
             i.Desactivate();
         }
-<<<<<<< Updated upstream
         
         ActivateWeakestPoint();
 
@@ -199,16 +165,10 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     private void ActivateWeakestPoint()
     {
         var weakestPoint = _puntosDebiles
-           .Aggregate((currentWeakest, next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
+            .Aggregate((currentWeakest, next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
 
-=======
-        var weakestPoint = _puntosDebiles.Aggregate((currentWeakest, next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
->>>>>>> Stashed changes
         weakestPoint.IsActive = true;
         weakestPoint.Activate();
-
-        if (!gameObject.activeInHierarchy) 
-            GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
     }
 
     public static void TurnOnOff(EnemigoVolador p, bool active = true)
@@ -217,7 +177,6 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         {
             p.Reset();
         }
-<<<<<<< Updated upstream
         else
         {
             _spatialGrid.Remove(p);
@@ -228,26 +187,20 @@ public class EnemigoVolador : EnemigoBase, IFreezed
     private List<int> _damageHistory = new List<int>();
 
     public void AddDamage(int damage)
-=======
-        p.gameObject.SetActive(active);
+    {
+        _damageHistory.Add(damage);
+        UpdateDamageUI();
     }
 
-    public bool IsAttackDistance()
->>>>>>> Stashed changes
+    private void UpdateDamageUI()
     {
-        return Vector3.Distance(GameManager.instance.pj.transform.position, transform.position) <= _distanceToAttack;
-    }
+        string damageString = _damageHistory
+            .Aggregate("", (result, damage) => result + damage.ToString() + ",");
 
-    public bool IsSeparationDistance()
-    {
-        foreach (EnemigoBase a in GameManager.instance.arenaManager.enemigosEnLaArena)
+        if (damageString.EndsWith(","))
         {
-            if (a == this)
-                continue;
-
-            return Vector3.Distance(a.transform.position, transform.position) <= _distanceToSeparation;
+            damageString = damageString.Substring(0, damageString.Length - 1);
         }
-<<<<<<< Updated upstream
         var damageValues = damageString.Split(',').Select(int.Parse);
         int totalDamage = damageValues.Aggregate(0, (sum, value) => sum + value);
         _damageText.text = "Damage: " + totalDamage.ToString();
@@ -309,14 +262,4 @@ public class EnemigoVolador : EnemigoBase, IFreezed
         }
     }
 
-    public void NormalUpdate()
-    {
-      
-    }
-=======
-
-        return this;
-    }
-
->>>>>>> Stashed changes
 }

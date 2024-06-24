@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ArenaBase : MonoBehaviour
 {
     public EnemigoBase[] enemigos;
-    public SpawnPoints[] spawnPoints;
+    public GameObject[] spawnPoints;
     public List<Nodo> nodos = new List<Nodo>();
     public List<EnemigoBase> enemigosEnLaArena;
     [SerializeField]protected bool _arenaEmpezada;

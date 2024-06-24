@@ -40,10 +40,7 @@ public class ProyectileGun : WeaponBase
 
     protected override void FireBehaviour()
     {
-<<<<<<< Updated upstream
         print("Disparo con Proyectil Gun");
-=======
->>>>>>> Stashed changes
         proyectil.SpawnProyectile(_spawnPoint);
     }
 }
