@@ -130,8 +130,8 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Blending: 1.97
-    - _Blending2: 1.39
+    - _Blending: 1.2
+    - _Blending2: 2.29
     - _Blending_1: 6.32
     - _Blending_2: 7.07
     - _Bottom_1: 0
@@ -143,7 +143,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Divisions: 34.9
+    - _Divisions: 10.23
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -165,8 +165,8 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _Test: 0
-    - _Tiling: -0.61
-    - _Tiling2: 0.08
+    - _Tiling: 0.06
+    - _Tiling2: 0.1
     - _Tiling_1: 0.01
     - _Tiling_2: 0.04
     - _Top_1: 0.28
@@ -175,8 +175,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 0.33776167, b: 0, a: 0.9843137}
-    - _Color2: {r: 0.4056604, g: 0.3133382, b: 0.2009167, a: 0}
+    - _Color: {r: 1, g: 0.882353, b: 0.7960785, a: 0.9843137}
+    - _Color2: {r: 0.34901962, g: 0.30980393, b: 0.30980393, a: 0}
     - _Color_1: {r: 0.7735849, g: 0.77159655, b: 0.748042, a: 0}
     - _Color_2: {r: 0.5566038, g: 0.112896055, b: 0.112896055, a: 1}
     - _Color_Texture_1_Blue_channel: {r: 0, g: 0.6886792, b: 0.658671, a: 0}
