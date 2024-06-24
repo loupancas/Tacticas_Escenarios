@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NewWalls2
-  m_Shader: {fileID: -6465566751694194690, guid: 191a47c527eac4646b34f31150041d2d,
+  m_Shader: {fileID: -6465566751694194690, guid: ece6deba16beea64c87359fb18bb27d0,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
-        m_Texture: {fileID: 2800000, guid: c7774a158c24a8d4ebf94aa775ab7984, type: 3}
+        m_Texture: {fileID: 2800000, guid: 777dac0e19f91ba4699fc6560a75a0ab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -69,6 +69,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
+        m_Texture: {fileID: 2800000, guid: 853517c04c3468d4ab5f9621ea7ff3e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normals:
         m_Texture: {fileID: 2800000, guid: 853517c04c3468d4ab5f9621ea7ff3e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -86,6 +90,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: f1ee13c1dab436248914b4f545c94064, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2:
+        m_Texture: {fileID: 2800000, guid: b00eb4198e2359442abfc404192e7472, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: ee83ababb2858ad44882177be495ee8f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture_1:
@@ -114,6 +130,10 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
+    - _Blending: 1.76
+    - _Blending2: 0.74
+    - _Blending_1: 1.17
+    - _Blending_2: 1.72
     - _Bottom_1: 0
     - _Bottom_2: 0
     - _BumpScale: 1
@@ -123,7 +143,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Divisions: 10
+    - _Divisions: 15.62
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -145,19 +165,28 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _Test: 0
+    - _Tiling: 0.05
+    - _Tiling2: 0.04
+    - _Tiling_1: 7.6
+    - _Tiling_2: 0.95
     - _Top_1: 0.28
     - _Top_2: 0.28
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color2: {r: 0.05271268, g: 1, b: 0, a: 0}
+    - _Color_1: {r: 0.6981132, g: 0.32600567, b: 0.32600567, a: 0}
+    - _Color_2: {r: 0.5849056, g: 0.10208259, b: 0.10208259, a: 0}
+    - _Color_Principal: {r: 0, g: 0, b: 0, a: 0}
     - _Color_Texture_1_Blue_channel: {r: 0, g: 0.6886792, b: 0.658671, a: 0}
     - _Color_Texture_2_Green_channel: {r: 0.9339623, g: 0.18062475, b: 0.18062475,
         a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Luz_Red_channel: {r: 0, g: 0, b: 0, a: 0}
     - _Principal_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Sombras: {r: 0.6132076, g: 0.30949628, b: 0.30949628, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4986417143349843885

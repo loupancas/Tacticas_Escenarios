@@ -156,14 +156,16 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_1: {r: 0.8018868, g: 0.74654996, b: 0, a: 0}
-    - _Color_2: {r: 0.21226415, g: 0.6914229, b: 0.8490566, a: 0}
+    - _Color_1: {r: 0.7075472, g: 0.69784886, b: 0.5773852, a: 1}
+    - _Color_2: {r: 0.8113208, g: 0.3013413, b: 0.27171594, a: 0}
+    - _Color_Principal: {r: 0.60938054, g: 0.7544408, b: 0.7735849, a: 0}
     - _Color_Texture_1_Blue_channel: {r: 0.9716981, g: 0.48005706, b: 0.19708972,
         a: 1}
     - _Color_Texture_2_Green_channel: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Luz_Red_channel: {r: 0.7924528, g: 0.7296955, b: 0.10840159, a: 0}
     - _Principal_Color: {r: 0.8509804, g: 0.84050643, b: 0.6509804, a: 1}
+    - _Sombras: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2459086695630759314

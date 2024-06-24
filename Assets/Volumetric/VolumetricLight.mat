@@ -147,7 +147,7 @@ Material:
     - _MinDis: 0.31
     - _NoiseIntensity: 0.3
     - _OcclusionStrength: 1
-    - _Opacity: 0.04
+    - _Opacity: 0.05
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

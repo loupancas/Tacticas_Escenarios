@@ -135,8 +135,8 @@ Material:
     - _DstBlendAlpha: 0
     - _Edgelight: 1
     - _EnvironmentReflections: 1
-    - _Float: 42.4
-    - _Float2: 63.5
+    - _Float: 4.8
+    - _Float2: 6.07
     - _Float_1: 0.5
     - _Fresnel: 0.22
     - _GlossMapScale: 0
