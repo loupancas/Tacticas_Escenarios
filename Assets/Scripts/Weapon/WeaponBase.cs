@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using System;
 
 public abstract class WeaponBase : MonoBehaviour
@@ -10,7 +11,8 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] protected Transform _shotTransform;
     [SerializeField] protected Animator _weaponAnimator;
     [SerializeField] protected Renderer _weaponRenderer;
-    [SerializeField] protected ParticleSystem _particula;
+    [SerializeField] protected VisualEffect _particula;
+
 
     [Header("Base Weapon Stats")]
     [SerializeField] public float shotCooldown = .1f;
@@ -46,6 +48,7 @@ public abstract class WeaponBase : MonoBehaviour
         _shotCooldownTimer = new CountdownTimer(_modifiedCooldown);
         _shotCooldownTimer.OnTimerStop = crFireCooldown;
         _shotCooldownTimer.OnTimerStart = crFireCooldown;
+        _weaponAnimator.SetBool("Idle", true);
     }
     abstract protected void FireBehaviour();
 
@@ -60,7 +63,9 @@ public abstract class WeaponBase : MonoBehaviour
         _shotCooldownTimer.Start();    
         _audioSource.clip = _shotSound;
         _audioSource.Play();
-        //_particula.Play();
+        _particula.Play();
+        _weaponAnimator.SetTrigger("Shoot");
+
     }
     private void crFireCooldown()
     {
