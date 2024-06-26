@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace FSM {
-
+    //IA2-TP2-FSM
     public class FiniteStateMachine {
 
         private const int _MAX_TRANSITIONS_PER_FRAME = 3;

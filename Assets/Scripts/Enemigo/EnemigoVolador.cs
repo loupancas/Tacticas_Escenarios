@@ -161,7 +161,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
         return this;
     }
-
+    //IA2-TP2 Aggregate identifica el punto el punto más débil y lo activa
     private void ActivateWeakestPoint()
     {
         var weakestPoint = _puntosDebiles
@@ -191,7 +191,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         _damageHistory.Add(damage);
         UpdateDamageUI();
     }
-
+    //IA2-TP2 Aggregate calcula el daño total recibido por el enemigo y lo muestra en pantalla
     private void UpdateDamageUI()
     {
         string damageString = _damageHistory
@@ -228,7 +228,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
             return toUpdate;
         });
     }
-
+    //IA2-TP2 Aggregate fusiona los enemigos que se encuentran en la misma celda, todavia se va a revisar porque hay conflicto con la FSM
     public static void FuseEnemiesInRange(Vector3 position, float cellSize)
     {
         var cellPosition = _spatialGrid.GetPositionInGrid(position);
@@ -251,9 +251,9 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
                     Debug.Log("Fusion de enemigos");
                 }
 
-                if (enemiesInCell.Count > 0) // Check if there is any enemy left in the cell
+                if (enemiesInCell.Count > 0) 
                 {
-                    var remainingFusedEnemy = enemiesInCell[0]; // Take the first remaining enemy
+                    var remainingFusedEnemy = enemiesInCell[0]; 
                     _spatialGrid.Remove(remainingFusedEnemy);
                     _spatialGrid.Add(remainingFusedEnemy);
                     Debug.Log("Fusion de enemigos 2");
