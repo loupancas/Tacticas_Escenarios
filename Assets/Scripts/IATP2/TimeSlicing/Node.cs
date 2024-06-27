@@ -12,7 +12,7 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
-        neighbour = Physics.OverlapSphere(transform.position, 1.5f).Select(x => x.GetComponent<Node>()).Where(x => x != null).
+        neighbour = Physics.OverlapSphere(transform.position, 15f).Select(x => x.GetComponent<Node>()).Where(x => x != null).
             Where(x => x.gameObject != gameObject).ToList();
     }
 
@@ -21,5 +21,12 @@ public class Node : MonoBehaviour
         Gizmos.color = isPath ? Color.green : Color.red;
 
         Gizmos.DrawSphere(transform.position, 0.5f);
+
+        Gizmos.color = Color.blue;
+
+        foreach (var node in neighbour)
+        {
+            Gizmos.DrawLine(transform.position, node.transform.position);
+        }
     }
 }
