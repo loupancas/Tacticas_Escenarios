@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
-    public void Desbloquear()
+    public virtual void Desbloquear()
     {
         gameObject.SetActive(false);
     }

@@ -71,7 +71,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     {
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
-        _Freezetime = new CountdownTimer(3);
+        _Freezetime = new CountdownTimer(10);
         _Freezetime.OnTimerStop = BackToNormal;
         _damageText.text = "Damage: 0";
         _vida = _vidaMax;

@@ -7,8 +7,12 @@ public class ActivadorDeSpawner : MonoBehaviour
     [SerializeField] GameManager _gameManager;
     private void OnTriggerEnter(Collider other)
     {
-        _gameManager.updateList = true;
-        _arena.IniciarHorda();
-        gameObject.SetActive(false);
+        if(other.GetComponent<FirstPersonPlayer>() != null)
+        {
+            _arena.IniciarHorda();
+            gameObject.SetActive(false);
+            _gameManager.updateList = true;
+        }
+        
     }
 }

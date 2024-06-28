@@ -12,7 +12,7 @@ public class Projectile : ProyectilesBase, IFreezed
     void Start()
     {
         delegateUpdate = NormalUpdate;
-        _Freezetime = new CountdownTimer(3);
+        _Freezetime = new CountdownTimer(10);
         _Freezetime.OnTimerStop = BackToNormal;
         GameManager.instance.pj.theWorld += StoppedTime;
         _modifiedDmg = _dmg;

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Components")]
     public FirstPersonPlayer pj;
-    public Arena arenaManager;
+    public ArenaBase arenaManager;
     [SerializeField] private float distanceThreshold = 20f;
     [SerializeField] private float checkInterval = 3f;
     private float timeSinceLastCheck = 0f;
