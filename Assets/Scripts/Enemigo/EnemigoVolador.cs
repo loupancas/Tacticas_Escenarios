@@ -22,8 +22,8 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     [SerializeField] SeparationEnemigoVolador separationState;
     [SerializeField] AttackEnemigoVolador attackState;
 
-
     [SerializeField] public VisualEffect _damageParticle;
+    [SerializeField] public ParticleSystem _explosionPrefab;
 
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
@@ -54,9 +54,14 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     {
         _vida -= Damage;
         _damageParticle.Play();
-        if (_vida < 0)
+        if (_vida <= 0) // Cambiado de < a <=
         {
-            Morir();
+            // Instanciar el prefab de explosión
+            var explosion = Instantiate(_explosionPrefab, transform.position, transform.rotation);
+            explosion.Play(); // Reproducir las partículas de la explosión
+
+            // Asegurarse de que el método Morir se ejecute después de un breve delay
+            Invoke(nameof(Morir), explosion.main.duration);
         }
     }
     public event Action<IGridEntity> OnMove;
