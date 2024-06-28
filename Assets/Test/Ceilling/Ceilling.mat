@@ -114,8 +114,8 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Blending_1: 0.95
-    - _Blending_2: 1.15
+    - _Blending_1: 1.08
+    - _Blending_2: 1.9
     - _Bottom_1: 0.3
     - _Bottom_2: -0
     - _BumpScale: 1
@@ -156,9 +156,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_1: {r: 0.7075472, g: 0.69784886, b: 0.5773852, a: 1}
+    - _Color_1: {r: 0.764151, g: 0.7564614, b: 0.6372731, a: 1}
     - _Color_2: {r: 0.8113208, g: 0.3013413, b: 0.27171594, a: 0}
-    - _Color_Principal: {r: 0.60938054, g: 0.7544408, b: 0.7735849, a: 0}
+    - _Color_Principal: {r: 0.34389463, g: 0.53959215, b: 0.5660378, a: 0}
     - _Color_Texture_1_Blue_channel: {r: 0.9716981, g: 0.48005706, b: 0.19708972,
         a: 1}
     - _Color_Texture_2_Green_channel: {r: 1, g: 1, b: 1, a: 1}
