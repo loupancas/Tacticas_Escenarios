@@ -85,6 +85,7 @@ public class FirstPersonPlayer : Entity
         _inputs.Rotation();
         _inputs.MeleeAttack();
         _inputs.TimeStop();
+        _inputs.Scan();
         _fases.UpdateTimer(Time.deltaTime);
     }
 
