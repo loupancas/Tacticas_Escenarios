@@ -114,11 +114,13 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     public void StoppedTime()
     {
         delegateUpdate = Freezed;
+        _fsm.Active = false;
         _Freezetime.Start();
     }
     public void BackToNormal()
     {
         delegateUpdate = NormalUpdate;
+        _fsm.Active = true;
     }
     public override void SpawnEnemy(Transform spawnPoint)
     {
