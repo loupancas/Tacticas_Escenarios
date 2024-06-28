@@ -6,7 +6,7 @@ using TMPro;
 
 public class player_Inputs 
 {
-    
+    [SerializeField] Animator _animator;
     float _xAxis, _zAxis, _inputMouseX, _inputMouseY, _currTimeMeleeAttack, _currTimeTimeStop;
     int _dashsRemaining;
     player_Movement _movement;
@@ -72,13 +72,13 @@ public class player_Inputs
     public void MeleeAttack()
     {
         _currTimeMeleeAttack += Time.deltaTime;
-        if(Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.StatResultado.cooldownMeleeAttack)
+        if (Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.StatResultado.cooldownMeleeAttack)
         {
-            _attackMelee.gameObject.SetActive(true);
+            _equippedWeapon._weaponAnimator.SetTrigger("Punch");
+            //_attackMelee.gameObject.SetActive(true);
             _attackMelee.StartCoroutine(_attackMelee.SpawnTime());
         }
     }
-
     public void UpdateWeapon(WeaponBase Arma)
     {
         Debug.Log(Arma);

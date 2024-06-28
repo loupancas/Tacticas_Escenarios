@@ -9,7 +9,7 @@ public abstract class WeaponBase : MonoBehaviour
 {
     [Header("Base Weapon Components")]
     [SerializeField] protected Transform _shotTransform;
-    [SerializeField] protected Animator _weaponAnimator;
+    [SerializeField] public Animator _weaponAnimator;
     [SerializeField] protected Renderer _weaponRenderer;
     [SerializeField] protected VisualEffect _particula;
 
