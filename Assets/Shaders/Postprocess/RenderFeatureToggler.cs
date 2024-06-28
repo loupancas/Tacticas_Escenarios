@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -7,6 +9,10 @@ public class RenderFeatureToggle
 {
     public ScriptableRendererFeature feature;
     public bool isEnabled;
+    public int id;
+
+
+
 }
 
 [ExecuteAlways]
@@ -15,30 +21,44 @@ public class RenderFeatureToggler : MonoBehaviour
     [SerializeField]
     private List<RenderFeatureToggle> renderFeatures = new List<RenderFeatureToggle>();
 
-    private int currentActiveIndex = -1;
+    private int currentActiveId = 1;
 
-    private void Update()
+    public  void ToggleFeatures(int featureId)
     {
-        // Al presionar la tecla "X", se intercambia el estado de las características
-        if (Input.GetKeyDown(KeyCode.X))
+        if (currentActiveId != 1)
         {
-            ToggleFeatures();
+            var currentFeature = renderFeatures.Find(rf => rf.id == currentActiveId);
+            if (currentFeature != null)
+            {
+                currentFeature.isEnabled = false;
+                currentFeature.feature.SetActive(false);
+            }
+
+           
         }
+        currentActiveId = featureId;
+        StartCoroutine(ActivateFeatureCoroutine(currentActiveId));
+        Debug.Log("NormalFeature");
     }
 
-    private void ToggleFeatures()
+    private IEnumerator ActivateFeatureCoroutine(int id)
     {
-        // Desactivar la característica actual
-        if (currentActiveIndex >= 0 && currentActiveIndex < renderFeatures.Count)
+        var nextFeature = renderFeatures.Find(rf => rf.id == id);
+        if (nextFeature != null)
         {
-            renderFeatures[currentActiveIndex].isEnabled = false;
-            renderFeatures[currentActiveIndex].feature.SetActive(false);
+            nextFeature.isEnabled = true;
+            nextFeature.feature.SetActive(true);
+
+            yield return new WaitForSeconds(10);
+
+            nextFeature.isEnabled = false;
+            nextFeature.feature.SetActive(false);
         }
 
-        // Activar la siguiente característica en la lista
-        currentActiveIndex = (currentActiveIndex + 1) % renderFeatures.Count;
-
-        renderFeatures[currentActiveIndex].isEnabled = true;
-        renderFeatures[currentActiveIndex].feature.SetActive(true);
+       
     }
+
+
 }
+
+
