@@ -85,6 +85,7 @@ public class FirstPersonPlayer : Entity
         _inputs.Rotation();
         _inputs.MeleeAttack();
         _inputs.TimeStop();
+        _inputs.Scan();
         _fases.UpdateTimer(Time.deltaTime);
     }
 
@@ -92,17 +93,19 @@ public class FirstPersonPlayer : Entity
     {
         if (equippedWeapon != null)
         {
+            equippedWeapon.GetComponent<Animator>().SetTrigger("Swap");
+
             equippedWeapon.gameObject.SetActive(false);
             equippedWeapon = null;
         }
+
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         equippedWeapon = _weaponStash[numeroRandom];
         _buffs.ArmaUpdate(equippedWeapon);
         _inputs.UpdateWeapon(equippedWeapon);
-        
+
         equippedWeapon.gameObject.SetActive(true);
         equippedWeapon.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
-
     }
 
     private void FixedUpdate()

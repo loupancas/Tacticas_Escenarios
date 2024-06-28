@@ -8,6 +8,7 @@ public class Controles : ScriptableObject
     public KeyCode fireKey = KeyCode.Mouse0;
     public KeyCode meleeKey = KeyCode.F;
     public KeyCode stopTime = KeyCode.E;
+    public KeyCode scan = KeyCode.X;
     public KeyCode dashKey = KeyCode.LeftShift;
     public KeyCode jumpKey = KeyCode.Space;
 }

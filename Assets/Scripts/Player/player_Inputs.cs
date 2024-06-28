@@ -6,7 +6,7 @@ using TMPro;
 
 public class player_Inputs 
 {
-    
+    [SerializeField] Animator _animator;
     float _xAxis, _zAxis, _inputMouseX, _inputMouseY, _currTimeMeleeAttack, _currTimeTimeStop;
     int _dashsRemaining;
     player_Movement _movement;
@@ -18,6 +18,8 @@ public class player_Inputs
     Controles _controles;
     player_Dash _dash;
     player_Jump _jump;
+    RenderFeatureToggler _renderFeatureToggler = GameObject.FindObjectOfType<RenderFeatureToggler>();
+
 
     public player_Inputs(player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles, AttackMelee attackMelee, TextoActualizable text2)
     {
@@ -40,8 +42,34 @@ public class player_Inputs
         {
             FirstPersonPlayer.instance.theWorld.Invoke();
             _currTimeTimeStop = 0;
+            _renderFeatureToggler.ToggleFeatures(2);
+            Debug.Log("Time Stop");
         }
     }
+
+    public void Scan()
+    {
+        if (Input.GetKeyDown(_controles.scan))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(_pj.transform.position, _pj.transform.forward, out hit, 10f))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    Debug.Log("Enemy Detected");
+
+                    _renderFeatureToggler.ToggleFeatures(3);
+
+                }
+                else
+                {
+                    Debug.Log("Nothing Detected");
+
+                }
+            }
+        }
+    }
+
     public void Rotation()
     {
         _inputMouseX = Input.GetAxisRaw("Mouse X");
@@ -72,13 +100,13 @@ public class player_Inputs
     public void MeleeAttack()
     {
         _currTimeMeleeAttack += Time.deltaTime;
-        if(Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.StatResultado.cooldownMeleeAttack)
+        if (Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.StatResultado.cooldownMeleeAttack)
         {
-            _attackMelee.gameObject.SetActive(true);
+            _equippedWeapon._weaponAnimator.SetTrigger("Punch");
+            //_attackMelee.gameObject.SetActive(true);
             _attackMelee.StartCoroutine(_attackMelee.SpawnTime());
         }
     }
-
     public void UpdateWeapon(WeaponBase Arma)
     {
         Debug.Log(Arma);
