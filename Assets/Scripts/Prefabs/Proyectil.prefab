@@ -121,5 +121,5 @@ MonoBehaviour:
   _speed: 1
   _maxDistance: 6.88
   _currentDistance: 0
-  _dmg: 2
+  _dmg: 30
   devuelto: 0
