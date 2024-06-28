@@ -3517,6 +3517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vidaMax: 100
   _vida: 0
+  _damageParticle: {fileID: 0}
   _maxVelocity: 4
   _maxForce: 4
   _viewRadius: 10
@@ -3529,7 +3530,7 @@ MonoBehaviour:
   - {fileID: 4478436201622781833}
   - {fileID: 5514389146469608995}
   cdShot: 3
-  _distanceToAttack: 3
+  _distanceToAttack: 10
   _distanceToSeparation: 1
   trackState: {fileID: -7043842147555466567}
   separationState: {fileID: -1369015049936239625}
