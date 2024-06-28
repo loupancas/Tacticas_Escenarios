@@ -5,7 +5,7 @@ using UnityEngine;
 using FSM;
 using System;
 using TMPro;
-
+using UnityEngine.VFX;
 public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 {
     
@@ -23,6 +23,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     [SerializeField] AttackEnemigoVolador attackState;
 
 
+    [SerializeField] public VisualEffect _damageParticle;
 
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
@@ -49,7 +50,15 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
             OnMove?.Invoke(this);
         }
     }
-
+    public override void TakeDamage(int Damage)
+    {
+        _vida -= Damage;
+        _damageParticle.Play();
+        if (_vida < 0)
+        {
+            Morir();
+        }
+    }
     public event Action<IGridEntity> OnMove;
       
 

@@ -409,7 +409,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 617
+  m_VersionIndex: 620
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 617
+  m_VersionIndex: 620
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1145,7 +1145,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 617
+  m_VersionIndex: 620
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3135,7 +3135,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2283
+  m_VersionIndex: 2286
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3517,7 +3517,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vidaMax: 100
   _vida: 0
-  _damageParticle: {fileID: 0}
   _maxVelocity: 4
   _maxForce: 4
   _viewRadius: 10
@@ -3535,6 +3534,7 @@ MonoBehaviour:
   trackState: {fileID: -7043842147555466567}
   separationState: {fileID: -1369015049936239625}
   attackState: {fileID: 994862325732535762}
+  _damageParticle: {fileID: 7258625135596389531}
   _proyectil: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
     type: 3}
   _spawnBullet: {fileID: 2502652083021165761}
