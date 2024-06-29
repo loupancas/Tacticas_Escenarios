@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        fsmState = 0,
+        gridState = 1,
+        aStarState = 2
+    }
     public static GameManager instance;
+    [SerializeField]
+    private GameState currentState;
 
     [Header("Components")]
     public FirstPersonPlayer pj;
@@ -65,4 +73,17 @@ public class GameManager : MonoBehaviour
             EnemigoVolador.FuseEnemiesInRange(enemigo.Position, EnemigoVolador._spatialGrid.cellWidth); // Usa el tamaño de la celda para el rango
         }
     }
+
+    public void ChangeState(GameState newState)
+    {
+        currentState = newState;
+        Debug.Log("Estado cambiado a: " + currentState);
+    }
+
+    public GameState GetCurrentState()
+    {
+        return currentState;
+    }
+
+
 }
