@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5302770026679984493
 RectTransform:
   m_ObjectHideFlags: 0
@@ -290,9 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _me: {fileID: 8171125479128317140}
-  _mesh: {fileID: 0}
+  _mesh: {fileID: 1003410995132631738}
   IsActive: 0
   resistance: 0
+  _puntoDebil: {fileID: 4334759201668968650}
 --- !u!65 &5132536719302234347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -361,9 +362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _me: {fileID: 8171125479128317140}
-  _mesh: {fileID: 0}
+  _mesh: {fileID: 3117804509031366745}
   IsActive: 0
   resistance: 0
+  _puntoDebil: {fileID: 1431844119893138023}
 --- !u!65 &6385618236590420817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -432,9 +434,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _me: {fileID: 8171125479128317140}
-  _mesh: {fileID: 0}
+  _mesh: {fileID: 8429353351359450851}
   IsActive: 0
   resistance: 0
+  _puntoDebil: {fileID: 4939159558741061342}
 --- !u!65 &2961763386975782625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3108,7 +3111,7 @@ PrefabInstance:
     - target: {fileID: 3667729709572671138, guid: 718ce520590ab0a4e816fd98ceb05543,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4523747814634280868, guid: 718ce520590ab0a4e816fd98ceb05543,
         type: 3}
@@ -3163,7 +3166,7 @@ PrefabInstance:
     - target: {fileID: 6512749884305313713, guid: 718ce520590ab0a4e816fd98ceb05543,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

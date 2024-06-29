@@ -49,24 +49,30 @@ public class player_Inputs
 
     public void Scan()
     {
+      
         if (Input.GetKeyDown(_controles.scan))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(_pj.transform.position, _pj.transform.forward, out hit, 10f))
+            Debug.Log("_pj:" + (_pj != null));
+            Debug.Log("_renderFeatureToggler:" + (_renderFeatureToggler != null));
+
+            if (_renderFeatureToggler != null)
             {
-                if (hit.collider.CompareTag("Enemy"))
+                _renderFeatureToggler.ToggleFeatures(3);
+            }
+
+            PuntosDebiles[] puntosDebilesArray = GameObject.FindObjectsOfType<PuntosDebiles>();
+            foreach (var puntosDebiles in puntosDebilesArray)
+            {
+                if (puntosDebiles != null && puntosDebiles._puntoDebil != null && puntosDebiles._puntoDebil.GetComponent<MeshRenderer>().enabled == false)
                 {
-                    Debug.Log("Enemy Detected");
-
-                    _renderFeatureToggler.ToggleFeatures(3);
-
-                }
-                else
-                {
-                    Debug.Log("Nothing Detected");
-
+                    puntosDebiles._puntoDebil.GetComponent<MeshRenderer>().enabled = true;
                 }
             }
+           
+        }
+        else
+        {
+            Debug.Log("No se ha encontrado el objeto");
         }
     }
 
