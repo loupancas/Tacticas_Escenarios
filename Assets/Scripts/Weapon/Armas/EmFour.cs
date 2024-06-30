@@ -15,14 +15,14 @@ public class EmFour : WeaponBase
                 break;
             case 1:
                 _modifiedCooldown = 0.07f;
-                _modifiedDmg = 10;
+                _modifiedDmg = 7;
                 break;
             case 2:
-                _modifiedCooldown = 0.05f;
-                _modifiedDmg = 25;
+                _modifiedCooldown = 0.068f;
+                _modifiedDmg = 7;
                 break;
             case 3:
-                _modifiedDmg = 30;
+                _modifiedDmg = 10;
                 break;
                 
         }

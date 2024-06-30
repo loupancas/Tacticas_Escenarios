@@ -20,14 +20,13 @@ public class Revolver : WeaponBase
                 _IsFase3On = false;
                 break;
             case 2:
-                _modifiedCooldown = 0.1f;
+                _modifiedCooldown = 0.5f;
                 _modifiedDmg = 75;
                 _IsFase3On = false;
                 break;
             case 3:
-                _modifiedCooldown = 0.1f;
+                _modifiedCooldown = 0.4f;
                 _modifiedDmg = 75;
-                _gunType = ShootType.Automatic;
                 _IsFase3On = true;
                 break;
 
@@ -44,7 +43,11 @@ public class Revolver : WeaponBase
             _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
             _rayHit.collider.GetComponent<EnemigoVolador>()?.AddDamage(_modifiedDmg);
             _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
-            _rayHit.collider.GetComponent<Projectile>()?.DevolverBala();
+            if(_IsFase3On)
+            {
+                _rayHit.collider.GetComponent<Projectile>()?.DevolverBala();
+            }
+            
 
         }
     }

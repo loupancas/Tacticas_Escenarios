@@ -3418,7 +3418,7 @@ MonoBehaviour:
   - {fileID: 5626540854111498135}
   - {fileID: 4478436201622781833}
   - {fileID: 5514389146469608995}
-  cdShot: 5
+  cdShot: 3
   _distanceToAttack: 10
   _distanceToSeparation: 1
   trackState: {fileID: -7043842147555466567}

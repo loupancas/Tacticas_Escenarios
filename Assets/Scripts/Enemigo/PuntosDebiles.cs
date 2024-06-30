@@ -29,8 +29,9 @@ public class PuntosDebiles : MonoBehaviour
         //else
         //{
             _me.TakeDamage(resistance + Dmg);
+            _me.AddDamage(resistance + Dmg);
         //}
-        
+
     }
     public void Desactivate()
     {

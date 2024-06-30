@@ -13,7 +13,7 @@ public class AttackMelee : MonoBehaviour
     {
         _timer = new CountdownTimer(_lifeTime);
         _timer.OnTimerStop = DesactivarAtaque;
-
+        _timer.Start();
     }
 
     private void Update()
