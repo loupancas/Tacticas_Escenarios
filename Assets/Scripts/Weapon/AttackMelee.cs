@@ -7,20 +7,36 @@ public class AttackMelee : MonoBehaviour
     [Header("Stats")]
     [SerializeField] int _dmg;
     [SerializeField] float _lifeTime;
+    CountdownTimer _timer;
 
-    public IEnumerator SpawnTime()
+    public void Start()
     {
-        print("Funciono");
-        yield return new WaitForSeconds(_lifeTime);
+        _timer = new CountdownTimer(_lifeTime);
+        _timer.OnTimerStop = DesactivarAtaque;
+
+    }
+
+    private void Update()
+    {
+        _timer.Tick(Time.deltaTime);    
+
+    }
+
+    public void MeleeAttack()
+    {
+        _timer.Start();
+        gameObject.SetActive(true);
+    }
+
+    public void DesactivarAtaque()
+    {
         gameObject.SetActive(false);
+        _timer.Reset();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<EnemigoVolador>()?.TakeDamage(_dmg);
-
-        
-        
+         other.gameObject.GetComponent<EnemigoVolador>()?.TakeDamage(_dmg);
     }
 
 }

@@ -103,8 +103,8 @@ public class player_Inputs
         if (Input.GetKeyDown(_controles.meleeKey) && _currTimeMeleeAttack > _baseStatsPlayer.StatResultado.cooldownMeleeAttack)
         {
             _equippedWeapon._weaponAnimator.SetTrigger("Punch");
-            //_attackMelee.gameObject.SetActive(true);
-            _attackMelee.StartCoroutine(_attackMelee.SpawnTime());
+            _attackMelee.gameObject.SetActive(true);
+            _attackMelee.MeleeAttack();
         }
     }
     public void UpdateWeapon(WeaponBase Arma)

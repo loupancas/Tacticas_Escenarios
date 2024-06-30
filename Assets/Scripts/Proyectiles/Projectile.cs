@@ -68,7 +68,6 @@ public class Projectile : ProyectilesBase, IFreezed
         if (other.gameObject.GetComponent<AttackMelee>() != null)
         {
             print("Toco el trigger");
-
             DevolverBala();
         }
     }
@@ -108,11 +107,12 @@ public class Projectile : ProyectilesBase, IFreezed
     }
     public void DevolverBala()
     {
+        print("Devolver bala");
         devuelto = true;
         transform.forward = GameManager.instance.pj.cam.transform.forward;
         transform.rotation = GameManager.instance.pj.cam.transform.rotation;
         _modifiedDmg = _dmg * 2;
-        _modifiedSpeed = _speed * 6;
+        _modifiedSpeed = _speed * 2;
     }
 
     

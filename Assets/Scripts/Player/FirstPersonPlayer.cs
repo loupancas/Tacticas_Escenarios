@@ -22,7 +22,7 @@ public class FirstPersonPlayer : Entity
     public bool dashing;
     public bool grounded = true;
     [Header("Components")]
-    [SerializeField] private Transform _head;
+    [SerializeField] public Transform _head;
     [SerializeField] private AttackMelee _attackMelee;
     [SerializeField] private HealthBar _hpBar;
     [SerializeField] private TextoActualizable _textDashCounts, _textJumpCounts, _textFases;
@@ -103,7 +103,7 @@ public class FirstPersonPlayer : Entity
         equippedWeapon = _weaponStash[numeroRandom];
         _buffs.ArmaUpdate(equippedWeapon);
         _inputs.UpdateWeapon(equippedWeapon);
-
+        _fases.SubirFase();
         equippedWeapon.gameObject.SetActive(true);
         equippedWeapon.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
     }

@@ -35,7 +35,7 @@ public class AttackEnemigoVolador : MonoBaseState
 
     public override void UpdateLoop()
     {
-        _me.transform.LookAt(GameManager.instance.pj.transform);
+        _me.transform.LookAt(GameManager.instance.pj._head.transform);
 
         _timer.Tick(Time.deltaTime);
     }
