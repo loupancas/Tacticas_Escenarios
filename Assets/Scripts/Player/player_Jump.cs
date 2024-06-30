@@ -26,25 +26,24 @@ public class player_Jump
         {
             _rb.AddForce(_pj.transform.up * _buffs.StatResultado.jumpHeight, ForceMode.Impulse);
             _jumpsRemaining -= 1;
+            
         }
-        _textJumpCount.UpdateHUD(_jumpsRemaining, _buffs.StatResultado.maxJumpsCount, "Saltos");
+        
     }
     public void GroundedState()
     {
+        _textJumpCount.UpdateHUD(_jumpsRemaining -1, _buffs.StatResultado.maxJumpsCount -1, "Salto EXTRA");
         float groundCheckDistance = 1.1f;
         RaycastHit hit;
         if (Physics.Raycast(_pj.transform.position, -_pj.transform.up, out hit, groundCheckDistance))
         {
             _pj.grounded = true;
             _jumpsRemaining = _buffs.StatResultado.maxJumpsCount;
-
-            _textJumpCount.UpdateHUD(_jumpsRemaining, _buffs.StatResultado.maxJumpsCount, "Saltos");
-
         }
         else
         {
             _pj.grounded = false;
-            _textJumpCount.UpdateHUD(_jumpsRemaining, _buffs.StatResultado.maxJumpsCount, "Saltos");
+
         }
 
 

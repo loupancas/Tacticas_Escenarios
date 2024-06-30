@@ -15,7 +15,7 @@ MonoBehaviour:
   baseStats:
     cooldownMeleeAttack: 0
     cooldownFreeze: 6
-    chargeDashTime: 1
+    chargeDashTime: 3
     dashCd: 0
     dashForce: 10
     dashSpeed: 7
