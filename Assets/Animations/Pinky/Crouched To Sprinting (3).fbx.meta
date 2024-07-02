@@ -1,0 +1,884 @@
+fileFormatVersion: 2
+guid: 22056c3bc9bee70409a10cf41ee7d63c
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: mixamo.com
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: bruiser_test:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandThumb1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandThumb2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandThumb3
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandIndex1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandIndex2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandIndex3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandMiddle1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandMiddle2
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandMiddle3
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandRing1
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandRing2
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandRing3
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandPinky1
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandPinky2
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:LeftHandPinky3
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandThumb1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandThumb2
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandThumb3
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandIndex1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandIndex2
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandIndex3
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandMiddle1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandMiddle2
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandMiddle3
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandRing1
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandRing2
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandRing3
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandPinky1
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandPinky2
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:RightHandPinky3
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: bruiser_test:Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Crouched To Sprinting (3)(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:Hips
+      parentName: Crouched To Sprinting (3)(Clone)
+      position: {x: 0.43348804, y: 120.00537, z: 3.1553607}
+      rotation: {x: -0.16943124, y: 0.036190007, z: -0.023948161, w: 0.9845861}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:Spine
+      parentName: bruiser_test:Hips
+      position: {x: -0, y: 18.7579, z: 0.9803}
+      rotation: {x: 0.088338576, y: -0.006910204, z: 0.006284951, w: 0.9960467}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:Spine1
+      parentName: bruiser_test:Spine
+      position: {x: -0, y: 21.9141, z: 0}
+      rotation: {x: 0.12444213, y: -0.0023173648, z: 0.015681047, w: 0.99210024}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:Spine2
+      parentName: bruiser_test:Spine1
+      position: {x: -0, y: 25.0447, z: 0}
+      rotation: {x: 0.124442026, y: -0.0023173597, z: 0.015681025, w: 0.9921003}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:Neck
+      parentName: bruiser_test:Spine2
+      position: {x: -0, y: 28.1753, z: 0}
+      rotation: {x: -0.12395018, y: 0.009427189, z: 0.0027296452, w: 0.99223995}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:Head
+      parentName: bruiser_test:Neck
+      position: {x: -0, y: 7.9660006, z: 3.4153}
+      rotation: {x: -0.03150236, y: 0.00839602, z: 0.0059241015, w: 0.99945086}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:HeadTop_End
+      parentName: bruiser_test:Head
+      position: {x: -0, y: 51.335697, z: 22.009798}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftShoulder
+      parentName: bruiser_test:Spine2
+      position: {x: -13.627599, y: 23.6811, z: 0.1865}
+      rotation: {x: 0.5759215, y: -0.4035722, z: 0.57059956, w: 0.42409927}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftArm
+      parentName: bruiser_test:LeftShoulder
+      position: {x: -0, y: 29.1797, z: 0}
+      rotation: {x: -0.15424773, y: 0.06776842, z: 0.006395339, w: 0.98568463}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftForeArm
+      parentName: bruiser_test:LeftArm
+      position: {x: -0, y: 41.6206, z: 0}
+      rotation: {x: -0.010060113, y: -0.03313575, z: 0.008412917, w: 0.99936485}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHand
+      parentName: bruiser_test:LeftForeArm
+      position: {x: -0, y: 51.557003, z: 0}
+      rotation: {x: -0.09777911, y: -0.46464962, z: 0.04069302, w: 0.8791383}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandThumb1
+      parentName: bruiser_test:LeftHand
+      position: {x: 7.6199, y: 8.6479, z: 0.2604}
+      rotation: {x: -0.32800135, y: 0.06461785, z: -0.10947677, w: 0.9360847}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandThumb2
+      parentName: bruiser_test:LeftHandThumb1
+      position: {x: 1.0051001, y: 9.1682005, z: 0}
+      rotation: {x: 0.022172648, y: -0.026051817, z: -0.038981725, w: 0.99865425}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandThumb3
+      parentName: bruiser_test:LeftHandThumb2
+      position: {x: 0.2608, y: 7.2316, z: 0}
+      rotation: {x: -0.00024409236, y: 0.0025534471, z: -0.13095944, w: 0.99138445}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandThumb4
+      parentName: bruiser_test:LeftHandThumb3
+      position: {x: -1.2659001, y: 5.4899, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandIndex1
+      parentName: bruiser_test:LeftHand
+      position: {x: 8.8627, y: 22.4933, z: 0.0653}
+      rotation: {x: -0.04478834, y: -0.04796789, z: -0.13274084, w: 0.98897576}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandIndex2
+      parentName: bruiser_test:LeftHandIndex1
+      position: {x: 0.0041999994, y: 6.1987, z: 0}
+      rotation: {x: 0.03147341, y: 0.0077347467, z: 0.000031350402, w: 0.99947464}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandIndex3
+      parentName: bruiser_test:LeftHandIndex2
+      position: {x: 0.0003, y: 6.0856, z: 0}
+      rotation: {x: 0.000000020563427, y: 0.000013059705, z: -0.00045900446, w: 0.9999999}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandIndex4
+      parentName: bruiser_test:LeftHandIndex3
+      position: {x: -0.0045, y: 5.1797, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandMiddle1
+      parentName: bruiser_test:LeftHand
+      position: {x: 2.6638002, y: 23.580997, z: -0.72169995}
+      rotation: {x: 0.01877925, y: -0.0090868035, z: -0.071746714, w: 0.9972047}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandMiddle2
+      parentName: bruiser_test:LeftHandMiddle1
+      position: {x: -0.0039000001, y: 6.5222993, z: 0}
+      rotation: {x: 0.029014992, y: 0.013489358, z: -0.0012646179, w: 0.99948716}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandMiddle3
+      parentName: bruiser_test:LeftHandMiddle2
+      position: {x: -0.0016, y: 6.7323, z: 0}
+      rotation: {x: 0.000000024810136, y: -0.000050070623, z: 0.0006718887, w: 0.99999976}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandMiddle4
+      parentName: bruiser_test:LeftHandMiddle3
+      position: {x: 0.0054999995, y: 4.9719, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandRing1
+      parentName: bruiser_test:LeftHand
+      position: {x: -3.5012, y: 22.0974, z: -0.057899997}
+      rotation: {x: 0.053511437, y: 0.012136752, z: -0.017668368, w: 0.99833715}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandRing2
+      parentName: bruiser_test:LeftHandRing1
+      position: {x: 0.006800001, y: 6.8503, z: 0}
+      rotation: {x: 0.026815629, y: -0.010642599, z: -0.0026924622, w: 0.99958014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandRing3
+      parentName: bruiser_test:LeftHandRing2
+      position: {x: -0.0096, y: 6.4325, z: 0}
+      rotation: {x: -0.000000011879527, y: 0.000021420665, z: 0.0009879817, w: 0.9999995}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandRing4
+      parentName: bruiser_test:LeftHandRing3
+      position: {x: 0.0028000001, y: 5.7903996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandPinky1
+      parentName: bruiser_test:LeftHand
+      position: {x: -8.0253, y: 19.7553, z: 0.20260003}
+      rotation: {x: 0.018646657, y: -0.0939671, z: -0.11093317, w: 0.9891999}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandPinky2
+      parentName: bruiser_test:LeftHandPinky1
+      position: {x: -0.0202, y: 5.9307003, z: 0}
+      rotation: {x: -0.008435726, y: 0.0339396, z: 0.03463801, w: 0.9987879}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandPinky3
+      parentName: bruiser_test:LeftHandPinky2
+      position: {x: -0.0059000007, y: 5.2426004, z: 0}
+      rotation: {x: -0.0000005950768, y: -0.00023479936, z: 0.0035636637, w: 0.9999936}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftHandPinky4
+      parentName: bruiser_test:LeftHandPinky3
+      position: {x: 0.0261, y: 4.3483996, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightShoulder
+      parentName: bruiser_test:Spine2
+      position: {x: 13.627599, y: 23.6862, z: 0.283}
+      rotation: {x: 0.67056054, y: 0.42952558, z: -0.42775947, w: 0.42764264}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightArm
+      parentName: bruiser_test:RightShoulder
+      position: {x: -0, y: 29.1797, z: 0}
+      rotation: {x: -0.12908515, y: -0.29465845, z: -0.052638277, w: 0.9453797}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightForeArm
+      parentName: bruiser_test:RightArm
+      position: {x: -0, y: 41.613, z: 0}
+      rotation: {x: -0.01624845, y: 0.00007390972, z: 0.0021272143, w: 0.9998658}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHand
+      parentName: bruiser_test:RightForeArm
+      position: {x: -0, y: 51.557304, z: 0}
+      rotation: {x: -0.30520687, y: 0.9096385, z: -0.1060768, w: -0.2610637}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandThumb1
+      parentName: bruiser_test:RightHand
+      position: {x: -8.024901, y: 8.665301, z: 0.3124}
+      rotation: {x: 0.16822316, y: 0.06420554, z: -0.26634854, w: 0.9469093}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandThumb2
+      parentName: bruiser_test:RightHandThumb1
+      position: {x: -0.9041, y: 9.4084, z: 0}
+      rotation: {x: -0.032682043, y: 0.0044714967, z: 0.061992116, w: 0.9975315}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandThumb3
+      parentName: bruiser_test:RightHandThumb2
+      position: {x: 0.33459997, y: 7.1558, z: 0}
+      rotation: {x: -0.00017942919, y: -0.002340031, z: 0.02978237, w: 0.9995537}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandThumb4
+      parentName: bruiser_test:RightHandThumb3
+      position: {x: 0.5694, y: 5.3364, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandIndex1
+      parentName: bruiser_test:RightHand
+      position: {x: -8.7034, y: 22.375797, z: 0.0096}
+      rotation: {x: -0.006515524, y: -0.014141016, z: -0.018941345, w: 0.99969935}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandIndex2
+      parentName: bruiser_test:RightHandIndex1
+      position: {x: -0.0109, y: 5.8007, z: 0}
+      rotation: {x: -0.037691, y: 0.00045724196, z: 0.0068161683, w: 0.99926615}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandIndex3
+      parentName: bruiser_test:RightHandIndex2
+      position: {x: 0.0014000001, y: 6.4443, z: 0}
+      rotation: {x: -0.00000014513617, y: -0.00010596417, z: 0.00085422857, w: 0.99999964}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandIndex4
+      parentName: bruiser_test:RightHandIndex3
+      position: {x: 0.0096, y: 4.9853005, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandMiddle1
+      parentName: bruiser_test:RightHand
+      position: {x: -2.9847002, y: 23.717, z: -0.4158}
+      rotation: {x: -0.031611305, y: -0.012212013, z: 0.07501221, w: 0.99660665}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandMiddle2
+      parentName: bruiser_test:RightHandMiddle1
+      position: {x: -0.0048, y: 6.7805996, z: 0}
+      rotation: {x: -0.03581046, y: -0.0063781603, z: -0.0003492248, w: 0.9993382}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandMiddle3
+      parentName: bruiser_test:RightHandMiddle2
+      position: {x: -0.0048, y: 6.4173994, z: 0}
+      rotation: {x: 0.000000078118546, y: 0.000036467663, z: 0.0012555809, w: 0.9999992}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandMiddle4
+      parentName: bruiser_test:RightHandMiddle3
+      position: {x: 0.0096, y: 5.4444, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandRing1
+      parentName: bruiser_test:RightHand
+      position: {x: 3.22, y: 22.134102, z: -0.1277}
+      rotation: {x: -0.043242145, y: 0.0044881687, z: 0.1339303, w: 0.9900367}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandRing2
+      parentName: bruiser_test:RightHandRing1
+      position: {x: -0.014100001, y: 7.0643997, z: 0}
+      rotation: {x: -0.034989376, y: 0.0039403094, z: -0.001887542, w: 0.99937814}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandRing3
+      parentName: bruiser_test:RightHandRing2
+      position: {x: 0.0053, y: 6.5585003, z: 0}
+      rotation: {x: 0.000000042679936, y: 0.000010470279, z: 0.0003121097, w: 0.99999994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandRing4
+      parentName: bruiser_test:RightHandRing3
+      position: {x: 0.008700001, y: 6.074, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandPinky1
+      parentName: bruiser_test:RightHand
+      position: {x: 8.4681, y: 20.599401, z: 0.26090002}
+      rotation: {x: -0.0058861235, y: -0.21545541, z: -0.0014377825, w: 0.97649497}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandPinky2
+      parentName: bruiser_test:RightHandPinky1
+      position: {x: 0.0058, y: 5.92, z: 0}
+      rotation: {x: 0.010328071, y: -0.006611927, z: 0.0013165813, w: 0.99992394}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandPinky3
+      parentName: bruiser_test:RightHandPinky2
+      position: {x: 0.0125, y: 4.8859005, z: 0}
+      rotation: {x: -0.000000100094574, y: 0.00009472185, z: -0.0036674438, w: 0.99999326}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightHandPinky4
+      parentName: bruiser_test:RightHandPinky3
+      position: {x: -0.0183, y: 3.8314998, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftUpLeg
+      parentName: bruiser_test:Hips
+      position: {x: -19.784502, y: -10.4158, z: -0.9974}
+      rotation: {x: -0.41006768, y: -0.07920505, z: 0.9041327, w: 0.09008375}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftLeg
+      parentName: bruiser_test:LeftUpLeg
+      position: {x: -0, y: 55.996807, z: 0}
+      rotation: {x: 0.25914437, y: 0.08314492, z: 0.049028836, w: -0.9610033}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftFoot
+      parentName: bruiser_test:LeftLeg
+      position: {x: -0, y: 52.4111, z: 0}
+      rotation: {x: 0.766095, y: -0.16723096, z: 0.26779932, w: 0.55983555}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftToeBase
+      parentName: bruiser_test:LeftFoot
+      position: {x: -0, y: 38.7613, z: 0}
+      rotation: {x: 0.58704007, y: 0.07293483, z: -0.02673702, w: 0.8058224}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:LeftToe_End
+      parentName: bruiser_test:LeftToeBase
+      position: {x: -0, y: 14.7571, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightUpLeg
+      parentName: bruiser_test:Hips
+      position: {x: 19.784502, y: -10.4158, z: -0.7671}
+      rotation: {x: 0.2858105, y: -0.065993875, z: 0.9511364, w: -0.09641994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightLeg
+      parentName: bruiser_test:RightUpLeg
+      position: {x: -0, y: 56.0316, z: 0}
+      rotation: {x: 0.25510672, y: -0.123677805, z: -0.054391894, w: -0.9574268}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightFoot
+      parentName: bruiser_test:RightLeg
+      position: {x: -0, y: 52.4355, z: 0}
+      rotation: {x: 0.77828807, y: 0.08524704, z: -0.104061626, w: 0.6133285}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightToeBase
+      parentName: bruiser_test:RightFoot
+      position: {x: -0, y: 37.9415, z: 0}
+      rotation: {x: 0.62289244, y: -0.050128255, z: 0.049543537, w: 0.77912617}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bruiser_test:RightToe_End
+      parentName: bruiser_test:RightToeBase
+      position: {x: -0, y: 14.585402, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 100
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
