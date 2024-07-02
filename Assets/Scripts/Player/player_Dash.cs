@@ -48,7 +48,7 @@ public class player_Dash
         if (_currCountDashs <= 0 || _dashToDashTimer.IsRunning)
             return;
 
-        Debug.Log("Dash");
+       
         Vector3 dir = (_pj.transform.right * xAxis + _pj.transform.forward * zAxis).normalized;
         _buffs.Add("Dash", (Stats original) => { original.movementSpeed = _dashSpeed; return original; }, _dashDuration);
         Vector3 forceToApply;
@@ -90,7 +90,7 @@ public class player_Dash
 
     void ChargeDash()
     {
-        Debug.Log("Cargando dash");
+        
         _currCountDashs++;
         _texto.UpdateHUD(_currCountDashs, _maxCountDashs, " Dashs");
         if (_currCountDashs < _maxCountDashs)

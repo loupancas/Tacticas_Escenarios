@@ -29,16 +29,16 @@ public class Fuego : MonoBehaviour
     {
         if(other.GetComponent<FirstPersonPlayer>() != null)
         {
-            print("Jugador quemandose");
+            
             _timer.Tick(Time.deltaTime);
-            print(_timer.Progress);
+            
             
             if (_timer.IsFinished)
             {
                 _timer.Reset();
                 _timer.Start();
                 other.GetComponent<FirstPersonPlayer>().TakeDamage(_dmg);
-                print("Jugador dañado");
+                
             }
             
         }

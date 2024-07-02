@@ -12,8 +12,8 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
-        neighbour = Physics.OverlapSphere(transform.position, 15f).Select(x => x.GetComponent<Node>()).Where(x => x != null).
-            Where(x => x.gameObject != gameObject).ToList();
+        //neighbour = Physics.OverlapSphere(transform.position, 15f).Select(x => x.GetComponent<Node>()).Where(x => x != null).
+            //Where(x => x.gameObject != gameObject).ToList();
     }
 
     private void OnDrawGizmos()

@@ -23,8 +23,8 @@ public class TrackEnemigoVolador : MonoBaseState
         if (_me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToAttack))
             return Transitions[StateTransitions.ToAttack];
 
-        if (_me.IsSeparationDistance() && Transitions.ContainsKey(StateTransitions.ToSeparation))
-            return Transitions[StateTransitions.ToSeparation];
+        if (!_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && Transitions.ContainsKey(StateTransitions.ToSearch))
+            return Transitions[StateTransitions.ToSearch];
 
         return this;
     }

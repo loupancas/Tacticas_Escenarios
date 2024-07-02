@@ -37,7 +37,7 @@ public class Player_Fases
 
 
         fases++;
-        Debug.Log("Fase: " + fases);
+        
         _text.UpdateHUD(fases, "Fase");
         _timer.Reset(_timeFaseToFase);
         _timer.Start();

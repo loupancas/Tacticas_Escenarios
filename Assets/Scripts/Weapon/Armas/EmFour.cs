@@ -26,7 +26,7 @@ public class EmFour : WeaponBase
                 break;
                 
         }
-        print("Fase: " + fase);
+        
     }
 
     protected override void FireBehaviour()

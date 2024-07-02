@@ -30,6 +30,9 @@ public class AttackEnemigoVolador : MonoBaseState
         if (!_me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToPersuit))
             return Transitions[StateTransitions.ToPersuit];
 
+        if (!_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && Transitions.ContainsKey(StateTransitions.ToSearch))
+            return Transitions[StateTransitions.ToSearch];
+
         return this;
     }
 

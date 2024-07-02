@@ -19,9 +19,9 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     [Header("Components")]
     [SerializeField] TrackEnemigoVolador trackState;
-    [SerializeField] SeparationEnemigoVolador separationState;
+    [SerializeField] SearchEnemigoVolador separationState;
     [SerializeField] AttackEnemigoVolador attackState;
-
+    
     [SerializeField] public VisualEffect _damageParticle;
     [SerializeField] public ParticleSystem _explosionPrefab;
 
@@ -59,7 +59,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
             // Instanciar el prefab de explosión
             var explosion = Instantiate(_explosionPrefab, transform.position, transform.rotation);
             explosion.Play(); // Reproducir las partículas de la explosión
-
+            //_fsm.Active = false;//Desactivar la inteligencia
             // Asegurarse de que el método Morir se ejecute después de un breve delay
             Invoke(nameof(Morir), explosion.main.duration);
         }
@@ -76,9 +76,6 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         _damageText.text = "Damage: 0";
         _vida = _vidaMax;
 
-        attackState = new AttackEnemigoVolador(this, _proyectil, _spawnBullet);
-        trackState = new TrackEnemigoVolador(this, _maxVelocity, _maxForce);
-        separationState = new SeparationEnemigoVolador(this, _maxVelocity, _maxForce);
 
         var weakestPoint = _puntosDebiles.Aggregate((currentWeakest,next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
         weakestPoint.IsActive = true;
@@ -86,17 +83,19 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
         _fsm = new FiniteStateMachine(trackState, StartCoroutine);
 
-        _fsm.AddTransition(StateTransitions.ToSeparation, trackState, separationState);
-        _fsm.AddTransition(StateTransitions.ToSeparation, attackState, separationState);
-        _fsm.AddTransition(StateTransitions.ToPersuit, separationState, trackState);
+        _fsm.AddTransition(StateTransitions.ToSearch, trackState, separationState);
         _fsm.AddTransition(StateTransitions.ToPersuit, attackState, trackState);
         _fsm.AddTransition(StateTransitions.ToAttack, trackState, attackState);
+        _fsm.AddTransition(StateTransitions.ToSearch, attackState, separationState);
+        _fsm.AddTransition(StateTransitions.ToAttack, separationState, attackState);
+        _fsm.AddTransition(StateTransitions.ToPersuit, separationState, trackState);
 
         _fsm.Active = true;
 
     }
     public override void Morir()
     {
+        
         GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
         EnemigoVoladorFactory.Instance.ReturnEnemy(this);
         GameManager.instance.pj.CambioDeArma();
@@ -108,6 +107,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     private void Update()
     {
+        print(InLineOfSight(transform.position, GameManager.instance.pj.transform.position));
         delegateUpdate.Invoke();
         if (_position != transform.position)  // Añadido
         {
@@ -165,18 +165,13 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         return Vector3.Distance(GameManager.instance.pj.transform.position, transform.position) <= _distanceToAttack;
     }
 
-    public bool IsSeparationDistance()
+    public bool InLineOfSight(Vector3 start, Vector3 end)
     {
-        foreach (EnemigoBase a in GameManager.instance.arenaManager.enemigosEnLaArena)
-        {
-            if (a == this)
-                continue;
+        var dir = end - start;
 
-            return Vector3.Distance(a.transform.position, transform.position) <= _distanceToSeparation;
-        }
-
-        return this;
+        return !Physics.Raycast(start, dir, dir.magnitude, _wallLayer);
     }
+
     //IA2-TP2 Aggregate identifica el punto el punto más débil y lo activa
     private void ActivateWeakestPoint()
     {

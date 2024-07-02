@@ -20,7 +20,7 @@ public class ModifierStat
     public void ArmaUpdate(WeaponBase Weaponstats)
     {
         ArmaOriginal = Weaponstats;
-        Debug.Log("Arma Actualizada: " + ArmaOriginal);
+       
     }
 
     public void Remove(string a)
