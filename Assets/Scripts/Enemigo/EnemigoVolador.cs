@@ -153,21 +153,23 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         Debug.Log("Disparo proyectil");
     }
 
-    void Reset()
+    public void Reset()
     {
         _vida = _vidaMax;
+        //_activeTime = 0;
         _damageText.text = "Damage: 0";
-
         foreach (PuntosDebiles i in _puntosDebiles)
         {
             i.IsActive = false;
             i.Desactivate();
         }
-        
+
         ActivateWeakestPoint();
 
-        if (!gameObject.activeInHierarchy) 
+        if (!gameObject.activeInHierarchy)
             GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+
+        _spatialGrid.Add(this);
     }
 
     public bool IsAttackDistance()
