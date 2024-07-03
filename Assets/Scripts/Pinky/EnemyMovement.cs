@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     public float maxFrameTime = 0.016f; // Tiempo máximo por frame (60 FPS), ajustable desde el Inspector
     private bool isChasing = false;
     private Coroutine _pathfindingCoroutine;
+    public int _dmg = 30;
 
     void Start()
     {
@@ -119,4 +120,16 @@ public class EnemyMovement : MonoBehaviour
             _currentPathIndex++;
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+      
+        if (collision.collider.GetComponent<FirstPersonPlayer>() != null)
+        {
+            collision.collider.GetComponent<FirstPersonPlayer>().TakeDamage(_dmg);
+
+        }
+
+    }
+
 }
