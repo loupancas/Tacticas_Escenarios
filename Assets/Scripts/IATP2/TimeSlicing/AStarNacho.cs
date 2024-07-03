@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 
-public class AStar<T> {
+public class AStarNacho<T> {
 
     public event Action<IEnumerable<T>> OnPathCompleted;
     public event Action                 OnCantCalculate;
