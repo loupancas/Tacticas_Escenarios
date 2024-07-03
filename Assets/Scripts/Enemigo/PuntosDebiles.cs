@@ -8,6 +8,7 @@ public class PuntosDebiles : MonoBehaviour
     [SerializeField] MeshRenderer _mesh;
     public bool IsActive;
     public int resistance;
+    public GameObject _puntoDebil;
     public void Awake()
     {
         int random = Random.Range(1, 10);
@@ -17,6 +18,8 @@ public class PuntosDebiles : MonoBehaviour
     public void Activate()
     {
         _mesh.material.color = Color.red;
+        _puntoDebil.SetActive(true);
+        _puntoDebil.GetComponent<MeshRenderer>().enabled = false;
     }
     public void OnHit(int Dmg)
     {
