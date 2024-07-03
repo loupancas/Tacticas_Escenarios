@@ -50,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+   
     void Update()
     {
         if (isChasing && _path != null && _currentPathIndex < _path.Count)
@@ -121,7 +122,16 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<FirstPersonPlayer>() != null)
+        {
+            other.GetComponent<FirstPersonPlayer>().TakeDamage(_dmg);
+
+        }
+    }
+   /* void OnCollisionEnter(Collision collision)
     {
       
         if (collision.collider.GetComponent<FirstPersonPlayer>() != null)
@@ -130,6 +140,6 @@ public class EnemyMovement : MonoBehaviour
 
         }
 
-    }
+    }*/
 
 }
