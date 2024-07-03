@@ -12,7 +12,7 @@ public class SearchEnemigoVolador : MonoBaseState
     [SerializeField] float _maxForce;
     [SerializeField] Node endNode = null;
     [SerializeField] Node startNode = null;
-    AStarNacho<Node> _aStar;
+    AStar<Node> _aStar;
     [SerializeField]List<Node> _path;
     Rigidbody _rb;
     [SerializeField] bool _isPathNotFound;
@@ -33,7 +33,7 @@ public class SearchEnemigoVolador : MonoBaseState
     private void Start()
     {
         _isPathNotFound = false;
-        _aStar = new AStarNacho<Node>();
+        _aStar = new AStar<Node>();
         _aStar.OnPathCompleted += GetPath;
         _aStar.OnCantCalculate += PathNotFound;
         _rb = gameObject.GetComponent<Rigidbody>();

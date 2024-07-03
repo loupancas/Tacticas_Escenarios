@@ -10,11 +10,11 @@ public class PathfindingUser : MonoBehaviour
 {
     [SerializeField] Node startNode = null;
     [SerializeField] Node endNode = null;
-    private AStarNacho<Node> _aStar;
+    private AStar<Node> _aStar;
 
     private void Start()
     {
-        _aStar = new AStarNacho<Node>();
+        _aStar = new AStar<Node>();
         _aStar.OnPathCompleted += GetPath;
         _aStar.OnCantCalculate += PathNotFound;
     }
