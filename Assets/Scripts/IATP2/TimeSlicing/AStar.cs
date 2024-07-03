@@ -13,6 +13,7 @@ public class AStar<T> {
                               Func<T, bool>                         isGoal,
                               Func<T, IEnumerable<WeightedNode<T>>> explode,
                               Func<T, float>                        getHeuristic) {
+        
         var queue     = new PriorityQueue<T>();
         var distances = new Dictionary<T, float>();
         var parents   = new Dictionary<T, T>();

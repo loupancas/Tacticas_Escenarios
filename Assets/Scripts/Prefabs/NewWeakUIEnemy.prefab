@@ -3362,6 +3362,7 @@ GameObject:
   - component: {fileID: 2688049747350996194}
   - component: {fileID: 8171125479128317140}
   - component: {fileID: 5213907397914646294}
+  - component: {fileID: 8064374206448167165}
   - component: {fileID: -600112179354609036}
   - component: {fileID: -7043842147555466567}
   - component: {fileID: -1369015049936239625}
@@ -3422,8 +3423,9 @@ MonoBehaviour:
   _distanceToAttack: 10
   _distanceToSeparation: 1
   trackState: {fileID: -7043842147555466567}
-  separationState: {fileID: -1369015049936239625}
+  searchState: {fileID: -1369015049936239625}
   attackState: {fileID: 994862325732535762}
+  lostViewState: {fileID: 8064374206448167165}
   _damageParticle: {fileID: 7258625135596389531}
   _explosionPrefab: {fileID: 5458370956222092248}
   _proyectil: {fileID: 6683345402694659087, guid: c7bf7c112e20a0c42a90995a5395a5c9,
@@ -3451,6 +3453,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.813405, y: 1.3917289, z: 1.7740417}
   m_Center: {x: 0.0014672279, y: 0.19586444, z: -0.1353755}
+--- !u!114 &8064374206448167165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850294711148623708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5047df51506a13b45a1b516be72d6755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _me: {fileID: 8171125479128317140}
+  _velocity: {x: 0, y: 0, z: 0}
+  _maxVelocity: 3
+  _maxForce: 3
+  _timeToStand: 10
 --- !u!54 &-600112179354609036
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3506,8 +3525,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _me: {fileID: 8171125479128317140}
-  _maxVelocity: 7
-  _maxForce: 7
+  _maxVelocity: 5
+  _maxForce: 5
+  endNode: {fileID: 0}
+  startNode: {fileID: 0}
+  _path: []
+  _isPathNotFound: 0
 --- !u!114 &994862325732535762
 MonoBehaviour:
   m_ObjectHideFlags: 0

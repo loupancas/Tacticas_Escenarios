@@ -9,7 +9,7 @@ public class AttackEnemigoVolador : MonoBaseState
     [SerializeField] CountdownTimer _timer;
     [SerializeField] ProyectilesBase _proyectiles;
     [SerializeField] Transform _spawnPoint;
-
+    [SerializeField] Rigidbody _rb;
     public AttackEnemigoVolador(EnemigoVolador me, ProyectilesBase proyectil, Transform spawnPoint)
     {
         _me = me;
@@ -21,9 +21,15 @@ public class AttackEnemigoVolador : MonoBaseState
     {
         base.Enter(from, transitionParameters);
 
+        _rb = gameObject.GetComponent<Rigidbody>();
+
         _timer = new CountdownTimer(_me.cdShot);
         _timer.OnTimerStop = Disparar;
+        _timer.OnTimerStart = Charge;
         _timer.Start();
+
+        
+        
     }
     public override IState ProcessInput()
     {
@@ -41,6 +47,12 @@ public class AttackEnemigoVolador : MonoBaseState
         _me.transform.LookAt(GameManager.instance.pj._head.transform);
 
         _timer.Tick(Time.deltaTime);
+    }
+
+    public void Charge()
+    {
+        //Aca se prepara para atacar
+        _rb.velocity = Vector3.zero;
     }
 
     public void Disparar()

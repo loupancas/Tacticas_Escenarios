@@ -19,8 +19,9 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     [Header("Components")]
     [SerializeField] TrackEnemigoVolador trackState;
-    [SerializeField] SearchEnemigoVolador separationState;
+    [SerializeField] SearchEnemigoVolador searchState;
     [SerializeField] AttackEnemigoVolador attackState;
+    [SerializeField] LostViewEnemigoVolador lostViewState;
     
     [SerializeField] public VisualEffect _damageParticle;
     [SerializeField] public ParticleSystem _explosionPrefab;
@@ -81,14 +82,23 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         weakestPoint.IsActive = true;
         weakestPoint.Activate();
 
+        //IA2-P3
+
         _fsm = new FiniteStateMachine(trackState, StartCoroutine);
 
-        _fsm.AddTransition(StateTransitions.ToSearch, trackState, separationState);
+        _fsm.AddTransition(StateTransitions.ToSearch, attackState, searchState);
+        _fsm.AddTransition(StateTransitions.ToSearch, trackState, searchState);
+
+        _fsm.AddTransition(StateTransitions.ToPersuit, searchState, trackState);
         _fsm.AddTransition(StateTransitions.ToPersuit, attackState, trackState);
+        _fsm.AddTransition(StateTransitions.ToPersuit, lostViewState, trackState);
+
         _fsm.AddTransition(StateTransitions.ToAttack, trackState, attackState);
-        _fsm.AddTransition(StateTransitions.ToSearch, attackState, separationState);
-        _fsm.AddTransition(StateTransitions.ToAttack, separationState, attackState);
-        _fsm.AddTransition(StateTransitions.ToPersuit, separationState, trackState);
+        _fsm.AddTransition(StateTransitions.ToAttack, searchState, attackState);
+        _fsm.AddTransition(StateTransitions.ToAttack, searchState, attackState);
+        
+        _fsm.AddTransition(StateTransitions.ToIdle, searchState, lostViewState);
+        
 
         _fsm.Active = true;
 

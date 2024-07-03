@@ -11,8 +11,11 @@ public class SearchEnemigoVolador : MonoBaseState
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
     [SerializeField] Node endNode = null;
+    [SerializeField] Node startNode = null;
     AStar<Node> _aStar;
-    [SerializeField]IEnumerable<Node> _path;
+    [SerializeField]List<Node> _path;
+    Rigidbody _rb;
+    [SerializeField] bool _isPathNotFound;
     public override IState ProcessInput()
     {
         if (_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && Transitions.ContainsKey(StateTransitions.ToPersuit))
@@ -21,31 +24,39 @@ public class SearchEnemigoVolador : MonoBaseState
         if (_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && _me.IsAttackDistance() && Transitions.ContainsKey(StateTransitions.ToAttack))
             return Transitions[StateTransitions.ToAttack];
 
+        if(_isPathNotFound && Transitions.ContainsKey(StateTransitions.ToIdle))
+            return Transitions[StateTransitions.ToIdle];
+
         return this;
     }
 
     private void Start()
     {
+        _isPathNotFound = false;
+        _aStar = new AStar<Node>();
         _aStar.OnPathCompleted += GetPath;
         _aStar.OnCantCalculate += PathNotFound;
-        var startNode = GameManager.instance.arenaManager.GetMinNode(transform.position);
+        _rb = gameObject.GetComponent<Rigidbody>();
+        startNode = GameManager.instance.arenaManager.GetMinNode(transform.position);
+        endNode = GameManager.instance.arenaManager.GetMinNode(GameManager.instance.pj.transform.position);
         StartCoroutine(_aStar.Run(startNode, IsGoal, Explode, GetHeuristic));
     }
     public override void UpdateLoop()
     {
         endNode = GameManager.instance.arenaManager.GetMinNode(GameManager.instance.pj.transform.position);
 
-        //if (_path.Count > 0)
-        //{
-        //    var dir = _path[0].transform.position - transform.position;
+        if (_path.Count > 0)
+        {
+            var dir = _path[0].transform.position - transform.position;
 
-        //    AddForce(Seek(_path[0].transform.position));
+            AddForce(Seek(_path[0].transform.position));
 
-        //    if (dir.magnitude <= 0.5f)
-        //    {
-        //        _path.RemoveAt(0);
-        //    }
-        //}
+            if (dir.magnitude <= 0.5f)
+            {
+                _path.RemoveAt(0);
+                _rb.velocity = Vector3.zero;
+            }
+        }
 
 
 
@@ -73,13 +84,12 @@ public class SearchEnemigoVolador : MonoBaseState
 
     void GetPath(IEnumerable<Node> path)
     {
-        
 
         foreach (Node node in path)
         {
             Debug.Log(node.name);
 
-            _path = path;
+            _path = path.ToList();
 
             node.isPath = true;
         }
@@ -101,5 +111,6 @@ public class SearchEnemigoVolador : MonoBaseState
     void PathNotFound()
     {
         Debug.Log("Path not found");
+        _isPathNotFound = true;
     }
 }

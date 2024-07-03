@@ -9,6 +9,7 @@ public abstract class ArenaBase : MonoBehaviour
     public List<Node> nodos = new List<Node>();
     public List<EnemigoBase> enemigosEnLaArena;
     [SerializeField]protected bool _arenaEmpezada;
+    [SerializeField] float _distanceToDisapier = 10;
     LayerMask _maskWall;
 
     public abstract void IniciarHorda();
@@ -24,13 +25,14 @@ public abstract class ArenaBase : MonoBehaviour
             {
                 if (Vector3.Distance(nodos[i].transform.position, position) < minDist)
                 {
-
                     minNode = nodos[i];
                     minDist = Vector3.Distance(nodos[i].transform.position, position);
-
                 }
             }
         }
+
+        if (minDist > _distanceToDisapier)
+            return null;
 
         return minNode;
     }
