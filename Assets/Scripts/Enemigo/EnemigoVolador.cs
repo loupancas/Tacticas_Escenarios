@@ -270,6 +270,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
                     _spatialGrid.Remove(enemyToFuse);
                     EnemigoVoladorFactory.Instance.ReturnEnemy(enemyToFuse);
                     enemiesInCell.Remove(enemyToFuse);
+                    GameManager.instance.arenaManager.enemigosEnLaArena.Remove(enemyToFuse);
                     fusionCount++;
                     Debug.Log("Fusion de enemigos");
                 }
