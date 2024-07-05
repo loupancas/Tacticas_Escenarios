@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2041990611023723621}
   - component: {fileID: 7850579025121637114}
   - component: {fileID: 7110761359633413029}
-  - component: {fileID: 1884176563910842153}
   m_Layer: 0
   m_Name: Floor_3
   m_TagString: Untagged
@@ -104,54 +103,3 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7850579025121637114}
   m_Enabled: 0
---- !u!114 &1884176563910842153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845256413982772438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd5e5ddd242bd64581fb5ed9c0e0507, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PolyMesh:
-    name: PolybrushMesh-54942
-    vertices:
-    - {x: -617.1695, y: -24.19371, z: -8.446556}
-    - {x: -618.1695, y: -24.19371, z: -8.446556}
-    - {x: -618.1695, y: -24.19371, z: -7.446556}
-    - {x: -617.1695, y: -24.19371, z: -7.446526}
-    normals:
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    colors:
-    - {r: 1, g: 0.431, b: 0.431, a: 1}
-    - {r: 1, g: 0.431, b: 0.431, a: 1}
-    - {r: 1, g: 0.431, b: 0.431, a: 1}
-    - {r: 1, g: 0.431, b: 0.431, a: 1}
-    tangents:
-    - {x: 1, y: 0, z: 0, w: 1}
-    - {x: 1, y: 0, z: 0, w: 1}
-    - {x: 1, y: 0, z: 0, w: 1}
-    - {x: 1, y: 0, z: 0, w: 1}
-    uv0:
-    - {x: 0.285709, y: 0.428567, z: 0, w: 0}
-    - {x: 0.142855, y: 0.428567, z: 0, w: 0}
-    - {x: 0.142855, y: 0.285713, z: 0, w: 0}
-    - {x: 0.285709, y: 0.285708, z: 0, w: 0}
-    uv1: []
-    uv2: []
-    uv3: []
-    m_Triangles: 000000000100000002000000000000000200000003000000
-    m_SubMeshes:
-    - m_Indexes: 000000000100000002000000000000000200000003000000
-      m_Topology: 0
-    m_Mesh: {fileID: 0}
-  m_SkinMeshRef: {fileID: 0}
-  m_OriginalMeshObject: {fileID: -3648143345082635806, guid: 74311cbfe34ebc54ca403b4ef5581241,
-    type: 3}
-  m_Mode: 0

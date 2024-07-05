@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 966844541048084890}
   - component: {fileID: 5871435860035391836}
   - component: {fileID: 7319161319189534834}
-  - component: {fileID: 8366631110554805856}
   m_Layer: 0
   m_Name: Floor_5
   m_TagString: Untagged
@@ -104,54 +103,3 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5871435860035391836}
   m_Enabled: 0
---- !u!114 &8366631110554805856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836755821126511168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd5e5ddd242bd64581fb5ed9c0e0507, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PolyMesh:
-    name: PolybrushMesh-645486
-    vertices:
-    - {x: -615.1695, y: -24.19371, z: -8.446556}
-    - {x: -616.1695, y: -24.19371, z: -8.446556}
-    - {x: -616.1695, y: -24.19371, z: -7.446556}
-    - {x: -615.1695, y: -24.19371, z: -7.446526}
-    normals:
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    - {x: 0, y: 1, z: 0}
-    colors:
-    - {r: 1, g: 0.43137255, b: 0.43137255, a: 1}
-    - {r: 1, g: 0.43137255, b: 0.43137255, a: 1}
-    - {r: 1, g: 0.43137255, b: 0.43137255, a: 1}
-    - {r: 1, g: 0.43137255, b: 0.43137255, a: 1}
-    tangents:
-    - {x: 1, y: 0, z: 0, w: 1}
-    - {x: 1, y: 0, z: 0, w: 1}
-    - {x: 1, y: 0, z: 0, w: 1}
-    - {x: 1, y: 0, z: 0, w: 1}
-    uv0:
-    - {x: 0.571419, y: 0.428567, z: 0, w: 0}
-    - {x: 0.428564, y: 0.428567, z: 0, w: 0}
-    - {x: 0.428564, y: 0.285713, z: 0, w: 0}
-    - {x: 0.571419, y: 0.285708, z: 0, w: 0}
-    uv1: []
-    uv2: []
-    uv3: []
-    m_Triangles: 000000000100000002000000000000000200000003000000
-    m_SubMeshes:
-    - m_Indexes: 000000000100000002000000000000000200000003000000
-      m_Topology: 0
-    m_Mesh: {fileID: 0}
-  m_SkinMeshRef: {fileID: 0}
-  m_OriginalMeshObject: {fileID: 6707487499538663902, guid: 74311cbfe34ebc54ca403b4ef5581241,
-    type: 3}
-  m_Mode: 0
