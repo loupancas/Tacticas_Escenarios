@@ -8,9 +8,10 @@ public class CanvasManager : MonoBehaviour
     [Header("Screens")]
     [SerializeField] private Canvas[] _menuCanvas;
 
-    
 
-    
+    public GameObject tutorialPanel;
+    public GameObject creditsPanel;
+
 
 
     private void Start()
@@ -49,5 +50,28 @@ public class CanvasManager : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Game Quitted");
+    }
+
+
+    public void Tutorial()
+    {
+        tutorialPanel.SetActive(true);
+
+    }
+    public void CloseTutorial()
+    {
+        tutorialPanel.SetActive(false);
+
+    }
+
+    public void Credits()
+    {
+        creditsPanel.SetActive(true);
+
+    }
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
+
     }
 }
