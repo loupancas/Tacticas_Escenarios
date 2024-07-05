@@ -8,13 +8,13 @@ public class AttackTorturado : MonoBaseState
     NavMeshAgent _agent;
     Torturado _me;
     [SerializeField]GameObject _target;
-    CountdownTimer _timerToCharge, _timerOnCharge;
+    CountdownTimer _timerOnCharge;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
     Vector3 _velocity;
-    bool _OnCharge = false;
+    [SerializeField]bool _OnCharge = false, _HitWall = false;
     [SerializeField] float _distance;
-    [SerializeField] float _timeToCharge, _timeOnCharge;
+    [SerializeField] float _timeOnCharge;
     Rigidbody _rb;
 
     private void Start()
@@ -28,38 +28,57 @@ public class AttackTorturado : MonoBaseState
         base.Enter(from, transitionParameters);
 
         _timerOnCharge = new CountdownTimer(_timeOnCharge);
+        _timerOnCharge.Start();
+
+        _OnCharge = true;
+        _HitWall = false;
+        
 
 
-
-        _timerToCharge = new CountdownTimer(_timeToCharge);
-
-        _timerToCharge.OnTimerStart = OnCharge;
-        _timerToCharge.OnTimerStop = SetTarget;
-        _timerToCharge.Start();
+        transform.LookAt(_target.transform);
 
         
     }
     public override IState ProcessInput()
     {
+        if (!_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && !_OnCharge && Transitions.ContainsKey(StateTransitions.ToSearch))
+            return Transitions[StateTransitions.ToSearch];
+
+        if (_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && !_OnCharge && Transitions.ContainsKey(StateTransitions.ToCharge))
+            return Transitions[StateTransitions.ToCharge];
+
+        
+
         return this;
     }
 
     public override void UpdateLoop()
     {
-        _timerToCharge.Tick(Time.deltaTime);
+        _timerOnCharge.Tick(Time.deltaTime);
         
-        if (_OnCharge)
-        {
-            AddForce(_target.transform.position);
+        AddForce(Seek(_target.transform.position));
 
-            if(Vector3.Distance(transform.position, _target.transform.position) <= 0.5f || _timerOnCharge.IsFinished)
+        if(Vector3.Distance(transform.position, _target.transform.position) <= 0.5f || _timerOnCharge.IsFinished)
+        {
+            print("Termino la embestida");
+            _rb.velocity = Vector3.zero;
+            _OnCharge = false;
+            
+        }
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.5f))
+        {
+            Gizmos.DrawLine(transform.position, hit.point);
+            if (hit.collider.gameObject.layer == 8)
             {
-                _rb.velocity = Vector3.zero;
                 _OnCharge = false;
-                _timerToCharge.Reset();
-                _timerToCharge.Start();
+                _HitWall = true;
+                print("Golpeo pared");
             }
         }
+        
 
         _me.transform.position += _velocity * Time.deltaTime;
         _me.transform.forward = _velocity;
@@ -67,20 +86,7 @@ public class AttackTorturado : MonoBaseState
     
     
 
-    public void OnCharge()
-    {
-        transform.LookAt(GameManager.instance.pj.transform);
-        _target.transform.position = new Vector3(GameManager.instance.pj.transform.position.x * _distance, 1, GameManager.instance.pj.transform.position.z * _distance);
-        
-    }
-
-    public void SetTarget()
-    {
-        print("Arranco");
-        _OnCharge = true;
-        
-        //_timerOnCharge.Start();
-    }
+    
 
     Vector3 Seek(Vector3 dir)
     {
@@ -104,6 +110,7 @@ public class AttackTorturado : MonoBaseState
     {
         Gizmos.DrawLine(transform.position, _target.transform.position);
 
+        
         //Gizmos.color = isPath ? Color.green : Color.red;
 
         //Gizmos.DrawSphere(transform.position, 0.5f);

@@ -15,7 +15,7 @@ public abstract class ArenaBase : MonoBehaviour
     public abstract void IniciarHorda();
     public Node GetMinNode(Vector3 position)
     {
-        print("Funciono");
+        
         Node minNode = null;
         float minDist = Mathf.Infinity;
 
