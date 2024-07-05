@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using static UnityEngine.GraphicsBuffer;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -42,6 +43,38 @@ public class FirstPersonPlayer : Entity
     player_Inputs _inputs;
     ModifierStat _buffs;
     Player_Fases _fases;
+
+    Vector3 missileLockDirection;
+
+
+    public Rigidbody Rigidbody { get; private set; }
+    public float Throttle { get; private set; }
+    public Vector3 EffectiveInput { get; private set; }
+    public Vector3 Velocity { get; private set; }
+    public Vector3 LocalVelocity { get; private set; }
+    public Vector3 LocalGForce { get; private set; }
+    public Vector3 LocalAngularVelocity { get; private set; }
+    public float AngleOfAttack { get; private set; }
+    public float AngleOfAttackYaw { get; private set; }
+    public bool AirbrakeDeployed { get; private set; }
+    public bool MissileLocked { get; private set; }
+    public bool MissileTracking { get; private set; }
+    public Target Target
+    {
+        get
+        {
+            return Target;
+        }
+    }
+    public Vector3 MissileLockDirection
+    {
+        get
+        {
+            return Rigidbody.rotation * missileLockDirection;
+        }
+    }
+
+
     private void Awake()
     {
         if (instance == null)
