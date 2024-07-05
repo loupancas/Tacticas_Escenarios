@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+using UnityEngine;
+using UnityEngine.LowLevel;
+using UnityEngine.SceneManagement;
 public class ResumeGameStop : MonoBehaviour
 {
     public GameObject setting;
     public bool isSettingActive;
-
     private bool isPaused = false;
 
 
@@ -14,12 +13,14 @@ public class ResumeGameStop : MonoBehaviour
     {
         Time.timeScale = 0f;
         isPaused = true;
+        isSettingActive = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         isPaused = false;
+        isSettingActive = false;
     }
 
     void Update()
@@ -30,18 +31,20 @@ public class ResumeGameStop : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
-                if (isSettingActive)
+                if (!isSettingActive)
                 {
                     Resume();
                 }
+
             }
             else
             {
                 PauseGame();
-                if (!isSettingActive)
+                if (isSettingActive)
                 {
                     Pause();
                 }
+
             }
         }
     }
@@ -49,18 +52,26 @@ public class ResumeGameStop : MonoBehaviour
     public void Pause ()
     {
         setting.SetActive(true);
-        isSettingActive = true;
-        //this.GetComponent<PlayerLook>().enabled = false;
-
+        //isSettingActive = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        this.GetComponent<FirstPersonCamera>().enabled = false;
+
     }
 
     public void Resume ()
     {
         setting.SetActive(false);
-        isSettingActive = false;
-        //this.GetComponent<PlayerLook>().enabled = true;
+        //isSettingActive = false;
 
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
+        this.GetComponent<FirstPersonCamera>().enabled = true;
+        Cursor.visible = false;
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }
