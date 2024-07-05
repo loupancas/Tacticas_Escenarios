@@ -1552,7 +1552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1097119341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2143,8 +2143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuCanvas:
   - {fileID: 1533297963}
-  tutorialPanel: {fileID: 0}
-  creditsPanel: {fileID: 0}
+  tutorialPanel: {fileID: 1665903283}
+  creditsPanel: {fileID: 1097119340}
 --- !u!114 &1533297966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2313,7 +2313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1665903284
 RectTransform:
   m_ObjectHideFlags: 0
