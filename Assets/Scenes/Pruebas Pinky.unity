@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &174301533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7855931946390838244, guid: f0c7bfb2b770a304695375bba92e2e23,
+    type: 3}
+  m_PrefabInstance: {fileID: 1426212656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d427464b55a93c409003a1e731a33c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &195030356
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34ffa1cce06c714196c53460dbffbed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pj: {fileID: 0}
-  arenaManager: {fileID: 0}
+  pj: {fileID: 174301533}
+  arenaManager: {fileID: 576896830}
   distanceThreshold: 20
   checkInterval: 3
   enemies: []
@@ -3276,6 +3288,7 @@ GameObject:
   - component: {fileID: 1257625324}
   - component: {fileID: 1257625323}
   - component: {fileID: 1257625329}
+  - component: {fileID: 1257625330}
   m_Layer: 0
   m_Name: Pinky
   m_TagString: Untagged
@@ -3306,6 +3319,7 @@ MonoBehaviour:
     m_Bits: 256
   _puntosDebiles: []
   searchState: {fileID: 1257625329}
+  attackState: {fileID: 1257625330}
 --- !u!195 &1257625324
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3369,7 +3383,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 948af63c470b03c429fbd9b912637100, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3426,6 +3440,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208693f4455f6784e8330fefd89896fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1257625330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257625322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d126a2a22511e40bd681eac8e9b71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedCharge: 5
+  _timeToCharge: 2
 --- !u!1001 &1426212656
 PrefabInstance:
   m_ObjectHideFlags: 0
