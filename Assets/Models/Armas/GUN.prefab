@@ -647,12 +647,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732418375685399726}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0031445946, y: -0.4728323, z: -0.52620935}
+  m_LocalRotation: {x: -0, y: -0, z: -4.656613e-10, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7613995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5189328326372900838}
+  m_Father: {fileID: 3546871599405123195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3428340776618618638
 SkinnedMeshRenderer:
@@ -844,7 +844,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3361693058065127181}
   - {fileID: 3634386421800903024}
   - {fileID: 5736423622556845973}
   m_Father: {fileID: 1054107170815479794}
@@ -4376,6 +4375,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3361693058065127181}
   - {fileID: 1054107170815479794}
   - {fileID: 7438544835109975548}
   - {fileID: 2706919282605893976}
@@ -4408,6 +4408,16 @@ MonoBehaviour:
     m_Bits: 0
   _audioSource: {fileID: 8215482747899013141}
   _shotSound: {fileID: 8300000, guid: c7cff2d0feb10394db6fc9465012690d, type: 3}
+  phaseSpeeds:
+  - {x: 0, y: 0}
+  - {x: 0.1, y: 0.1}
+  - {x: 0.5, y: 0.5}
+  - {x: 1, y: 1}
+  phaseColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0.9421263, b: 1, a: 0}
+  - {r: 0.044923782, g: 1, b: 0, a: 0}
+  - {r: 1, g: 0.9492886, b: 0, a: 0}
 --- !u!82 &8215482747899013141
 AudioSource:
   m_ObjectHideFlags: 0

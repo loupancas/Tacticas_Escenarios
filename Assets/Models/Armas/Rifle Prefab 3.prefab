@@ -4192,7 +4192,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1156081872778262565}
   - {fileID: 5039471634700226761}
   - {fileID: 516409897831267382}
   - {fileID: 9093797111534314144}
@@ -4407,7 +4406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &315238682893047104
 Transform:
   m_ObjectHideFlags: 0
@@ -4421,6 +4420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1156081872778262565}
   - {fileID: 4808375253841754953}
   - {fileID: 7355970488642282253}
   - {fileID: 8476339105293204065}
@@ -4454,6 +4454,8 @@ MonoBehaviour:
     m_Bits: 0
   _audioSource: {fileID: 2444711225064408707}
   _shotSound: {fileID: 8300000, guid: c7cff2d0feb10394db6fc9465012690d, type: 3}
+  phaseSpeeds: []
+  phaseColors: []
 --- !u!82 &2444711225064408707
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5605,7 +5607,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7933920400460452924}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -6393,12 +6395,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9073013765043914175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0031445946, y: -0.4728323, z: -0.52620935}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7613994, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8351677662136222109}
+  m_Father: {fileID: 315238682893047104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &9183398039363949554
 SkinnedMeshRenderer:
