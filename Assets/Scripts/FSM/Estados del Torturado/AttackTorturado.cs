@@ -28,11 +28,13 @@ public class AttackTorturado : MonoBaseState
 
     public override IState ProcessInput()
     {
-        throw new System.NotImplementedException();
+        return this;
     }
 
     public override void UpdateLoop()
     {
+        _timer.Tick(Time.deltaTime);
+        print(_timer.Progress);
         if(_OnCharge)
         {
             _agent.destination = transform.forward;

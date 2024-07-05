@@ -5,7 +5,7 @@ using FSM;
 public class Torturado : EnemigoBase
 {
     [SerializeField] SearchTorturado searchState;
-
+    [SerializeField] AttackTorturado attackState;
     public override void Morir()
     {
         throw new System.NotImplementedException();
@@ -25,8 +25,8 @@ public class Torturado : EnemigoBase
 
         _fsm.Active = true;
 
-        
 
+        _fsm.AddTransition(StateTransitions.ToAttack, searchState, attackState);
 
     }
 
