@@ -31,8 +31,8 @@ public class SearchTorturado : MonoBaseState
     }
     public override IState ProcessInput()
     {
-        if (_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && Transitions.ContainsKey(StateTransitions.ToAttack))
-            return Transitions[StateTransitions.ToAttack];
+        if (_me.InLineOfSight(transform.position, GameManager.instance.pj.transform.position) && Transitions.ContainsKey(StateTransitions.ToCharge) && _me.IsAttackDistance())
+            return Transitions[StateTransitions.ToCharge];
 
         return this;
     }
@@ -77,6 +77,7 @@ public class SearchTorturado : MonoBaseState
 
     void GetPath(IEnumerable<Node> path)
     {
+        _path.Clear();
 
         foreach (Node node in path)
         {
