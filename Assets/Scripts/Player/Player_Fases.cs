@@ -34,8 +34,6 @@ public class Player_Fases
     {
         if (fases >= 3)
             return;
-
-
         fases++;
         
         _text.UpdateHUD(fases, "Fase");

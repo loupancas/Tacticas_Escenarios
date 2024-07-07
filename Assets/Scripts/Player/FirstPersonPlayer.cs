@@ -101,9 +101,9 @@ public class FirstPersonPlayer : Entity
 
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         equippedWeapon = _weaponStash[numeroRandom];
+        _fases.SubirFase();
         _buffs.ArmaUpdate(equippedWeapon);
         _inputs.UpdateWeapon(equippedWeapon);
-        _fases.SubirFase();
         equippedWeapon.gameObject.SetActive(true);
         equippedWeapon.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
     }
@@ -130,7 +130,7 @@ public class FirstPersonPlayer : Entity
     public void AgregarBuff()
     {
         print("Buffo dado");
-        _fases.SubirFase();
+        
         int Numero = UnityEngine.Random.Range(0, 5);
 
         switch(Numero)
