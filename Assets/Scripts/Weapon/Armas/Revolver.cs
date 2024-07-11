@@ -41,6 +41,7 @@ public class Revolver : WeaponBase
                 break;
 
         }
+        
     }
 
     protected override void FireBehaviour()

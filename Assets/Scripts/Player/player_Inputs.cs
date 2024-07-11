@@ -47,7 +47,7 @@ public class player_Inputs
         }
         else
         {
-            Debug.Log("No se ha encontrado el objeto");
+            //Debug.Log("No se ha encontrado el objeto");
         }
     }
 
@@ -75,7 +75,7 @@ public class player_Inputs
 
         else
         {
-            Debug.Log("No se ha encontrado el objeto");
+            //Debug.Log("No se ha encontrado el objeto");
         }
 
 

@@ -35,19 +35,22 @@ public abstract class WeaponBase : MonoBehaviour
 
     [SerializeField] protected AudioClip _shotSound;
 
-    CountdownTimer _shotCooldownTimer;
+    protected CountdownTimer _shotCooldownTimer;
+
     
+
     public void SetInitialParams(Transform shotTransform, LayerMask shootableLayers, int Fase)
     {
         _shotTransform = shotTransform;
         _shootableLayers = shootableLayers;
 
         Fases(Fase);
-
-        _canShoot = true;
         _shotCooldownTimer = new CountdownTimer(_modifiedCooldown);
         _shotCooldownTimer.OnTimerStop = crFireCooldown;
         _shotCooldownTimer.OnTimerStart = crFireCooldown;
+        _canShoot = true;
+        
+       
         _weaponAnimator.SetBool("Idle", true);
     }
     abstract protected void FireBehaviour();
@@ -81,7 +84,12 @@ public abstract class WeaponBase : MonoBehaviour
 
     public void UpdateFase(int fase)
     {
+        print("Update fase : WeaponBase");
         Fases(fase);
+        print(_modifiedCooldown);
+        _shotCooldownTimer.Reset(_modifiedCooldown);
+        //bool existo = _shotCooldownTimer != null;
+        //print("El timer del cooldown existe: " + existo);
     }
 
     public abstract void Fases(int fase);

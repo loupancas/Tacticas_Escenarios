@@ -67,6 +67,11 @@ public class FirstPersonPlayer : Entity
 
         _fases = new Player_Fases(5, _textFases);
 
+        foreach(var a in _weaponStash)
+        {
+            a.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
+        }
+
         int numeroRandom = UnityEngine.Random.Range(0, _weaponStash.Capacity);
         equippedWeapon = _weaponStash[numeroRandom];
         equippedWeapon.gameObject.SetActive(true);

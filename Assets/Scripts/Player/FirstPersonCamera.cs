@@ -9,9 +9,11 @@ public class FirstPersonCamera : MonoBehaviour
     [Range(-90, 90f)][SerializeField] private float _yMinRotation = -60f;
     [Range(-90f, 90f)][SerializeField] private float _yMaxRotation = 75f;
 
+    
+
     private Transform _playerHead;
     private float _mouseY;
-
+    
     protected Ray _ray;
     protected RaycastHit _rayHit;
     [SerializeField] protected LayerMask _layerMask;

@@ -121,7 +121,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     private void Update()
     {
-        print(InLineOfSight(transform.position, GameManager.instance.pj.transform.position));
+        //print(InLineOfSight(transform.position, GameManager.instance.pj.transform.position));
         delegateUpdate.Invoke();
         if (_position != transform.position)  // Añadido
         {
