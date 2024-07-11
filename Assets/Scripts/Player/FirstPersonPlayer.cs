@@ -91,6 +91,8 @@ public class FirstPersonPlayer : Entity
 
     public void CambioDeArma()
     {
+        Debug.Log("Cambio de arma");
+
         if (equippedWeapon != null)
         {
             equippedWeapon.GetComponent<Animator>().SetTrigger("Swap");
