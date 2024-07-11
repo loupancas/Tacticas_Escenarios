@@ -52,9 +52,11 @@ public class EmFour : WeaponBase
 
     protected override void FireBehaviour()
     {
-        _ray = new Ray(_shotTransform.position, _shotTransform.forward);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+        //_ray = new Ray(_shotTransform.position, _shotTransform.forward);
 
-        if (Physics.Raycast(_ray, out _rayHit, _shootableLayers))
+        if (Physics.Raycast(ray, out _rayHit, _shootableLayers))
         {
             print("Detecto m4");
             _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);

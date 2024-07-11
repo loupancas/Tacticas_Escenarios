@@ -45,9 +45,12 @@ public class Revolver : WeaponBase
 
     protected override void FireBehaviour()
     {
-        _ray = new Ray(_shotTransform.position, _shotTransform.forward);
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 
-        if (Physics.Raycast(_ray, out _rayHit, _shootableLayers))
+        //_ray = new Ray(_shotTransform.position, _shotTransform.forward);
+
+        if (Physics.Raycast(ray, out _rayHit, _shootableLayers))
         {
             
             _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
@@ -75,5 +78,11 @@ public class Revolver : WeaponBase
                 }
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Gizmos.DrawLine(transform.position, screenCenter);
     }
 }

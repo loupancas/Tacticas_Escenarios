@@ -41,7 +41,9 @@ public class LostViewEnemigoVolador : MonoBaseState
 
         _timerToStand.Tick(Time.deltaTime);
 
-        if (Vector3.Distance(GameManager.instance.arenaManager.nodos[_numeroRandom].transform.position, transform.position) >= 0.5f)
+        Debug.Log("Tiempo de Time to stand: " + _timerToStand.Progress);
+
+        if (Vector3.Distance(GameManager.instance.arenaManager.nodos[_numeroRandom].transform.position, transform.position) >= 0.5f && _timerToStand.IsFinished)
         {
             AddForce(Seek(GameManager.instance.arenaManager.nodos[_numeroRandom].transform.position));
 
@@ -51,7 +53,7 @@ public class LostViewEnemigoVolador : MonoBaseState
         else
         {
             _rb.velocity = Vector3.zero;
-            _timerToStand.Start();
+            
         }
         
     }
@@ -65,6 +67,7 @@ public class LostViewEnemigoVolador : MonoBaseState
             _numeroRandom = Random.Range(0, GameManager.instance.arenaManager.nodos.Capacity);
         }
         _timerToStand.Reset();
+        _timerToStand.Start();
     }
     Vector3 Seek(Vector3 dir)
     {
