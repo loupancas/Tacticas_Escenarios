@@ -16,6 +16,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     public float cdShot;
     [SerializeField] float _distanceToAttack;
     [SerializeField] float _distanceToSeparation;
+    [SerializeField] bool _IsDead;
 
     [Header("Components")]
     [SerializeField] TrackEnemigoVolador trackState;
@@ -55,12 +56,15 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     {
         _vida -= Damage;
         _damageParticle.Play();
-        if (_vida <= 0) // Cambiado de < a <=
+        if (_vida <= 0 && !_IsDead) // Cambiado de < a <=
         {
+            _IsDead = true;
             // Instanciar el prefab de explosión
             var explosion = Instantiate(_explosionPrefab, transform.position, transform.rotation);
             explosion.Play(); // Reproducir las partículas de la explosión
-            //_fsm.Active = false;//Desactivar la inteligencia
+            GameManager.instance.pj.CambioDeArma();
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            
             // Asegurarse de que el método Morir se ejecute después de un breve delay
             Invoke(nameof(Morir), explosion.main.duration);
         }
@@ -108,7 +112,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         
         GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
         EnemigoVoladorFactory.Instance.ReturnEnemy(this);
-        GameManager.instance.pj.CambioDeArma();
+        
         _vida = _vidaMax;
 
     }    
