@@ -30,8 +30,10 @@ public class SearchEnemigoVolador : MonoBaseState
         return this;
     }
 
-    private void Start()
+    public override void Enter(IState from, Dictionary<string, object> transitionParameters = null)
     {
+        base.Enter(from, transitionParameters);
+
         _isPathNotFound = false;
         _aStar = new AStar<Node>();
         _aStar.OnPathCompleted += GetPath;
@@ -40,6 +42,11 @@ public class SearchEnemigoVolador : MonoBaseState
         startNode = GameManager.instance.arenaManager.GetMinNode(transform.position);
         endNode = GameManager.instance.arenaManager.GetMinNode(GameManager.instance.pj.transform.position);
         StartCoroutine(_aStar.Run(startNode, IsGoal, Explode, GetHeuristic));
+    }
+
+    private void Start()
+    {
+        
     }
     public override void UpdateLoop()
     {
