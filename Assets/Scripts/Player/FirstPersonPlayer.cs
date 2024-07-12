@@ -123,6 +123,7 @@ public class FirstPersonPlayer : Entity
     {
         _inputs.Control();
         
+
     }
     public override void Morir()
     {

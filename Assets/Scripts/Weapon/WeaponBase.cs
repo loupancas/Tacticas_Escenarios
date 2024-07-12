@@ -18,7 +18,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] public float shotCooldown = .1f;
     [SerializeField] public int dmg = 5;
     [SerializeField] protected ShootType _gunType;
-    [SerializeField] private float cameraRecoilAmount = 0.5f;
+    [SerializeField] protected float cameraRecoilAmount = 0.5f;
     [SerializeField] protected int _modifiedDmg;
     [SerializeField] protected float _modifiedCooldown;
 
@@ -30,7 +30,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected Ray _ray;
     protected RaycastHit _rayHit;
     [SerializeField]protected LayerMask _shootableLayers;
-    Transform cameraTransform;
+    protected Transform cameraTransform;
     [SerializeField] private float cameraRecoilRecoverySpeed = 0.2f;
     private Vector3 cameraOriginalRotation;
     [SerializeField]protected AudioSource _audioSource;
@@ -95,7 +95,7 @@ public abstract class WeaponBase : MonoBehaviour
         cameraOriginalRotation = cameraTransform.localEulerAngles;
         _recoilRecoveryTimer.Start();
         cameraTransform.localEulerAngles += new Vector3(-cameraRecoilAmount, 0, 0);
-        cameraTransform.localEulerAngles = Vector3.Lerp(cameraTransform.localEulerAngles, cameraOriginalRotation, Time.deltaTime * cameraRecoilRecoverySpeed);
+        //cameraTransform.localEulerAngles = Vector3.Lerp(cameraTransform.localEulerAngles, cameraOriginalRotation, Time.deltaTime * cameraRecoilRecoverySpeed);
     }
 
     

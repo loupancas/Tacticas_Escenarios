@@ -83,6 +83,7 @@ public class ProyectileGun : WeaponBase
         _weaponAnimator.SetTrigger("Shoot");
         print("Disparo con Proyectil Gun");
         proyectil.SpawnProyectile(_spawnPoint);
+        cameraTransform.localEulerAngles += new Vector3(-cameraRecoilAmount, 0, 0);
     }
 
 }
