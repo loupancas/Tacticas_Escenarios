@@ -85,7 +85,7 @@ public abstract class WeaponBase : MonoBehaviour
         _audioSource.Play();
         _particula.Play();
         _weaponAnimator.SetTrigger("Shoot");
-
+        _particula.enabled = false;
 
         cameraOriginalRotation = cameraTransform.localEulerAngles;
         _recoilRecoveryTimer.Start();
