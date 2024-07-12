@@ -38,6 +38,8 @@ public class FirstPersonCamera : MonoBehaviour
         _mouseY += yAxis;
         _mouseY = Mathf.Clamp(_mouseY, _yMinRotation, _yMaxRotation);
         transform.rotation = Quaternion.Euler(-_mouseY, xAxis, 0f);
+
+        
     }
 
     public void SetFov(float FOV)
