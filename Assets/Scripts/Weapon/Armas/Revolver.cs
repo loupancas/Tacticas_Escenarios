@@ -54,7 +54,7 @@ public class Revolver : WeaponBase
         {
             
             _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
-            _rayHit.collider.GetComponent<EnemigoVolador>()?.AddDamage(_modifiedDmg);
+            //_rayHit.collider.GetComponent<EnemigoVolador>()?.AddDamage(_modifiedDmg);
             _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
             if(_IsFase3On)
             {

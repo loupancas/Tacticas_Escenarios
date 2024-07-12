@@ -75,6 +75,7 @@ public class FirstPersonPlayer : Entity
 
         _movement = new player_Movement(this, _textJumpCounts, _buffs, _control);
         _inputs = new player_Inputs( _movement, equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee, _textJumpCounts);
+        _inputs.prendido = false;
 
     }
 
@@ -159,4 +160,11 @@ public class FirstPersonPlayer : Entity
                 break;
         }
     }
+
+    public player_Inputs GetPlayerInputs()
+    {
+        return _inputs;
+    }
+
+
 }

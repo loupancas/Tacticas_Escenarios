@@ -9,6 +9,7 @@ public class PuntosDebiles : MonoBehaviour
     public bool IsActive;
     public int resistance;
     public GameObject _puntoDebil;
+    public bool isHit;
     public void Awake()
     {
         int random = Random.Range(1, 10);
@@ -31,8 +32,11 @@ public class PuntosDebiles : MonoBehaviour
         //}
         //else
         //{
+             
+
             _me.TakeDamage(resistance + Dmg);
-            _me.AddDamage(resistance + Dmg);
+            //_me.AddDamage(resistance + Dmg);
+          
         //}
 
     }

@@ -30,6 +30,8 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
 
+    private player_Inputs _playerInputs;
+    private PuntosDebiles weakestPoint;
 
     CountdownTimer _Freezetime;
 
@@ -37,7 +39,10 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     private Vector3 _position;
     public static SpatialGrid _spatialGrid;
+    
 
+
+    
     public static void InitializeGrid()
     {
         _spatialGrid = FindObjectOfType<SpatialGrid>(); // Busca el componente en la escena
@@ -56,9 +61,12 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     {
         _vida -= Damage;
         _damageParticle.Play();
+        UpdateDamageUI(Damage);
+
         if (_vida <= 0 && !_IsDead) // Cambiado de < a <=
         {
             _IsDead = true;
+            _damageText.text =string.Empty;
             // Instanciar el prefab de explosión
             var explosion = Instantiate(_explosionPrefab, transform.position, transform.rotation);
             explosion.Play(); // Reproducir las partículas de la explosión
@@ -74,11 +82,13 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     public void Start()
     {
+        _playerInputs = FirstPersonPlayer.instance.GetPlayerInputs();
+        
         delegateUpdate = NormalUpdate;
         GameManager.instance.pj.theWorld += StoppedTime;
         _Freezetime = new CountdownTimer(10);
         _Freezetime.OnTimerStop = BackToNormal;
-        _damageText.text = "Damage: 0";
+        _damageText.text = string.Empty;
         _vida = _vidaMax;
 
 
@@ -128,6 +138,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
             _position = transform.position;
             OnMove?.Invoke(this);
         }
+        bool prendido = _playerInputs.GetPrendido();
     }
 
     public void NormalUpdate()
@@ -161,7 +172,8 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     {
         _vida = _vidaMax;
         //_activeTime = 0;
-        _damageText.text = "Damage: 0";
+        _damageText.text =  string.Empty; 
+        //_damageHistory.Clear();
         foreach (PuntosDebiles i in _puntosDebiles)
         {
             i.IsActive = false;
@@ -216,22 +228,42 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     public void AddDamage(int damage)
     {
         _damageHistory.Add(damage);
-        UpdateDamageUI();
+        //UpdateDamageUI(damage);
     }
     //IA2-TP2 Aggregate calcula el daño total recibido por el enemigo y lo muestra en pantalla
-    private void UpdateDamageUI()
+    private void UpdateDamageUI(int lastDamage)
     {
-        string damageString = _damageHistory
-            .Aggregate("", (result, damage) => result + damage.ToString() + ",");
+        //string damageString = _damageHistory
+        //    .Aggregate("", (result, damage) => result + damage.ToString() + ",");
 
-        if (damageString.EndsWith(","))
+        //if (damageString.EndsWith(","))
+        //{
+        //    damageString = damageString.Substring(0, damageString.Length - 1);
+        //}
+        //var damageValues = damageString.Split(',').Select(int.Parse);
+        //int totalDamage = damageValues.Aggregate(0, (sum, value) => sum + value);
+        //_damageText.text = "Damage: " + totalDamage.ToString();
+
+        //altura = transform.position + new Vector3(0, 1, 0); // Ajusta seg?n la altura que desees
+        _damageText.text = lastDamage.ToString();
+        bool prendido = _playerInputs.GetPrendido();
+     
+        // Verificar si weakestPoint está activo
+        if (prendido==true)
         {
-            damageString = damageString.Substring(0, damageString.Length - 1);
+            _damageText.color = Color.red;
+            
         }
-        var damageValues = damageString.Split(',').Select(int.Parse);
-        int totalDamage = damageValues.Aggregate(0, (sum, value) => sum + value);
-        _damageText.text = "Damage: " + totalDamage.ToString();
+        else
+        {
+            _damageText.color = Color.white; // Ajusta según el color por defecto que desees
+        }
+
+        DmgPopUpGenerator.current.CreatePopUp(this.transform.position, _damageText.text, _damageText.color);
+        //_damageText.text.anima
     }
+
+    
 
     public static void DeactivateEnemiesByDistance(FirstPersonPlayer player, IEnumerable<EnemigoVolador> enemies, float distanceThreshold)
     {

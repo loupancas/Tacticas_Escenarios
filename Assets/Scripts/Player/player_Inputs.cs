@@ -19,7 +19,7 @@ public class player_Inputs
     player_Dash _dash;
     player_Jump _jump;
     RenderFeatureToggler _renderFeatureToggler = GameObject.FindObjectOfType<RenderFeatureToggler>();
-
+    public bool prendido;
 
     public player_Inputs(player_Movement movement, WeaponBase equippedWeapon, FirstPersonPlayer pj, TextoActualizable text, ModifierStat baseStatsPlayer, Controles controles, AttackMelee attackMelee, TextoActualizable text2)
     {
@@ -50,9 +50,8 @@ public class player_Inputs
             Debug.Log("No se ha encontrado el objeto");
         }
     }
-
     public void Scan()
-    {
+    {        
         if (Input.GetKeyDown(_controles.scan))
         {
             Debug.Log("_pj:" + (_pj != null));
@@ -69,6 +68,7 @@ public class player_Inputs
                 if (puntosDebiles != null && puntosDebiles._puntoDebil != null && puntosDebiles._puntoDebil.GetComponent<MeshRenderer>().enabled == false)
                 {
                     puntosDebiles._puntoDebil.GetComponent<MeshRenderer>().enabled = true;
+                    prendido = true;
                 }
             }
         }
@@ -80,6 +80,13 @@ public class player_Inputs
 
 
     }
+
+    public bool GetPrendido()
+    {
+        return prendido;
+    }
+
+
     public void Rotation()
     {
         _inputMouseX = Input.GetAxisRaw("Mouse X");

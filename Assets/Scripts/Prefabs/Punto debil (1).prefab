@@ -250,7 +250,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 623
+  m_VersionIndex: 626
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -341,6 +341,7 @@ MonoBehaviour:
   IsActive: 0
   resistance: 0
   _puntoDebil: {fileID: 8492720864482319779}
+  isHit: 0
 --- !u!33 &552679178679442536
 MeshFilter:
   m_ObjectHideFlags: 0
