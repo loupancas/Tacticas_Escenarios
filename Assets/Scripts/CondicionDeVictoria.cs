@@ -9,6 +9,12 @@ public class CondicionDeVictoria : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.GetComponent<FirstPersonPlayer>() != null && IsActive)
+        {
+            FirstPersonPlayer player = collision.gameObject.GetComponent<FirstPersonPlayer>();
+            player.buff.SetActive(false);
+
             SceneManager.LoadScene(2);
+
+        }
     }
 }
