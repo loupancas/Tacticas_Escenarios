@@ -576,7 +576,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 623
+  m_VersionIndex: 626
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 623
+  m_VersionIndex: 626
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 623
+  m_VersionIndex: 626
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3307,7 +3307,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2289
+  m_VersionIndex: 2292
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3539,6 +3539,7 @@ GameObject:
   - component: {fileID: -7043842147555466567}
   - component: {fileID: -1369015049936239625}
   - component: {fileID: 994862325732535762}
+  - component: {fileID: 8276500756354734758}
   m_Layer: 7
   m_Name: NewWeakUIEnemy
   m_TagString: Untagged
@@ -3594,6 +3595,7 @@ MonoBehaviour:
   cdShot: 3
   _distanceToAttack: 10
   _distanceToSeparation: 1
+  _IsDead: 0
   trackState: {fileID: -7043842147555466567}
   searchState: {fileID: -1369015049936239625}
   attackState: {fileID: 994862325732535762}
@@ -3720,6 +3722,20 @@ MonoBehaviour:
     type: 3}
   _spawnPoint: {fileID: 2688049747350996194}
   _rb: {fileID: 0}
+--- !u!114 &8276500756354734758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850294711148623708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a38ae60f6b82146ad2b86d71deb505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hdrFlashColor: {r: 32, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!1 &8360185113413339651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,6 +3875,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2591741641230215976, guid: c946388ab13e4d341b2d61d472acbb37,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591741641230215976, guid: c946388ab13e4d341b2d61d472acbb37,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bee94552f60edd9459b0c1ad2ad41f45, type: 2}
@@ -3867,6 +3888,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bee94552f60edd9459b0c1ad2ad41f45, type: 2}
+    - target: {fileID: 3096268763083931479, guid: c946388ab13e4d341b2d61d472acbb37,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3096268763083931479, guid: c946388ab13e4d341b2d61d472acbb37,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3926,6 +3952,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6694833731550347237, guid: c946388ab13e4d341b2d61d472acbb37,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6694833731550347237, guid: c946388ab13e4d341b2d61d472acbb37,
         type: 3}

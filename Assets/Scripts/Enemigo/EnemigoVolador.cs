@@ -29,6 +29,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
 
     [SerializeField] ProyectilesBase _proyectil;
     [SerializeField] Transform _spawnBullet;
+    private DamageFeedback damageFeedback;
 
 
     CountdownTimer _Freezetime;
@@ -55,7 +56,8 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     public override void TakeDamage(int Damage)
     {
         _vida -= Damage;
-        _damageParticle.Play();
+        //_damageParticle.Play();
+        damageFeedback.TakeDamage();
         if (_vida <= 0 && !_IsDead) // Cambiado de < a <=
         {
             _IsDead = true;
@@ -81,6 +83,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         _damageText.text = "Damage: 0";
         _vida = _vidaMax;
 
+        damageFeedback = GetComponent<DamageFeedback>();
 
         var weakestPoint = _puntosDebiles.Aggregate((currentWeakest,next) => next.resistance < currentWeakest.resistance ? next : currentWeakest);
         weakestPoint.IsActive = true;
