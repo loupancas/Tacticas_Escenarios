@@ -12,9 +12,7 @@ public class ProyectileGun : WeaponBase
     [SerializeField] private BuffFase _buff;
     public float[] phaseFresnel;
 
-    private void Start()
-    {
-    }
+    
     public override void Fases(int fase)
     {
         switch(fase)
@@ -81,6 +79,8 @@ public class ProyectileGun : WeaponBase
     }
     protected override void FireBehaviour()
     {
+        _particula.Play();
+        _weaponAnimator.SetTrigger("Shoot");
         print("Disparo con Proyectil Gun");
         proyectil.SpawnProyectile(_spawnPoint);
     }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
+
 using TMPro;
 using System;
 
@@ -31,13 +33,12 @@ public class FirstPersonPlayer : Entity
     [Header("Weapons")]
     [SerializeField] private List<WeaponBase> _weaponStash = new List<WeaponBase>();
     [SerializeField] private LayerMask _shootableLayers;
-    
 
 
+    [SerializeField] private ScriptableRendererFeature buff;
     private Rigidbody _rb;
     public FirstPersonCamera cam;
     public WeaponBase equippedWeapon;
-
     player_Movement _movement;
     player_Inputs _inputs;
     ModifierStat _buffs;
@@ -76,10 +77,13 @@ public class FirstPersonPlayer : Entity
         equippedWeapon = _weaponStash[numeroRandom];
         equippedWeapon.gameObject.SetActive(true);
         equippedWeapon.SetInitialParams(cam.transform, _shootableLayers, _fases.fases);
+        
 
 
         _movement = new player_Movement(this, _textJumpCounts, _buffs, _control);
         _inputs = new player_Inputs( _movement, equippedWeapon, this, _textDashCounts, _buffs, _control, _attackMelee, _textJumpCounts);
+        buff.SetActive(true);
+
 
     }
 
@@ -125,6 +129,7 @@ public class FirstPersonPlayer : Entity
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
+        buff.SetActive(false);
         SceneManager.LoadScene(2);
     }
 

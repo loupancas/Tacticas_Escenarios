@@ -56,7 +56,7 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     public override void TakeDamage(int Damage)
     {
         _vida -= Damage;
-        //_damageParticle.Play();
+        _damageParticle.Play();
         damageFeedback.TakeDamage();
         if (_vida <= 0 && !_IsDead) // Cambiado de < a <=
         {

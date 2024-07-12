@@ -11,7 +11,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] protected Transform _shotTransform;
     [SerializeField] public Animator _weaponAnimator;
     [SerializeField] protected Renderer _weaponRenderer;
-    [SerializeField] protected VisualEffect _particula;
+    [SerializeField] public VisualEffect _particula;
 
 
     [Header("Base Weapon Stats")]
@@ -54,8 +54,10 @@ public abstract class WeaponBase : MonoBehaviour
         _recoilRecoveryTimer = new CountdownTimer(cameraRecoilRecoverySpeed);
         _recoilRecoveryTimer.OnTimerStop = _recoilRecoveryTimer.Reset;
         _weaponAnimator.SetBool("Idle", true);
+        _particula.enabled = false;
 
-        
+
+
     }
     abstract protected void FireBehaviour();
 
@@ -79,13 +81,16 @@ public abstract class WeaponBase : MonoBehaviour
 
     virtual public void Fire()
     {
+        Debug.Log(_particula);
+        _particula.enabled = true;
+        _particula.Play();
         FireBehaviour();
         _shotCooldownTimer.Start();    
         _audioSource.clip = _shotSound;
         _audioSource.Play();
-        _particula.Play();
-        _weaponAnimator.SetTrigger("Shoot");
-        _particula.enabled = false;
+        _particula.enabled=true;
+
+        
 
         cameraOriginalRotation = cameraTransform.localEulerAngles;
         _recoilRecoveryTimer.Start();

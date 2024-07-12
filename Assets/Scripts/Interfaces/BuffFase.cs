@@ -35,15 +35,6 @@ public class BuffFase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            StartCoroutine(LerpTestStat(_lastTestStat, _testStat, fadeOutTime));
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine(LerpTestStat(_testStat, _lastTestStat, fadeOutTime));
-        }
     }
 
     public IEnumerator LerpTestStat(float startValue, float endValue, float duration, System.Action onComplete = null)
@@ -65,7 +56,6 @@ public class BuffFase : MonoBehaviour
         }
 
         _buff.SetFloat(_test, endValue); // Ensure it ends at the final value
-
         onComplete?.Invoke(); // Call the onComplete action if provided
     }
 

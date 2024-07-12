@@ -70,6 +70,8 @@ public class EmFour : WeaponBase
 
     protected override void FireBehaviour()
     {
+        _particula.Play();
+        _weaponAnimator.SetTrigger("Shoot");
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         //_ray = new Ray(_shotTransform.position, _shotTransform.forward);
