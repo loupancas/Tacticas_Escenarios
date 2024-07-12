@@ -35,7 +35,7 @@ public class FirstPersonPlayer : Entity
     [SerializeField] private LayerMask _shootableLayers;
 
 
-    [SerializeField] private ScriptableRendererFeature buff;
+    [SerializeField] public ScriptableRendererFeature buff;
     private Rigidbody _rb;
     public FirstPersonCamera cam;
     public WeaponBase equippedWeapon;
