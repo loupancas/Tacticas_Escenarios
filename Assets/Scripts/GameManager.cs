@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         {
             timeSinceLastCheck = 0f;
             //UpdateDistanceEnemies();
-            FuseNearbyEnemies();
+            //FuseNearbyEnemies();
         }
     }
 
@@ -50,19 +50,19 @@ public class GameManager : MonoBehaviour
         EnemigoVolador.DeactivateEnemiesByDistance(pj, enemies, distanceThreshold);
     }
 
-    private void FuseNearbyEnemies()
-    {
-        if (updateList)
-        {
-            enemies = new List<EnemigoVolador>(FindObjectsOfType<EnemigoVolador>());
-            updateList = false;
-        }
+    //private void FuseNearbyEnemies()
+    //{
+    //    if (updateList)
+    //    {
+    //        enemies = new List<EnemigoVolador>(FindObjectsOfType<EnemigoVolador>());
+    //        updateList = false;
+    //    }
 
-        // Iterar sobre cada enemigo y tratar de fusionarlo con enemigos en la misma celda
-        foreach (var enemigo in enemies)
-        {
-            var cellPosition = EnemigoVolador._spatialGrid.GetPositionInGrid(enemigo.Position);
-            EnemigoVolador.FuseEnemiesInRange(enemigo.Position, EnemigoVolador._spatialGrid.cellWidth); // Usa el tamaño de la celda para el rango
-        }
-    }
+    //    // Iterar sobre cada enemigo y tratar de fusionarlo con enemigos en la misma celda
+    //    foreach (var enemigo in enemies)
+    //    {
+    //        var cellPosition = EnemigoVolador._spatialGrid.GetPositionInGrid(enemigo.Position);
+    //        EnemigoVolador.FuseEnemiesInRange(enemigo.Position, EnemigoVolador._spatialGrid.cellWidth); // Usa el tamaño de la celda para el rango
+    //    }
+    //}
 }

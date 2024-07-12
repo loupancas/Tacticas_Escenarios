@@ -259,38 +259,38 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         });
     }
     //IA2-TP2 Aggregate fusiona los enemigos que se encuentran en la misma celda, todavia se va a revisar porque hay conflicto con la FSM
-    public static void FuseEnemiesInRange(Vector3 position, float cellSize)
-    {
-        var cellPosition = _spatialGrid.GetPositionInGrid(position);
-        if (_spatialGrid.IsInsideGrid(cellPosition))
-        {
-            var enemiesInCell = _spatialGrid.GetEntitiesInCell(cellPosition).OfType<EnemigoVolador>().ToList();
-            if (enemiesInCell.Count > 1)
-            {
-                int fusionCount = 0;
-                while (enemiesInCell.Count > 1 && fusionCount < 2)
-                {
-                    var fusedEnemy = enemiesInCell.Aggregate((currentMax, next) => next._vida > currentMax._vida ? next : currentMax);
-                    var enemyToFuse = enemiesInCell.First(e => e != fusedEnemy);
+    //public static void FuseEnemiesInRange(Vector3 position, float cellSize)
+    //{
+    //    var cellPosition = _spatialGrid.GetPositionInGrid(position);
+    //    if (_spatialGrid.IsInsideGrid(cellPosition))
+    //    {
+    //        var enemiesInCell = _spatialGrid.GetEntitiesInCell(cellPosition).OfType<EnemigoVolador>().ToList();
+    //        if (enemiesInCell.Count > 1)
+    //        {
+    //            int fusionCount = 0;
+    //            while (enemiesInCell.Count > 1 && fusionCount < 2)
+    //            {
+    //                var fusedEnemy = enemiesInCell.Aggregate((currentMax, next) => next._vida > currentMax._vida ? next : currentMax);
+    //                var enemyToFuse = enemiesInCell.First(e => e != fusedEnemy);
 
-                    fusedEnemy._vida += enemyToFuse._vida;
-                    _spatialGrid.Remove(enemyToFuse);
-                    EnemigoVoladorFactory.Instance.ReturnEnemy(enemyToFuse);
-                    enemiesInCell.Remove(enemyToFuse);
-                    GameManager.instance.arenaManager.enemigosEnLaArena.Remove(enemyToFuse);
-                    fusionCount++;
-                    Debug.Log("Fusion de enemigos");
-                }
+    //                fusedEnemy._vida += enemyToFuse._vida;
+    //                _spatialGrid.Remove(enemyToFuse);
+    //                EnemigoVoladorFactory.Instance.ReturnEnemy(enemyToFuse);
+    //                enemiesInCell.Remove(enemyToFuse);
+    //                GameManager.instance.arenaManager.enemigosEnLaArena.Remove(enemyToFuse);
+    //                fusionCount++;
+    //                Debug.Log("Fusion de enemigos");
+    //            }
 
-                if (enemiesInCell.Count > 0) 
-                {
-                    var remainingFusedEnemy = enemiesInCell[0]; 
-                    _spatialGrid.Remove(remainingFusedEnemy);
-                    _spatialGrid.Add(remainingFusedEnemy);
-                    Debug.Log("Fusion de enemigos 2");
-                }
-            }
-        }
-    }
+    //            if (enemiesInCell.Count > 0) 
+    //            {
+    //                var remainingFusedEnemy = enemiesInCell[0]; 
+    //                _spatialGrid.Remove(remainingFusedEnemy);
+    //                _spatialGrid.Add(remainingFusedEnemy);
+    //                Debug.Log("Fusion de enemigos 2");
+    //            }
+    //        }
+    //    }
+    //}
 
 }
