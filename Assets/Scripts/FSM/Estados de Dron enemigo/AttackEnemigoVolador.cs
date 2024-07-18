@@ -10,6 +10,7 @@ public class AttackEnemigoVolador : MonoBaseState
     [SerializeField] ProyectilesBase _proyectiles;
     [SerializeField] Transform _spawnPoint;
     [SerializeField] Rigidbody _rb;
+    [SerializeField] LayerMask a;
     public AttackEnemigoVolador(EnemigoVolador me, ProyectilesBase proyectil, Transform spawnPoint)
     {
         _me = me;
@@ -22,6 +23,8 @@ public class AttackEnemigoVolador : MonoBaseState
         base.Enter(from, transitionParameters);
 
         _rb = gameObject.GetComponent<Rigidbody>();
+
+        _rb.excludeLayers = a;
 
         _timer = new CountdownTimer(_me.cdShot);
         _timer.OnTimerStop = Disparar;

@@ -120,7 +120,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Test: 0
+    - _Test: 0.64434516
     - _TimeScale: -0.34
     - _VoronoiPower: 3
     - _VoronoiSize: 28.2

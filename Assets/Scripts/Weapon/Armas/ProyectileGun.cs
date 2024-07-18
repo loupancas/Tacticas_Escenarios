@@ -41,7 +41,7 @@ public class ProyectileGun : WeaponBase
                 proyectil.SetDistance(10);
                 proyectil.SetDmg(dmg + 15);
                 proyectil.SetSpeed(_proyectileSpeed + 10);
-                _modifiedCooldown = 0.5f;
+                _modifiedCooldown = 0.3f;
                 UpdateChildMaterials(phaseSpeeds[2], phaseColors[2], phaseFresnel[2]);
                 _buff._testStat = 0.12f;
                 _buff.StartCoroutine(_buff.LerpTestStat(_buff._lastTestStat, _buff._testStat, _buff.fadeOutTime));

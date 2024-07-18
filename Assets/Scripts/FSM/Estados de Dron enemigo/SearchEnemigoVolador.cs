@@ -7,6 +7,7 @@ using System.Linq;
 public class SearchEnemigoVolador : MonoBaseState
 {
     [SerializeField] EnemigoVolador _me;
+    [SerializeField] LayerMask _enemies;
     Vector3 _velocity;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
@@ -55,7 +56,7 @@ public class SearchEnemigoVolador : MonoBaseState
         if (_path.Count > 0)
         {
             var dir = _path[0].transform.position - transform.position;
-
+            _rb.excludeLayers = _enemies;
             AddForce(Seek(_path[0].transform.position));
 
             if (dir.magnitude <= 0.5f)
@@ -65,11 +66,12 @@ public class SearchEnemigoVolador : MonoBaseState
             }
         }
 
-
+        
 
         _me.transform.position += _velocity * Time.deltaTime;
         _me.transform.forward = _velocity;
     }
+
 
     Vector3 Seek(Vector3 dir)
     {

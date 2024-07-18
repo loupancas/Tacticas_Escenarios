@@ -116,7 +116,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         print("Update fase : WeaponBase");
         Fases(fase);
-        print(_modifiedCooldown);
+        //print(_modifiedCooldown);
         _shotCooldownTimer.Reset(_modifiedCooldown);
         //bool existo = _shotCooldownTimer != null;
         //print("El timer del cooldown existe: " + existo);

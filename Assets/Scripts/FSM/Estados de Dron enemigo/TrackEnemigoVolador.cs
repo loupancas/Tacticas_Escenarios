@@ -6,6 +6,7 @@ using FSM;
 public class TrackEnemigoVolador : MonoBaseState
 {
     [SerializeField] EnemigoVolador _me;
+    [SerializeField] Rigidbody _rb;
     Vector3 _velocity;
     [SerializeField] float _maxVelocity;
     [SerializeField] float _maxForce;
@@ -15,6 +16,12 @@ public class TrackEnemigoVolador : MonoBaseState
         _me = me;
         _maxVelocity = maxVelocity;
         _maxForce = maxForce;
+    }
+
+    public override void Enter(IState from, Dictionary<string, object> transitionParameters = null)
+    {
+        base.Enter(from, transitionParameters);
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     public override IState ProcessInput()

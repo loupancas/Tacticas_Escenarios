@@ -3699,6 +3699,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _me: {fileID: 8171125479128317140}
+  _enemies:
+    serializedVersion: 2
+    m_Bits: 128
   _maxVelocity: 5
   _maxForce: 5
   endNode: {fileID: 0}
