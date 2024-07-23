@@ -8,7 +8,10 @@ public class SingleArena : ArenaBase
     public override void IniciarHorda()
     {
         GameManager.instance.arenaManager = this;
-        puerta.gameObject.SetActive(true);
+        if (puerta != null)
+        {
+            puerta.gameObject.SetActive(true);
+        }
 
         _arenaEmpezada = true;
         foreach (SpawnPoints a in spawnPoints)
@@ -29,8 +32,8 @@ public class SingleArena : ArenaBase
     {
         if (enemigosEnLaArena.Count == 0 && _arenaEmpezada)
         {
-            
-            puerta.Desbloquear();
+            if (puerta != null)
+                puerta.Desbloquear();
         }
     }
 }

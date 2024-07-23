@@ -3684,6 +3684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _me: {fileID: 8171125479128317140}
+  _rb: {fileID: 0}
   _maxVelocity: 5
   _maxForce: 5
 --- !u!114 &-1369015049936239625
@@ -3725,6 +3726,9 @@ MonoBehaviour:
     type: 3}
   _spawnPoint: {fileID: 2688049747350996194}
   _rb: {fileID: 0}
+  a:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8276500756354734758
 MonoBehaviour:
   m_ObjectHideFlags: 0
