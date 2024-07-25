@@ -91,14 +91,14 @@ public class Misil : ProyectilesBase, IFreezed
             MisilFactory.Instance.ReturnProjectile(this);
         }
 
-        if (collision.collider.GetComponent<EnemigoBasico>() != null)
-        {
-            print("Toco al enemigo");
-            collision.collider.GetComponent<EnemigoBasico>().TakeDamage(_dmg);
-            GameManager.instance.pj.AgregarBuff();
+        //if (collision.collider.GetComponent<EnemigoBasico>() != null)
+        //{
+        //    print("Toco al enemigo");
+        //    collision.collider.GetComponent<EnemigoBasico>().TakeDamage(_dmg);
+        //    GameManager.instance.pj.AgregarBuff();
 
-            MisilFactory.Instance.ReturnProjectile(this);
-        }
+        //    MisilFactory.Instance.ReturnProjectile(this);
+        //}
 
 
 

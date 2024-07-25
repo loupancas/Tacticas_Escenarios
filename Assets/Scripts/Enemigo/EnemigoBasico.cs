@@ -36,14 +36,35 @@ public class EnemigoBasico : EnemigoBase
         _fsm.Active = true;
     }
 
+    private void Reset()
+    {
+        if (!gameObject.activeInHierarchy)
+            GameManager.instance.arenaManager.enemigosEnLaArena.Add(this);
+    }
+
+    public static void TurnOnOff(EnemigoBasico p, bool active = true)
+    {
+        if (active)
+        {
+            p.Reset();
+        }
+        
+        p.gameObject.SetActive(active);
+    }
     public override void Morir()
     {
-        throw new System.NotImplementedException();
+        GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
+        EnemigoBasicoFactory.Instance.ReturnEnemy(this);
+
+        _vida = _vidaMax;
+
     }
 
     public override void SpawnEnemy(Transform spawnPoint)
     {
-        throw new System.NotImplementedException();
+        var p = EnemigoBasicoFactory.Instance.pool.GetObject();
+        p.transform.SetPositionAndRotation(spawnPoint.transform.position, spawnPoint.rotation.normalized);
+        Debug.Log("Disparo proyectil");
     }
 
     public bool IsAttackDistance()
@@ -103,36 +124,17 @@ public class EnemigoBasico : EnemigoBase
             
 
         };
-        //{
-        //    new GOAPAction("Search")
-        //        .Pre("isPlayerInSight",lineOfSight(transform.position, GameManager.instance.pj.transform.position) == false)
-        //        .Effect("isPlayerInSight", lineOfSight(transform.position, GameManager.instance.pj.transform.position) == true)
-        //        .LinkedState(searchState),
-
-        //    new GOAPAction("Attack")
-        //        .Pre("isPlayerInDistanceAttack", isDistance(_distanceToAttack) == true)
-        //        .Effect("isPlayerAlive", false)
-        //        .LinkedState(attackState),
-
-        //    new GOAPAction("Chase")
-        //        .Pre("isPlayerInSight", lineOfSight(transform.position, GameManager.instance.pj.transform.position) == true)
-        //        .Effect("isPlayerInDistanceAttack", isDistance(_distanceToAttack) == true)
-        //        .LinkedState(trackState),
-
-        //    new GOAPAction("Lost View")
-        //        .Pre("isPlayerOutOfArena", true)
-        //        .LinkedState(lostViewState),
-        //};
+        
 
 
         var from = new GOAPState();
-        //from.values["isPlayerInSight"] = false;
-        //from.values["isPlayerNear"] = false;
-        //from.values["isPlayerAlive"] = true;
+        from.values["IsPlayerInDistanceToMelee"] = false;
+        from.values["IsPlayerInDistanceToShot"] = false;
+        from.values["IsGunActive"] = false;
 
         var to = new GOAPState();
 
-        //to.values["isPlayerAlive"] = false;
+        to.values["IsPlayerInDistanceToMelee"] = true;
 
         var planner = new GoapPlanner();
         planner.OnPlanCompleted += OnPlanCompleted;
