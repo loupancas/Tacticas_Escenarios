@@ -70,7 +70,8 @@ public class Revolver : WeaponBase
         if (Physics.Raycast(ray, out _rayHit, _shootableLayers))
         {
             
-            _rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
+            //_rayHit.collider.GetComponent<EnemigoVolador>()?.TakeDamage(_modifiedDmg);
+            _rayHit.collider.GetComponent<EnemigoBase>()?.TakeDamage(_modifiedDmg);
             _rayHit.collider.GetComponent<EnemigoVolador>()?.AddDamage(_modifiedDmg);
             _rayHit.collider.GetComponent<PuntosDebiles>()?.OnHit(_modifiedDmg);
             if(_IsFase3On)

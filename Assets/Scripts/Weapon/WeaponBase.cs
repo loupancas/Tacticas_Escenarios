@@ -66,7 +66,7 @@ public abstract class WeaponBase : MonoBehaviour
         var x = Input.GetAxis("Mouse X");
         var y = Input.GetAxis("Mouse Y");
 
-        print(x);
+        
 
         _shotCooldownTimer.Tick(Time.deltaTime);
         _recoilRecoveryTimer.Tick(Time.deltaTime);

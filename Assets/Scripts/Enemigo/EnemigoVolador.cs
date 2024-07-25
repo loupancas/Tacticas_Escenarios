@@ -105,9 +105,9 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
         _fsm.AddTransition(StateTransitions.ToAttack, searchState, attackState);
         
         _fsm.AddTransition(StateTransitions.ToIdle, searchState, lostViewState);
-        
 
-        _fsm.Active = true;
+        OnlyPlan();
+        //_fsm.Active = true;
 
     }
     public override void Morir()
@@ -293,4 +293,68 @@ public class EnemigoVolador : EnemigoBase, IFreezed, IGridEntity
     //    }
     //}
 
+
+    private void OnlyPlan()
+    {
+        Func<float, bool> isDistance = a => a >= Vector3.Distance(GameManager.instance.pj.transform.position, transform.position);
+        Func<Vector3, Vector3, bool> lineOfSight = (start, end) =>
+        {
+            var dir = end - start;
+
+            return !Physics.Raycast(start, dir, dir.magnitude, _wallLayer);
+        };
+
+
+        var actions = new List<GOAPAction>
+        {
+            new GOAPAction("Search")
+                .Pre("isPlayerInSight",lineOfSight(transform.position, GameManager.instance.pj.transform.position) == false)
+                .Effect("isPlayerInSight", lineOfSight(transform.position, GameManager.instance.pj.transform.position) == true)
+                .LinkedState(searchState),
+
+            new GOAPAction("Attack")
+                .Pre("isPlayerInDistanceAttack", isDistance(_distanceToAttack) == true)
+                .Effect("isPlayerAlive", false)
+                .LinkedState(attackState),
+
+            new GOAPAction("Chase")
+                .Pre("isPlayerInSight", lineOfSight(transform.position, GameManager.instance.pj.transform.position) == true)
+                .Effect("isPlayerInDistanceAttack", isDistance(_distanceToAttack) == true)
+                .LinkedState(trackState),
+
+            new GOAPAction("Lost View")
+                .Pre("isPlayerOutOfArena", lineOfSight(transform.position, GameManager.instance.pj.transform.position) == false)
+
+                .LinkedState(lostViewState),
+        };
+
+
+        var from = new GOAPState();
+        from.values["isPlayerInSight"] = false;
+        from.values["isPlayerNear"] = false;
+        from.values["isPlayerAlive"] = true;
+
+        var to = new GOAPState();
+
+        to.values["isPlayerAlive"] = false;
+
+        var planner = new GoapPlanner();
+        planner.OnPlanCompleted += OnPlanCompleted;
+        planner.OnCantPlan += OnCantPlan;
+
+        planner.Run(from, to, actions, StartCoroutine);
+    }
+
+    private void OnPlanCompleted(IEnumerable<GOAPAction> plan)
+    {
+        _fsm = GoapPlanner.ConfigureFSM(plan, StartCoroutine);
+        _fsm.Active = true;
+    }
+
+    private void OnCantPlan()
+    {
+        //TODO: debuggeamos para ver por qué no pudo planear y encontrar como hacer para que no pase nunca mas
+
+        print("No se pudo planear nada");
+    }
 }
