@@ -55,7 +55,7 @@ public class EnemigoBasico : EnemigoBase
     {
         GameManager.instance.arenaManager.enemigosEnLaArena.Remove(this);
         EnemigoBasicoFactory.Instance.ReturnEnemy(this);
-
+        GameManager.instance.pj.CambioDeArma();
         _vida = _vidaMax;
 
     }
@@ -86,7 +86,7 @@ public class EnemigoBasico : EnemigoBase
     {
         return _vida <= vida;
     }
-
+    //IA2 Final - GOAP
     private void OnlyPlan()
     {
         Func<float, bool> isDistance = a => a >= Vector3.Distance(GameManager.instance.pj.transform.position, transform.position);
